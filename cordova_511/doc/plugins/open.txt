@@ -1,0 +1,18 @@
+https://github.com/disusered/cordova-open
+
+Open audio, video, images and more with applications installed on the user's device.
+调用本机安装的程序打开文件（本地、远程）。
+类似的有一个 fr.smile.cordova.fileopener 插件。
+
+依赖插件：
+cordova-plugin-file
+	http://plugins.cordova.io/#/package/cordova-plugin-file
+cordova-plugin-file-transfer
+	http://plugins.cordova.io/#/package/cordova-plugin-file-transfer
+
+@Android
+1、远程的图片，会下载到 /Android/data/<app-id>/cache 下
+
+测试：
+cordova.plugins.disusered.open('file:/storage/sdcard/DCIM/Camera/1404177327783.jpg');
+cordova.plugins.disusered.open('https://www.baidu.com/img/bdlogo.png')

@@ -1,0 +1,22 @@
+https://www.npmjs.com/package/cordova-plugin-cache
+https://github.com/tiltshiftfocus/cordova-plugin-cache
+
+This is a WebView cache plugin for Phonegap 3.3.0 / Cordova 3.3.1 supporting Android (>=2.3.3) and iOS(>=6.0).
+It allows to clear the cordova webview cache.
+
+安装：
+cordova plugin add https://github.com/tiltshiftfocus/cordova-plugin-cache.git
+
+测试代码：
+function testClearCache() {
+	var success = function(status) {
+		alert('testClearCache()--success: ' + status);
+	}
+
+	var error = function(status) {
+		alert('testClearCache()--error: ' + status);
+	}
+
+	window.cache.clear( success, error );
+	window.cache.cleartemp();
+}

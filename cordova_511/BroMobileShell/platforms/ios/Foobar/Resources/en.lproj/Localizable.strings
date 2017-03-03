@@ -1,0 +1,19 @@
+/* Copyright © 2013-2014 北京博瑞开源软件有限公司版权所有。*/
+// 同 zh-Hans
+
+"kServerVersion" = "发现新版本";
+"kMustUpdate" = "当前版本为必须更新版本,请下载最新版本进行更新!";
+"kIsUpdate" = "是否更新?";
+
+"kNetWorkMessageTitle" = "网络信息提示";
+"kNetWorkContentMessage" = "网络不可用,如果继续,请先设置网络";
+"kServerConectionMessage" = "升级服务器连接失败，请与管理员联系";
+
+"kCancelButtonTitle" = "取消";
+"kConfirmButtonTitle" = "确定";
+
+"kVersionConfirmButtonTitle" = "更新";
+"kVersionCancelButtonTitle" = "暂不更新";
+
+"kSVProgressHUDLoadMessage" = "正在加载......";
+"kSVProgressHUDMessage"  = "服务器请求失败";

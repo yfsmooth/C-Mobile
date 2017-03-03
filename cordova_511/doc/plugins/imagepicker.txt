@@ -1,0 +1,61 @@
+多图选择插件1 -- failed
+https://www.npmjs.com/package/cordova-obimagepicker
+https://github.com/ovidiubularda/cordova-imagePicker
+
+Cordova Plugin For Multiple Image Selection - implemented for iOS and Android 4.0 and above.
+It can be used as a replacement for http://ngcordova.com/docs/plugins/imagePicker/
+
+安装：
+../node_modules/.bin/cordova plugin add cordova-obimagepicker
+
+@Andoird
+1、异常 java.lang.ClassNotFoundException: ro.qualitance.obimagepicker
+	需修改 config.xml，将 ro.qualitance.obimagepicker 改为 com.synconset.ImagePicker
+2、选择图片后，图片会被复制到临时文件夹，并且只能返回文件URL：
+	file:///data/user/0/com.foo.bar/cache/.....jpg
+	即应用的缓存文件夹下，文件上传后需要手动清理
+	疑问：该 URL 可以放到 img 标签里预览吗？
+3、没有中文语言：
+	需汉化，此外其他语言文件（multiimagechooser_strings_xx.xml）可以删除
+4、操作上，没有 camera 插件直观：
+	不能选择文件夹、默认按照时间排序 --- 和 iOS 下的多选 <input type="file"> 类似。
+	而 camera 插件调用的是系统的图片选择器，并且可以返回Base64编码的图片数据。
+
+@IOS
+编译不过：（
+
+===========================================================
+
+多图选择插件2
+http://ngcordova.com/docs/plugins/imagePicker/
+https://github.com/wymsee/cordova-imagePicker
+
+@Android
+和第一个基本是一样的，但没异常。
+
+@iOS
+1、编译、运行OK
+2、选择图片后，也会复制到临时文件夹
+	/Data/Application/...../tmp/....jpg
+
+汉化：
+1、保存成了 org 文件
+2、Android 的 multiimagechooser_strings_en.xml，直接修改了，如果保存org文件会编译失败
+
+安装：
+../node_modules/.bin/cordova plugin add /dev/shm/ramdisk/cordova-imagePicker-1.0.7
+
+===========================================================
+
+测试代码：
+function testImagepicker() {
+	window.imagePicker.getPictures(
+		function(results) {
+			for (var i = 0; i < results.length; i++) {
+				alert('Image URI: ' + results[i]);
+			}
+		}, function (error) {
+			alert('Error: ' + error);
+		}
+	);
+}

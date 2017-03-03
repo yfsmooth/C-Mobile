@@ -1,0 +1,33 @@
+/* Copyright © 2013-2014 北京博瑞开源软件有限公司版权所有。*/
+
+//
+// Prefix header for all source files of the 'Foobar' target in the 'Foobar' project
+//
+
+// App 名称
+#define kAppName @"Foobar"
+
+// 升级服务地址：
+// 检查版本URl，版本存储文件命名为 version_ios.txt 对应的升级包在相同文件夹下
+// 命名为 产品名_版本号.ipa 和 .plist
+#define kUpdateUrl @"http://192.168.0.114/shell/client/"
+
+// 首页地址：
+// 如果是本地地址，形如：file:///Users/lixx/Library/...../Foobar.app/www/
+#define kStartUrl  @"http://192.168.0.114/shell/"
+
+// 应用首页参数：传给首页的URL参数，如 x=1&y=2
+#define kStartParams @""
+
+// 是否开发模式
+#define kIsDevelopmentMode @"true"
+
+// 是否启用苹果的消息推送服务
+#define kIsRemoteNotificationEnabled @"false"
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "HttpUtil.h"
+#import "SVProgressHUD.h"
+#endif

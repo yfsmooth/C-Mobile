@@ -1,0 +1,131 @@
+https://github.com/charleyw/cordova-plugin-alipay
+
+这个一个支付宝 SDK的Cordova 插件。主要功能包括第三方APP调用支付宝进行付款。
+插件详细说明参见：https://github.com/charleyw/cordova-plugin-alipay/blob/master/README.md
+
+安装要求
+- Cordova Version >=3.5，建议 5.1.1 以上的版本
+- Cordova-Android >=4.0
+
+安装：
+1、 进入支付宝开放平台(https://open.alipay.com/platform/home.htm)，申请支付宝企业账号，
+	填入相关的企业信息进行企业实名认证，认证通过后会得到一个和支付宝账号对应的商户id(简称PID)
+	已经认证过的公司账号为:3130054960@qq.com  密码:Passw0rd123
+2、 登录到支付宝开放平台->点击"管理中心"->点击 "创建应用"，然后填入APP的相关信息创建一个移动APP应用，
+	注意选择时将Android和IOS选项都选中，这样生成的然后在应用审核通过后会获得APP的"APP ID"
+3、 进行签约和生成秘钥
+	(相关问题可以在这里看到:登录到支付宝开放平台->点击"文档中心"->点击 "业务接入"->下面的"移动支付"),
+
+	3.1 签约与审核：
+		请商户在b.alipay.com里进行产品签约：
+			进入网站之后点击页面中间的"移动支付"，进入下一页面后页面(页面右上角有一个"如何签约"下拉框，
+			点击后有"更多介绍"模块可以查看签约步骤)就会有签约的提示按钮，点击签约按钮后会进入签约的具体信息填写页面，根据表格内容填写信息即可。
+		审核：
+			商户登录qy.alipay.com，可在“签约订单”中查看审核进度，审核成功即可进行开发。
+		注意该签约过程是针对账号而言，不是针对APP而言：
+			也就是说"移动支付"业务只需要签约一次就行，但是如果要在一个支付宝账号上绑定两个app并且两个app都开通"无线支付"业务，需要先将两个app在支付宝上审核通过。
+		然后联系支付宝在线客服，由客服进行操作：
+			进入https://b.alipay.com网站，点击"移动支付"，进入的页面中有"在线客服"图标，点击即可。
+
+	3.2 PID和密钥管理:
+		3.2.1：查看合作者身份ID（PID）
+			PID是商户与支付宝签约后，商户获得的支付宝商户唯一识别码。当商户把支付宝功能接入商户网站时会用到PID，以便让支付宝认证商户。
+			查看PID步骤如下：登录支付宝官方网站b.alipay.com，点击导航栏中“商家服务”，点击“查询PID、Key”
+
+		3.2.2：查看MD5（Key）
+			在MD5签名时，需要支付宝安全校验码（Key）参与签名。安全校验码（Key）是以英文字母和数字组成的32位字符串。
+			查看MD5（Key）步骤如下：登录支付宝官方网站b.alipay.com，点击导航栏中“商家服务”，点击“查询PID、Key”，输入支付密码，查询Key
+
+		3.2.3：RSA私钥及公钥生成
+			OpenSSL工具安装
+				Linux用户（以Ubuntu为例）
+					sudo apt-get install openssl
+				Windows用户
+					开发者可以在直接百度搜索"OpenSSL官方网站"，然后在官网下载Windows的OpenSSL安装包进行安装。
+
+			RSA私钥及公钥生成
+				Linux用户（以Ubuntu为例）
+					$ openssl
+					OpenSSL> genrsa -out rsa_private_key.pem 1024 									## 生成私钥
+					OpenSSL> pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt ## Java开发者需要将私钥转换成PKCS8格式，注意这个秘钥会直接在命令行上显示
+					OpenSSL> rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem 			## 生成公钥
+					OpenSSL> exit
+				Windows用户在cmd窗口中进行以下操作：
+					cd C:\OpenSSL-Win32\bin
+					C:\OpenSSL-Win32\bin>openssl.exe
+					OpenSSL> genrsa -out rsa_private_key.pem 1024									## 生成私钥
+					OpenSSL> pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM -nocrypt	## Java开发者需要将私钥转换成PKCS8格式
+					OpenSSL> rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem			## 生成公钥
+					OpenSSL> exit
+
+			注意：对于使用Java的开发者，将pkcs8在console中输出的私钥去除头尾、换行和空格，作为开发者私钥，对于.NET和PHP的开发者来说，无需进行pkcs8命令行操作。
+
+			经过以上步骤，开发者可以在当前文件夹中（Windows用户在C:\OpenSSL-Win32\bin）看到rsaprivatekey.pem和rsapublickey.pem两个文件，前者为私钥，后者为公钥。
+			开发者将私钥保留，将公钥提交给支付宝网关，用于信息加密及解密。
+
+		3.2.4 上传RSA公钥
+			商户生成好一对RSA私钥、公钥之后（3.2.3：RSA私钥及公钥生成），需要把公钥上传给支付宝，同时下载支付宝公钥！
+
+			如何上传自己的RSA公钥，可参考以下步骤操作：
+			登录支付宝官方网站b.alipay.com，点击导航栏中“我的商家服务”，点击“查询PID、Key”，输入支付密码，点击“确认”，（注意：输入支付密码浏览器需要安装数字证书或支付盾）；
+			在“合作伙伴密钥管理”下（根据不同的产品选择对应的入口），点击“RSA加密”后的“添加密钥”，把自己的公钥复制进去。
+			注意： 上传的公钥是一行格式，不允许有注释、空格、换行等！
+
+			点击“确认上传”，提示：上传成功，说明已经成功上传。
+			说明： 在使用的过程中如果担心公钥泄露可以定期进行修改，如果需要修改公钥，只需要把新的公钥复制进去，点击“修改”即可！
+
+		3.2.5：用户在使用过程中如果已经进行了上述几个步骤的操作，仅仅是查看RSA商户公钥与支付宝公钥，进行如下操作即可
+			在RSA签名时，需要私钥和公钥一起参与签名。私钥与公钥都是商户通过OPENSSL来生成得出的。商户把生成出的公钥与支付宝技术人员配置好的支付宝公钥做交换。在签名时，商户要用到的是商户的私钥和支付宝的公钥。
+			商户可以通过以下步骤查看支付宝公钥和自己上传的商户公钥：登录支付宝官方网站b.alipay.com，点击导航栏中“商家服务”，点击“查询PID、Key”，输入支付密码，点击“确认”，(注意：输入支付密码浏览器需要安装数字证书或支付盾)；
+			点击“RSA加密”后面的“查看密钥”即可查看已上传的商户的公钥，点击“查看支付宝公钥”即可查看到对应的支付宝公钥！
+
+
+4、运行命令安装插件：
+	cordova plugin add https://github.com/charleyw/cordova-plugin-alipay.git --variable PARTNER_ID=[商户PID，参见3.2.1] --variable SELLER_ACCOUNT=[商户支付宝帐号] --variable PRIVATE_KEY=[生成的private key，参见3.2.3]
+
+	注意一个问题，该命令的最后一个参数在使用时可能会出现问题：
+		当PRIVATE_KEY=MII(...)DQ==时，
+		最后两个字符"="号在添加到工程中后就没有了，此问题在windows上多次测试均出现。原因可能是Cordova命令或者Windows命令行自己将等号作为无用符号处理掉了。
+	解决方法:
+		可以在cordova_511中先搜索PARTNER_ID对应的值，一般这三个值是相邻存在的，在搜索结果的位置将PRIVATE_KEY对应的值修改即可。
+		其实也可以直接在代码中进行修改，但是不建议这样做，因为这样很可能将这三个信息泄露出去。
+
+测试：
+window.alipay.pay({
+	tradeNo: tradeNo,
+	subject: "测试标题",
+	body: "我是测试内容",
+	price: 0.01,
+	notifyUrl: "http://your.server.notify.url"
+}, function(successResults){
+	alert(successResults)
+}, function(errorResults){
+	alert(errorResults)
+});
+
+### 参数说明
+
+* tradeNo	这个是支付宝需要的，是一个唯一的ID号，代表交易码，可以自己按照一定规则去生成，注意各次交易的交易码必须不同，一般为一些有规律的字符串(例如"商品名"+"系统时间"+"自定义的附加信息")
+* subject	交易对应的标题，这个字段会显示在支付宝app付款的页面
+* body		订单详情，支付宝SDK中需要的参数，没找到会在APP支付过程中会显示在哪里
+* price		价格，支持两位小数
+* notifyUrl	一般电商都会有网站和手机APP客户端，当用户在手机端支付成功或失败时，支付宝的后台服务器会向商家对应的电商网站后台发送一个消息，用于给商家一个提示
+			(当然商家的网站后台也需要集成该功能，在支付宝无线支付业务的demo中同样有web端的demo)，具体参数可以到支付宝网站上查看，此处只要指定电商后台接收该信息的url即可。
+* function(successResults){}	成功之后的回调函数
+* function(errorResults){}		失败之后的回调函数
+	successResults 和 errorResults 分别是成功和失败之后支付宝SDK返回的结果，类似如下内容，具体参数含义请参考 https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103666&docType=1
+		// 成功
+		{
+			resultStatus: "9000",
+			memo: "",
+			result: "partner=\"XXXX\"&seller_id=\"XXXX\"&out_trade_no=\"XXXXX\"..."
+		}
+		// 用户取消
+		{
+			memo: "用户中途取消",
+			resultStatus: "6001",
+			result: ""
+		}
+* resultStatus	的含义请参照这个官方文档：[客户端返回码](https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103671&docType=1)
+* memo			一般是一些纯中文的解释，出错的时候会有内容。
+* result		是所有支付请求参数的拼接起来的字符串。具体参数含义请参考:https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103666&docType=1

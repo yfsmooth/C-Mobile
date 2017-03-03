@@ -1,0 +1,28 @@
+http://plugins.cordova.io/#/package/com.connectivity.monitor
+https://github.com/appfeel/connectivity-monitor-cordova
+
+Connectivity status monitoring for Cordova apps. Detects if there is WIFI/3G/EDGE/CDMA available.
+检查当前网络链接状态。
+
+问题：
+必须访问某个地址，可以改造一下API，后台自动调用。
+
+测试：
+	connectivity.observeRemoteHostName("http://www.baidu.com", function(x) { console.log(x) }, function(x) { console.log(x) } );
+
+目前这个版本（1.1.0）有问题，测试时后台抛出下面的异常：
+	java.lang.NullPointerException: Attempt to invoke virtual method
+		'void org.apache.cordova.CordovaPlugin.privateInitialize(java.lang.String, org.apache.cordova.CordovaInterface
+			, org.apache.cordova.CordovaWebView, org.apache.cordova.CordovaPreferences)'
+		on a null object reference
+	at org.apache.cordova.PluginManager.getPlugin(PluginManager.java:169)
+	at org.apache.cordova.PluginManager.exec(PluginManager.java:120)
+	at org.apache.cordova.CordovaBridge.jsExec(CordovaBridge.java:59)
+	at org.apache.cordova.engine.SystemExposedJsApi.exec(SystemExposedJsApi.java:41)
+	at com.android.org.chromium.base.SystemMessageHandler.nativeDoRunLoopOnce(Native Method)
+	at com.android.org.chromium.base.SystemMessageHandler.handleMessage(SystemMessageHandler.java:28)
+	at android.os.Handler.dispatchMessage(Handler.java:102)
+	at android.os.Looper.loop(Looper.java:135)
+	at android.os.HandlerThread.run(HandlerThread.java:61)
+
+改用插件 network-information。

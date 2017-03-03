@@ -1,0 +1,7 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.vibration
+
+cordova plugin add cordova-plugin-vibration
+
+This plugin aligns with the W3C vibration specification http://www.w3.org/TR/vibration/
+
+This plugin provides a way to vibrate the device.

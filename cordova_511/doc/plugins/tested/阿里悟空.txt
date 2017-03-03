@@ -1,0 +1,37 @@
+https://imwukong.com/#download
+
+这个一个阿里悟空 SDK的Android，IOS客户端Demo 。主要功能为即时通讯，包括文字，图片，语音通信功能
+
+工程编译问题:
+	Android：
+	下载Demo工程解压后进入wukong_demo.git这个目录下，然后使用AndroidStudio打开build.gradle文件编译；
+	不要打开wukong_demo.git\demo_project这个目录下的build.gradle，
+
+	IOS:
+	该工程编译需要使用命令行安装CocoaPods(统一管理第三方类库的工具)
+	具体步骤:
+	1. Ruby环境搭建，要使用CocoaPods需要Ruby环境
+		Mac OS一般本身自带Ruby，但还是更新一下保险，因为在没有更新Ruby的情况下安装可能失败。
+		1.1：查看下当前ruby版本：打开终端输入 ruby -v(主要是确定有没有ruby)
+		1.2：更新ruby
+			终端输入如下命令（把Ruby镜像指向taobao，避免被墙，无法下载）
+			gem sources --remove https://rubygems.org/
+            gem sources -a https://ruby.taobao.org/
+            检查使用替换镜像位置是否成功，输入如下命令：
+            gem sources -l
+            如果下面出现:"https://ruby.taobao.org/"这个字符串就说明替换成功
+    2. 下载安装CocoaPods
+    	终端输入：sudo gem install cocoapods
+    3. 编译工程:
+    	解压IOSDemo工程，在命令行中进入和WKDemo.xcodeproj所在的目录，在命令行中执行pod install命令，安装和下载第三方库。
+    	该过程可能会因为网络问题失败，如果失败，重新执行命令安装即可。安装之前最好开一个VPN。
+    	安装成功后，注意该工程目录下会生成一个.xcworkspace格式的文件，双击打开项目编译即可。
+
+Android和IOS无法通信的问题:
+	阿里悟空SDK设有线上环境和沙箱环境两种，分别用于线上发布和线下开发。测试后发现Android和IOS Demo设置的环境不同，所以导致无法通信。
+	只要将两个Demo的环境设为一致即可。
+	具体方法:(此处修改Android)
+	在com.alibaba.wukong.demo.DemoApplication.java文件中的initWukongIM()方法中，将WKManager.setEnvironment(WKConstants.Environment.SANDBOX);
+	改为 WKManager.setEnvironment(WKConstants.Environment.ONLINE);然后编译即可。
+
+

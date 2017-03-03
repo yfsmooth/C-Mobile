@@ -1,0 +1,3 @@
+android_bropen.keystore
+	安卓打包的 keystore 文件
+	密码：bropen.com.cn

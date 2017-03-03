@@ -1,0 +1,138 @@
+https://github.com/iVanPan/Cordova_QQ
+
+这个一个QQ SDK的Cordova 插件。主要功能包括 SSO、注销、分享（好友、空间）、收藏、客户端检查等。
+插件详细说明参见：https://github.com/iVanPan/Cordova_QQ/blob/master/README_ZH.md
+
+安装要求
+- Cordova Version >=3.5，建议 5.1.1 以上的版本
+- Cordova-Android >=4.0
+
+安装：
+1、登录到腾讯开放平台->点击"移动应用"->点击 "安卓应用"或"IOS应用"，然后创建应用、并获得应用的 APP ID
+	http://open.qq.com/
+	DONE 问题1：添加测试QQ账号：
+		开发者平台的登陆QQ号账号可以直接测试，如果需要测试其他QQ号，需将该QQ添加为开发者QQ号的好友(不要加入黑名单)，然后在腾讯开放平台上添加这个测试QQ即可。
+		添加测试QQ号步骤：在应用详细界面中，点击基础服务的QQ登录，在应用调试者页签中，输入QQ号、保存即可。
+	TODO 问题2：必须先创建应用才能获得 APP ID，按理应用没发布（未审核）的情况下就应该可以测试了吧？
+	TODO 问题3：iOS应用和Android应用的 APP ID 如何才能保持一致？
+	DONE 问题4：开发过程中，只有开发者的QQ号或者测试QQ账号可以测试；通过开放平台发布到应用宝后，会自动开通所有QQ用户的功能吗？
+		否，只要是正式 release、加了签名的 apk 就可以开通所有 QQ 用户的功能。
+	DONE 问题5：如果问题4属实的话，是不是我们产品的自动更新服务器里的 apk，也必须先发布？
+		否
+	DONE 问题6：如果是企业版的 iOS 开发者证书（无法发布到 App Store），在开放平台上如何审核通过？
+		用 Android 的 APP ID 即可
+2、运行命令安装插件：
+	cordova plugin add https://github.com/iVanPan/Cordova_QQ.git --variable QQ_APP_ID=YOUR_QQ_APPID
+	注意此处的 YOUR_QQ_APPID 是指腾讯开放平台上该需要接入 QQ SDK 的 APP ID，这里使用的是测试ID 1104997136
+	DONE 问题7：Android 版插件自带了一个 android-support-v4.jar
+		相对插件 local-notification 自带的 jar 包，多了一些文件，但是有部分class文件不一致（反编译后检查），而后者的编译时间要新，
+		不知道有什么影响，需要测一下插件 local-notification！
+		--- 测试貌似没问题。
+
+注意事项：
+1. 新建一个应用时，需重新在腾讯开放平台创建新的应用，并获得新的 APP ID，此时需要修改配置里的 APP ID：
+   Android：在 BroMobileShell\platforms\android 下搜 1104997136，批量替换成新的 APP ID
+   IOS：在 BroMobileShell\platforms\ios 下搜 1104997136，批量替换成新的 APP ID
+
+插件集成过程中，Xcode 6.x出现问题汇总（xcode 7.2没问题）：
+1. 安装完插件打开工程编译会出异常：
+		.../platforms/ios/BroMobileShell/Resources/ResourcesTencentOpenApi_IOS_Bundle.bundle: No such file or directory
+	解决方案：
+		将 Resources 文件夹下的 TencentOpenApi_IOS_Bundle.bundle 文件（夹）改名为 ResourcesTencentOpenApi_IOS_Bundle.bundle
+2. 解决上面问题之后再次编译会出现异常：
+ 		.../platforms/ios/BroMobileShell/Plugins/cordova-plugin-qqsdk/YCQQ.h:3:9: 'TencentOpenAPI/TencentOAuth.h' file not found
+ 	解决方案：重新导入TencentOpenAPI.framework
+		点击Xcode左侧工程选项卡—>点击Xcode中间页面中Targets目录下的BroMobileShell->点击Build Phases->展开下面的Link Binary With Libraries->点击该展开页面左下角的”+”号，
+		选择Add Other->进入.../platforms/ios/BroMobileShell/Plugins/cordova-plugin-qqsdk中，选中TencentOpenAPI.framework点击”open”，
+		同时删除工程中 Link Binary With Libraries 页面中原先加入的 TencentOpenAPI.framework 即可。
+
+
+
+测试代码:
+
+//分享到QQ空间
+function testShareToQQzone() {
+	var args = {};
+	args.url = "http://www.baidu.com";
+	args.title = "This is cordova QZone share ";
+	args.description = "This is cordova QZone share ";
+	var imgs =['https://www.baidu.com/img/bdlogo.png',
+	'https://www.baidu.com/img/bdlogo.png',
+	'https://www.baidu.com/img/bdlogo.png'];
+	args.imageUrl = imgs;
+	YCQQ.shareToQzone(function () {
+		alert("testShareToQQzone()-->share success");
+	}, function (failReason) {
+		alert("testShareToQQzone()-->"+failReason);
+	}, args);
+}
+		
+//分享到QQ好友
+function testShareToQQ() {
+	alert("testShareToQQ:1");
+	var args = {};
+	args.url = "http://www.baidu.com";
+	args.title = "This is cordova QQ share ";
+	args.description = "This is cordova QQ share ";
+	args.imageUrl = "https://www.baidu.com/img/bdlogo.png";//注意这里只能传一个url
+	args.appName = "设备优化";
+	alert("testShareToQQ:2");
+	YCQQ.shareToQQ(function(){
+		alert("testShareToQQ:success");
+		console.log("share success");
+	},function(failReason){
+		alert("testShareToQQ:fail");				
+		console.log(failReason);
+	},args);			
+}
+
+//QQ SSO 登录
+function testQQLogin() {
+	var checkClientIsInstalled = 1; //default is 0,only for iOS
+	YCQQ.ssoLogin(function(args){
+			alert("访问令牌:"+args.access_token);
+			alert("用户id:"+args.userid);
+		},function(failReason){
+			console.log(failReason);
+			alert(args.userid);
+		},checkClientIsInstalled);
+}
+
+//QQ 登出
+function testQQLogout() {
+	YCQQ.logout(function(){
+		alert("testQQLogout:success");
+		console.log('logout success');
+	},function(failReason){
+		alert("testQQLogout:failReason");
+		console.log(failReason);
+	});
+}
+
+//测试QQ是否安装
+function testIsQQInstall() {
+	YCQQ.checkClientInstalled(function(){
+		QQINSTALLED=true;
+		alert("QQ是否安装:"+QQINSTALLED);
+	},function(){
+		// if installed QQ Client version is not supported sso,also will get this error
+		QQINSTALLED=false;
+		alert("QQ是否安装:"+QQINSTALLED);
+	});
+}
+
+//QQ 收藏
+function testAddToQQCollection() {
+	var args = {};
+	args.url = "http://www.baidu.com";
+	args.title = "这个是cordova QQ 收藏测试";
+	args.description = "这个是cordova QQ 收藏测试";
+	args.imageUrl = "https://www.baidu.com/img/bdlogo.png";
+	args.appName = "cordova—QQ";
+	YCQQ.addToQQFavorites(function () {
+			alert("testAddToQQCollection()-->share success");
+		}, function (failReason) {
+			alert("testAddToQQCollection():"+failReason);
+		}, args);
+}
+

@@ -1,0 +1,102 @@
+https://github.com/xu-li/cordova-plugin-wechat
+
+这个一个微信 SDK的Cordova 插件。主要功能包括分享（好友、朋友圈）、客户端检查等。
+插件详细说明参见：下载上面地址中的zip文件，其中有README.md
+
+安装：
+1、登录到微信开放平台->点击"管理中心"->点击 "移动应用"，然后创建应用、并获得应用的 APP ID
+	https://open.weixin.qq.com/
+2、运行命令安装插件：
+	cordova plugin add cordova-plugin-wechat --variable wechatappid=YOUR_WECHAT_APPID
+	注意此处的 YOUR_WECHAT_APPID 是指微信开放平台上该需要接入 微信 SDK 的 APP ID，这里使用的是测试ID wx3519f806c6d5a875
+	注：文档上说运行完这条命令之后需要运行cordova build ios或cordova build android命令，但是这两个命令在windows和Linux上运行都有错，建议不要使用
+3、代码修改:
+	Android工程需要修改的代码：
+		3.1、在AndroidManifest.xml文件中package=""这个属性对应的包下新建"wxapi"包，
+			将io.cordova.hellocordova.wxapi下的代码移动到这个包中，并修改改文件包名（这里是 com.foo.bar）。
+			(原因参见：http://bbs.csdn.net/topics/390876180)
+		3.2、修复 EntryActivity.java
+		3.3、将 AndroidManifest.xml 中 wxapi 的两个 Activity 的 android:launchMode 改为 singleInstance
+	iOS配置修改（xcode 7.x 下不需要）：
+		重新导入libWeChatSDK.a
+		点击Xcode左侧工程选项卡—>点击Xcode中间页面中Targets目录下的DeviceStore->点击Build Phases->展开下面的Link Binary With Libraries->点击该展开页面左下角的”+”号，
+		选择Add Other->进入...platforms\ios\DeviceStore\Plugins\cordova-plugin-wechat中，选中libWeChatSDK.a点击”open”，
+		同时删除工程中 Link Binary With Libraries 页面中原先加入的 libWeChatSDK.a 即可。
+
+注意事项：
+1. 新建一个应用时，需重新申请 APP ID，此时需要修改配置里的 APP ID：
+   Android：在 BroMobileShell\platforms\android 下搜 wx3519f806c6d5a875，批量替换成新的 APP ID
+   IOS：在 BroMobileShell\platforms\ios 下搜 wx3519f806c6d5a875，批量替换成新的 APP ID
+
+测试代码:
+
+//微信是否安装:
+function testIsWeixinInstall() {
+	Wechat.isInstalled(function (installed) {
+	    alert("Wechat installed: " + installed );
+	}, function (reason) {
+	    alert("Failed: " + reason);
+	});
+}
+
+//微信分享文本:
+function testWeixinShareText() {
+	alert("testWeixinShareText()-->111");
+	Wechat.share({
+		text: "This is just a plain string",
+		scene: Wechat.Scene.TIMELINE   // share to Timeline
+	}, function () {
+		alert("Success");
+	}, function (reason) {
+		alert("Failed: " + reason);
+	});
+
+}
+
+//微信分享链接到朋友圈:
+function testWeixinShareLink() {
+	Wechat.share({
+	    message: {
+	        title: "Hi, there",
+	        //description: "This is description.",
+	        //thumb: "https://www.baidu.com/img/bdlogo.png",
+	        //mediaTagName: "TEST-TAG-001",
+	        //messageExt: "这是第三方带的测试字段",
+	        //messageAction: "<action>dotalist</action>",
+	        media: {
+	            type: Wechat.Type.LINK,
+	            webpageUrl: "http://www.baidu.com"
+	        }
+	    },
+	    scene: Wechat.Scene.TIMELINE   // share to Timeline
+	}, function () {
+	    alert("testWeixinShareLink()-->Success");
+	}, function (reason) {
+	    alert("testWeixinShareLink()-->fail:"+reason);
+	});
+}	
+
+
+
+//微信分享链接到好友:
+function testWeixinShareLinkToFriend() {
+	Wechat.share({
+	    message: {
+	        title: "Hi, there",
+	        description: "This is description.",
+	        thumb: "https://www.baidu.com/img/bdlogo.png",
+	        //mediaTagName: "TEST-TAG-001",
+	        //messageExt: "这是第三方带的测试字段",
+	        //messageAction: "<action>dotalist</action>",
+	        media: {
+	            type: Wechat.Type.LINK,
+	            webpageUrl: "http://www.baidu.com"
+	        }
+	    },
+	    scene: Wechat.Scene.SESSION   // share to Timeline
+	}, function () {
+	    alert("testWeixinShareLink()-->Success");
+	}, function (reason) {
+	    alert("testWeixinShareLink()-->fail:"+reason);
+	});
+}

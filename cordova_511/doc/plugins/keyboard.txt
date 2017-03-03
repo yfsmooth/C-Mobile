@@ -1,0 +1,23 @@
+http://plugins.cordova.io/#/package/com.ionic.keyboard
+
+
+cordova plugin add com.ionic.keyboard
+
+The cordova.plugins.Keyboard object provides functions to make interacting with the keyboard easier, 
+and fires events to indicate that the keyboard will hide/show.
+
+Methods
+    cordova.plugins.Keyboard.hideKeyboardAccessoryBar
+    cordova.plugins.Keyboard.close
+    cordova.plugins.Keyboard.disableScroll
+    cordova.plugins.Keyboard.show
+
+Properties
+    cordova.plugins.Keyboard.isVisible
+
+Events
+    native.keyboardshow
+        A number keyboardHeight is given on the event object, which is the pixel height of the keyboard.
+    native.keyboardhide
+
+最有用的应该是键盘事件，可以用来规避显示键盘时，内容被遮挡的情况。

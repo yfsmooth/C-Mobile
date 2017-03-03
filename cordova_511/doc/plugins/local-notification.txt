@@ -1,0 +1,24 @@
+http://plugins.cordova.io/#/package/de.appplant.cordova.plugin.local-notification
+https://github.com/katzer/cordova-plugin-local-notifications/wiki
+
+如果安装出错的话，可以把 zip 下载回来，修改 plugin.xml（取消 device 依赖），再安装。
+
+疑问 @ Android：
+	. 能否自动启动：
+		应该可以，有个 RestoreReceiver，并且有权限 RECEIVE_BOOT_COMPLETED
+	. 能否自动启动后，接收消息，而不仅仅是重新 schedule 提醒
+		自动启动后，如果有 schedule 的消息，并且设置了允许自启动，则会提醒消息。
+		但是自动接收消息的话，貌似得写额外的代码了
+			-- 在 RestoreReceiver，或者继承一个，然后改 AndroidManifest.xml 应该就可以
+	. 点击提醒后，自动打开app
+		有个 ClickActivity，不知道有什么用？
+		貌似 OK，但还是会先显示启动界面，但是首页不会重新加载
+		如果关闭应用，提示还在，点击后会打开首页，并且如果在首页上设置 click 事件，也会执行。
+		如果彻底关闭应用（在“设置/其他应用管理/已缓存”中都没了），提示会自动消失。
+总结 @ Android：
+	除非彻底关闭应用，提示会一直存在，点击能自动打开app。
+	如果要自动接收消息再提醒，需要通过改造或继承 RestoreReceiver 来实现。
+
+疑问 @ iOS：
+	? 没有声音或震动
+	? 如果通过设置 at 设置计划提醒，直接抛出异常，iOS 8.4 下是这样，其他未知

@@ -1,0 +1,35 @@
+https://github.com/OutSystems/Cordova-Plugin-FileChooser
+
+The purpose of this plugin is to provide a file chooser for Hybrid Applications running on Android 4.4.2 (KitKat).
+With this plugin the users can succussful upload files through a webview.
+This plugin was created as a workaround for a known issue with the file input element on webviews running on
+Android 4.4.2 (KitKat). Thus, we recommend you to only use this plugin for that Android version.
+
+按照github里的说明安装失败：
+	../node_modules/.bin/cordova plugin add https://github.com/OutSystems/Cordova-Plugin-FileChooser.git
+安装成功的方法：
+	直接下载、解压，然后：
+	../node_modules/.bin/cordova plugin add /dev/shm/ramdisk/Cordova-Plugin-FileChooser-0.0.3
+
+@Android：
+1、可以拍照或者选择一个图片，并返回 base64 的数据，但是不能缩放；
+2、capture 为 false 时，会先弹出一个框选择拍照或文件：
+	按理应该可以屏蔽掉
+3、选择文件时，调用的是系统的文件选择器（和 camera 类似）
+4、仍然不能多选文件，应该可以改造，实现多选：
+	intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+	// 简单测了一下，不行，不知道是不是放错地方了：（
+
+@iOS
+1、完全不支持，只能用 <input type="file" ...>
+
+测试代码：
+function testFileChooser() {
+	//var options = {"accept":"image/*", "capture":false};
+	var options = {"accept":"*", "capture":false};
+	window.filechooser.open(options, function(data) {
+		console.log(data);
+	}, function(error) {
+		alert(error);
+	});
+}

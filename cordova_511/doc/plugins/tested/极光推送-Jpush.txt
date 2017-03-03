@@ -1,0 +1,468 @@
+https://github.com/jpush/jpush-phonegap-plugin
+
+这个一个极光推送 SDK的Cordova 插件。主要功能包括检查极光推送是否开启，在不同位置接收推送消息等。
+
+安装：
+1、登录到极光推送官网->创建应用、并获得应用的 APP ID
+	https://www.jpush.cn/
+2、运行命令安装插件：
+	cordova plugin add  https://github.com/jpush/jpush-phonegap-plugin.git --variable API_KEY=your_jpush_appkey
+	注意此处的 your_jpush_appkey 是指极光推送官网上该需要接入 极光推送 SDK 的 appkey，这里使用的是测试key 515e51d335c8554e7ebab7f1
+3、代码修改:
+	Android工程需要修改的代码：
+		3.1、在cordova_511\BroMobileShell\platforms\android\src\cn\jpush\phonegap\JPushPlugin.java中有import io.cordova.hellocordova.R;
+			 将其改为AndroidManifest.xml文件中package=""这个属性对应的包，例如对于Foobar这个工程就是:import com.foo.bar.R;
+			 以后每新建一个工程都要修改，这个注意。
+
+
+	iOS配置修改：
+		证书文件如果有密码,都是bropen
+		3.1、 首先在苹果开发者网站上新建一个APP:
+			3.1.1：	进入https://developer.apple.com，登录到自己账号之后，在页面主体上点击”Certificates,Identifiers&Profiles”这个模块，进入之后的页面中，
+					然后在IOS Apps的标签下点击Identifiers,此时进入的页面在左侧菜单的位置是“Identifiers”模块下面的”App IDs”,右侧主体页面上有一个加号和一个搜索符号，点击加号新建APP。
+			3.1.2：	在进入的页面中填写AppID Description，用来描述你的AppID。（注意，必须输入英文）。例如：使用的工程名(英文)
+			3.1.3：	生成AppID：在进入的页面中，App ID Suffix有两个选项:”Explicit App ID”和“Wildcard App ID”,此处选第一个，并在BundleID这个栏目中输入BundleID
+					(这是你的AppID的后缀，这个需要仔细命名，因为这个内容和你的程序直接相关，很多地方都需要用到，最好是com.yourcompany.yourappname的格式。当然对于没有公司名的个人开发者，
+					也可以用您自己的英文名字或者拼音。)。
+			3.1.4：	查看生成AppID:继续下一步完成提交。点击左侧菜单App IDs即可回到列表看见已经生成的AppID。
+		3.2、 申请iOS APP应用的Provisioning Profiles文件(一个P12文件可以匹配多个APP，但是一个APP只有一个对应的mobileprovision文件)
+			3.2.1：	进入https://developer.apple.com，登录到自己账号之后，在页面主体上点击”Certificates,Identifiers&Profiles”这个模块，进入之后的页面中，然后在IOS Apps的标签下
+					点击Identifiers,此时进入的页面在左侧菜单的位置是“Identifiers”模块下面的”App IDs”,点击Provisioning Profiles下面的All，右侧主体页面上有一个加号，一个搜索符号和一个编辑符号，
+					此时右侧有一个列表，点击加号新建ProvisioningProfiles。
+			3.2.2：	选择申请类型(Select Type类型界面，Development作为开发使用，Distribution作为发布使用)
+				  	当使用的是299美元的苹果企业开发帐号要生成发布证书时，选择In-House，然后点击Continue按钮进入下一步。（注意：需要与之前生成的P12证书类型保持一致。）
+				  	当使用的是99美元的个人开发帐号应用需要发布至Appstore时，选择App Store，然后点击Continue按钮进入下一步。（注意：需要与之前生成的P12证书类型保持一致。）
+				  	无论是使用299美元还是99美元的帐号，当申请证书用于开发调试时，在这里需选中iOS App Development，点击Continue进入下一步。（注意：需要与之前生成的P12证书类型保持一致。）
+			3.2.3：	选择对应的App ID：点击下拉菜单，选择要申请的App ID，点击Continue按钮进入下一步。
+			3.2.4：	选择对应的证书(在生成mobileprovision文件时需选择对应的P12文件，所以你在存储P12文件时必须与App的mobileprovision文件配对存放，如果不匹配也会造成打包失败。)
+					需生成发布模式APP的mobileprovision描述文件时，选择之前创建的发布证书，点击Continue按钮进入下一步。需生成开发模式APP的mobileprovision描述文件时，选择之前创建的开发证书，以及需要测试安装的设备，点击Continue按钮进入下一步。
+			3.2.5：	保存ProvisioningProfiles文件标签：在这个页面中需要填写Profile Name栏，填入描述文字，只能输入英文。点击Generate按钮创建provisioning文件。等待几秒钟，provisioning就可以下载了。点击download下载。得到了一个xxxxxx.mobileprovision文件，
+					打ipa包时需要使用的ios.distribution.mobileprovision或者ios.development.mobileprovision就是生成的这个文件。
+
+		上面的两步，详情请参考:http://wex5.com/cn/ios-certificate-request/.(主要参考第4和第5部分,但建议整体阅读一下)
+
+		3.3、 APNS证书申请及生成:
+			3.3.1：	为 App 开启 Push Notification 功能。
+					进入https://developer.apple.com，登录到自己账号之后，在页面主体上点击”Certificates,Identifiers&Profiles”这个模块，进入之后的页面中，然后在IOS Apps的标签下点击Identifiers,
+					此时进入的页面在左侧菜单的位置是“Identifiers”模块下面的”App IDs”,点击自己需要的APP，这个APP的具体信息就会展开，点击下面的”Edit”,在进入的页面中把”Push Notifications”勾选上并点击最下方的“Done”。
+			3.3.2： 配置和下载证书。
+					如果你之前没有创建过 Push 证书或者是要重新创建一个新的，进入https://developer.apple.com，登录到自己账号之后，在页面主体上点击”Certificates,Identifiers&Profiles”这个模块，进入之后的页面中，
+					然后在IOS Apps的标签下点击Identifiers,此时进入的页面在左侧菜单的位置是“Identifiers”模块下面的”App IDs”,此时点击IOS Apps—Cretificates下的”All”，然后点击右上角的加号新建。进入的页面上有Development和Production两种证书，
+					在Development或是Production下面选择”Apple Push Notification service SSL”这个选项，点击 Continue 后选择证书对应的应用ID，然后后面的页面继续会出现“About Creating a Certificate Signing Request (CSR)”。
+					根据它的说明创建打开“钥匙串访问“程序创建 Certificate Signing Request(具体步骤是:打开苹果电脑中的“钥匙串访问”，点击左上角菜单栏的“钥匙串访问”-“证书助理”-”从证书颁发机构请求证书“，在弹出的界面上”用户电子邮件地址“输入开发者账号的Email地址，
+					在”常用名称“中输入一个名称，下面的单项选择栏选择”存储到磁盘”，会生成一个后缀名为.certSigningRequest的文件)，继续返回Apple developer 网站点击 Continue ，上传刚刚生成的 .certSigningRequest 文件生成 APNs Push  Certificate。
+					下载并双击打开证书(一般后缀名为.cer)，证书打开时会启动“钥匙串访问”工具。在“钥匙串访问”中你的证书会显示在“我的证书”中，注意在程序左侧栏中同时选择“我的证书” 和”登录”，然后在右侧栏中，选择刚刚加进来的证书，选择右键菜单中的“导出…”
+					(注意要选“登录”和“我的证书” 导出证书时要选中证书文件，不要展开private key)，将文件保存为Personal Information Exchange (.p12)格式，保存p12文件时，可以为其设置密码，也可以让密码为空，然后到Jpush的官网上上传这个开发或者生产证书。
+
+		该步可以查看:http://docs.jpush.cn/pages/viewpage.action?pageId=1343727
+		3.4、 Xcode的证书配置教程:
+			将3.2生成的xxx.mobileprovision文件双击安装到Xcode中，
+			在Xcode中点击”项目名.xcodeproj“，选择目标TARGETS后进入Build Setting 界面，搜索“Code signing”，然后在Provisioning Profile中选择xxx即可。
+
+		该步可以参考:http://docs.jpush.cn/pages/viewpage.action?pageId=8820084中的Xcode的证书配置教程
+		(注意在这篇文章中有”Xcode的证书配置教程”这个模块，其中第二部分的图中有一个“步骤2:......”可以忽略)
+
+		3.5、 导入工程后，修改应用的bundle id:
+		点击工程左侧的Foobar.xcodeproj，然后点击工程中央上方页签中的General，点击TARGET下面的Foobar，将Bundle identifier中的com.foo.bar改为com.foo.bar.Foobar，编译工程。
+
+注意事项：
+1. 新建一个应用时，需重新申请appkey，此时需要修改配置里的appkey：
+   Android：在 BroMobileShell\platforms\android 下搜 515e51d335c8554e7ebab7f1，批量替换成新的appkey
+   IOS：在 BroMobileShell\platforms\ios 下搜 515e51d335c8554e7ebab7f1，批量替换成新的appkey
+
+
+
+测试代码:
+
+/**
+检查极光推送是否开启：
+ API - isPushStopped
+	 在android平台：
+		用来检查 Push Service 是否已经被停止
+	 iOS平台：
+		平台检查推送服务是否注册
+
+	 接口定义
+		window.plugins.jPushPlugin.isPushStopped(callback)
+
+	 参数说明
+		callback 回调函数，用来通知JPush的推送服务是否开启
+ */
+function isPushStopped() {
+	var onCallback = function(data) {
+		if(data>0){
+			//关闭
+			alert("testIsPushOn()-->极光推送已关闭");
+		}else{
+			//开启
+			alert("testIsPushOn()-->极光推送已开启");
+		}
+	}
+	window.plugins.jPushPlugin.isPushStopped(onCallback);
+}
+
+
+/**
+开启极光推送
+ API - init
+	 调用此API,用来开启 JPush SDK 提供的推送服务。
+	 开发者App可以通过调用停止推送服务API来停止极光推送服务。当又需要使用极光推送服务时，则必须要调用恢复推送服务 API。
+	 本功能是一个完全本地的状态操作。也就是说：停止推送服务的状态不会保存到服务器上。
+	 如果停止推送服务后，开发者App被重新安装，或者被清除数据，
+	 JPush SDK 会恢复正常的默认行为。（因为保存在本地的状态数据被清除掉了）。
+	 本功能其行为类似于网络中断的效果，即：推送服务停止期间推送的消息，
+	 恢复推送服务后，如果推送的消息还在保留的时长范围内，则客户端是会收到离线消息
+ */
+function testInitPush() {
+	window.plugins.jPushPlugin.init();
+}
+
+//
+/**
+关闭极光推送:
+ API - stopPush
+ 在android平台:
+	 开发者App可以通过调用停止推送服务API来停止极光推送服务。当又需要使用极光推送服务时，则必须要调用恢复推送服务 API。
+	 调用了本 API 后，JPush 推送服务完全被停止。具体表现为：
+	 JPush Service 不在后台运行	 收不到推送消息	不能通过 JPushInterface.init 恢复，需要调用resumePush恢复
+	 极光推送所有的其他 API 调用都无效
+
+ iOS平台:
+	 不推荐调用，因为这个API只是让你的DeviceToken失效，在设置－通知 中您的应用程序没有任何变化
+	 推荐：设置一个UI界面， 提醒用户在在设置－通知关闭推送服务
+
+ 接口定义:
+	window.plugins.jPushPlugin.stopPush()
+ */
+function testStopPush() {
+	window.plugins.jPushPlugin.stopPush();
+}
+
+
+/**
+关闭的状态下恢复极光推送
+ API - resumePush
+ 恢复推送服务。调用了此 API 后
+
+ 在android平台:
+	极光推送完全恢复正常工作，
+
+ iOS平台:
+	 重新去APNS注册
+
+ 接口定义:
+	 window.plugins.jPushPlugin.resumePush()
+ */
+function testResumePush() {
+	window.plugins.jPushPlugin.resumePush();
+}
+
+/**
+获取RegistrationID:
+获取 RegistrationID API
+API - getRegistrationID
+
+RegistrationID 定义：
+集成了 JPush SDK 的应用程序在第一次成功注册到 JPush 服务器时，JPush 服务器会给客户端返回一个唯一的该设备的标识 - RegistrationID。JPush SDK 会以广播的形式发送 RegistrationID 到应用程序。
+应用程序可以把此 RegistrationID 保存以自己的应用服务器上，然后就可以根据 RegistrationID 来向设备推送消息或者通知。
+
+接口定义
+ JPushPlugin.prototype.getRegistrationID = function(callback)
+ 参数说明：无
+
+ 返回值:
+	调用此 API 来取得应用程序对应的 RegistrationID。 只有当应用程序成功注册到 JPush 的服务器时才返回对应的值，否则返回空字符串。
+
+调用示例:
+ window.plugins.jPushPlugin.getRegistrationID(onGetRegistradionID);
+ var onGetRegistradionID = function(data) {
+	try{
+		console.log("JPushPlugin:registrationID is "+data)
+	}catch(exception){
+		console.log(exception);
+	}
+}
+ */
+function testGetRegistrationID () {
+	var onGetRegistradionID = function(data) {
+		try{
+			alert("JPushPlugin:registrationID is "+data);
+			console.log("JPushPlugin:registrationID is "+data);
+		}catch(exception){
+			alert(exception);
+			console.log(exception);
+		}
+	}
+	window.plugins.jPushPlugin.getRegistrationID(onGetRegistradionID);
+}
+
+/**
+别名与标签 API
+
+API - setTagsWithAlias,setTags,setAlias
+ 提供几个相关 API 用来设置别名（alias）与标签（tags）。	 这几个 API 可以在 App 里任何地方调用。
+
+别名 alias:
+ 为安装了应用程序的用户，取个别名来标识。以后给该用户 Push 消息时，就可以用此别名来指定。
+ 每个用户只能指定一个别名。
+ 同一个应用程序内，对不同的用户，建议取不同的别名。这样，尽可能根据别名来唯一确定用户。
+ 系统不限定一个别名只能指定一个用户。如果一个别名被指定到了多个用户，当给指定这个别名发消息时，服务器端API会同时给这多个用户发送消息。
+ 举例：在一个用户要登录的游戏中，可能设置别名为 userid。游戏运营时，发现该用户 3 天没有玩游戏了，则根据 userid 调用服务器端API发通知到客户端提醒用户。
+
+标签 tag：
+ 为安装了应用程序的用户，打上标签。其目的主要是方便开发者根据标签，来批量下发 Push 消息。
+ 可为每个用户打多个标签。
+ 不同应用程序、不同的用户，可以打同样的标签。
+ 举例： game, old_page, women
+
+接口定义；
+ JPushPlugin.prototype.setTagsWithAlias = function(tags,alias)
+ JPushPlugin.prototype.setTags = function(tags)
+ JPushPlugin.prototype.setAlias = function(alias)
+
+参数说明：
+
+ tags：
+	 参数类型为数组
+	 nil 此次调用不设置此值
+	 空集合表示取消之前的设置
+	 每次调用至少设置一个 tag，覆盖之前的设置，不是新增
+	 有效的标签组成：字母（区分大小写）、数字、下划线、汉字
+	 限制：每个 tag 命名长度限制为 40 字节，最多支持设置 100 个 tag，但总长度不得超过1K字节。（判断长度需采用UTF-8编码）
+	 单个设备最多支持设置 100 个 tag。App 全局 tag 数量无限制。
+
+ alias：
+	 参数类型为字符串
+	 nil 此次调用不设置此值
+	 空字符串 （""）表示取消之前的设置
+	 有效的别名组成：字母（区分大小写）、数字、下划线、汉字。
+	 限制：alias 命名长度限制为 40 字节。（判断长度需采用UTF-8编码）
+	 返回值说明
+
+函数本身无返回值，但需要注册jpush.setTagsWithAlias事件来监听设置结果
+
+document.addEventListener("jpush.setTagsWithAlias", onTagsWithAlias, false);
+var onTagsWithAlias = function(event){
+try{
+   console.log("onTagsWithAlias");
+   var result="result code:"+event.resultCode+" ";
+   result+="tags:"+event.tags+" ";
+   result+="alias:"+event.alias+" ";
+   $("#tagAliasResult").html(result);
+}
+catch(exception){
+   console.log(exception)
+}
+}
+
+错误码定义
+
+|Code|描述|详细解释| |-|-|-| |6001| 无效的设置，tag/alias 不应参数都为 null||
+|6002| 设置超时| 建议重试| |6003| alias| 字符串不合法 有效的别名、标签组成：字母（区分大小写）、数字、下划线、汉字。|
+|6004| alias超长。最多 40个字节 中文 UTF-8 是 3 个字节| |6005| 某一个 tag 字符串不合法| 有效的别名、标签组成：字母（区分大小写）、数字、下划线、汉字。|
+|6006| 某一个 tag 超长。|一个 tag 最多 40个字节 中文 UTF-8 是 3 个字节| |6007| tags 数量超出限制。最多 100个| 这是一台设备的限制。一个应用全局的标签数量无限制。|
+|6008| tag/alias 超出总长度限制。|总长度最多 1K 字节| |6011| 10s内设置tag或alias大于3次| 短时间内操作过于频繁|
+ */
+function testSetTagsWithAlias() {
+
+	var onTagsWithAlias = function(event){
+		try{
+			alert("onTagsWithAlias");
+			var result="result code:"+event.resultCode+" ";
+			result+="tags:"+event.tags+" ";
+			result+="alias:"+event.alias+" ";
+			alert(result);
+		}
+		catch(exception){
+			console.log(exception)
+		}
+	}
+	document.addEventListener("jpush.setTagsWithAlias", onTagsWithAlias, false);
+	/*
+		注意:上面的代码建议在app的js初始化代码段中调用，上面的代码在执行了window.plugins.jPushPlugin.setTagsWithAlias(dd,alias)
+		函数之后会自动调用，因为window.plugins.jPushPlugin.setTagsWithAlias(dd,alias)是一个网络操作，可能失败，所以需要监听
+	 */
+	var alias = "alias1";
+	var dd = [];
+	dd.push("tags1");
+	window.plugins.jPushPlugin.setTagsWithAlias(dd,alias);
+}
+
+/**
+获取点击通知内容
+event - jpush.openNotification
+点击通知进入应用程序时会触发该事件
+
+代码示例
+在你需要接收通知的的js文件中加入:
+
+document.addEventListener("jpush.openNotification", onOpenNotification, false);
+onOpenNotification需要这样写：
+var alertContent
+if(device.platform == "Android"){
+	alertContent=window.plugins.jPushPlugin.openNotification.alert;
+}else{
+	alertContent   = event.aps.alert;
+}
+alert("open Notificaiton:"+alertContent);
+
+ps：点击通知后传递的json object 保存在window.plugins.jPushPlugin.openNotification，直接访问即可，字段示例，根据实际推送情况，可能略有差别，请注意
+
+android：
+{"alert":"ding",
+"extras":{
+	  "cn.jpush.android.MSG_ID":"1691785879",
+	  "app":"com.thi.pushtest",
+	  "cn.jpush.android.ALERT":"ding",
+	  "cn.jpush.android.EXTRA":{},
+	  "cn.jpush.android.PUSH_ID":"1691785879",
+	  "cn.jpush.android.NOTIFICATION_ID":1691785879,
+	  "cn.jpush.android.NOTIFICATION_TYPE":"0"}}
+iOS：
+{
+"aps":{
+   "badge":1,
+   "sound":"default",
+   "alert":"今天去哪儿"
+   },
+"_j_msgid":154604475
+}
+ */
+function testGetOpenNotification() {
+	//点击通知栏上的通知时触发
+	/*
+	 	注意:这段代码建议在app的js初始化代码段中调用，
+	 */
+	document.addEventListener("jpush.openNotification", function() {
+		var alertContent
+		if(device.platform == "Android"){
+			alertContent=window.plugins.jPushPlugin.openNotification.alert;
+		}else{
+			alertContent   = event.aps.alert;
+		}
+		alert("testGetOpenNotification()-->open Notificaiton:"+alertContent);
+	}, false);
+}
+
+/**
+获取通知内容
+event - jpush.receiveNotification
+正在使用该应用时接收到推送消息，应用程序时会触发该事件，IOS测试无效
+
+代码示例
+在你需要接收通知的的js文件中加入:
+
+document.addEventListener("jpush.receiveNotification", onReceiveNotification, false);
+onReceiveNotification需要这样写：
+var alertContent
+if(device.platform == "Android"){
+	alertContent=window.plugins.jPushPlugin.receiveNotification.alert;
+}else{
+	alertContent   = event.aps.alert;
+}
+alert("open Notificaiton:"+alertContent);
+ps：点击通知后传递的json object 保存在window.plugins.jPushPlugin.receiveNotification，直接访问即可，字段示例，根据实际推送情况，可能略有差别，请注意
+
+android:
+{"alert":"ding",
+"extras":{
+	  "cn.jpush.android.MSG_ID":"1691785879",
+	  "app":"com.thi.pushtest",
+	  "cn.jpush.android.ALERT":"ding",
+	  "cn.jpush.android.EXTRA":{},
+	  "cn.jpush.android.PUSH_ID":"1691785879",
+	  "cn.jpush.android.NOTIFICATION_ID":1691785879,
+	  "cn.jpush.android.NOTIFICATION_TYPE":"0"}}
+iOS:
+{
+"aps":{
+   "badge":1,
+   "sound":"default",
+   "alert":"今天去哪儿"
+   },
+"_j_msgid":154604475
+}
+ */
+function testReceiveNotification() {
+	//当你已经在使用该应用程序时，发送过来的推送会触发该方法
+	/*
+	 注意:这段代码建议在app的js初始化代码段中调用，该函数在IOS下绑定后测试没用
+	 */
+	document.addEventListener("jpush.receiveNotification", function() {
+		var alertContent
+		if(device.platform == "Android"){
+			alertContent=window.plugins.jPushPlugin.receiveNotification.alert;
+		}else{
+			alertContent   = event.aps.alert;
+		}
+		alert("testReceiveNotification()-->open Notificaiton:"+alertContent);
+	}, false);
+}
+
+/**
+获取自定义消息推送内容:自定义消息不会有震动，不会显示在通知栏
+event - jpush.receiveMessage
+收到应用内消息时触发这个事件
+推荐使用事件的方式传递，但同时保留了receiveMessageIniOSCallback的回调函数，兼容以前的代码
+
+代码示例
+在你需要接收通知的的js文件中加入:
+
+document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+onReceiveMessage需要这样写：
+
+var onReceiveMessage = function(event){
+try{
+	var message
+	if(device.platform == "Android"){
+		 message = window.plugins.jPushPlugin.receiveMessage.message;
+	}else{
+		 message   = event.content;
+	}
+	 $("#messageResult").html(message);
+}
+catch(exception){
+	console.log("JPushPlugin:onReceiveMessage-->"+exception);
+}
+}
+ps：点击通知后传递的json object 保存在window.plugins.jPushPlugin.receiveMessage，直接访问即可，字段示例，根据实际推送情况，可能略有差别，请注意
+
+android
+
+{"message":"今天去哪儿",
+"extras"{
+	 "cn.jpush.android.MSG_ID":"154378013",
+	 "cn.jpush.android.CONTENT_TYPE":"",
+	 "cn.jpush.android.EXTRA":{"key":"不添没有"}
+	 }
+}
+iOS
+
+{
+"content":"今天去哪儿",
+"extras":
+	  {
+	  "key":"不填写没有"
+	  }
+}
+ */
+function testReceiveMessage() {
+	/*
+	 注意:这段代码建议在app的js初始化代码段中调用，
+	 */
+	var onReceiveMessage = function(event){
+		try{
+			var message
+			if(device.platform == "Android"){
+				message = window.plugins.jPushPlugin.receiveMessage.message;
+			}else{
+				message   = event.content;
+			}
+			alert("testReceiveMessage()--message:"+message);
+		}
+		catch(exception){
+			console.log("JPushPlugin:onReceiveMessage-->"+exception);
+		}
+	}
+	document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+}

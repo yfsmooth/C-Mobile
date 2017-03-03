@@ -1,0 +1,11 @@
+https://github.com/wymsee/cordova-HTTP
+
+另：http://plugins.cordova.io/#/package/plugin.http.request
+
+Cordova / Phonegap plugin for communicating with HTTP servers. Supports iOS and Android.
+支持 SSL Pinning，提供更高的安全性。
+理论上也是跨域访问、自制https证书的解决方案之一。
+
+cordova plugin add https://github.com/wymsee/cordova-HTTP.git
+	如果安装出错的话，可以把 zip 下载回来，修改 plugin.xml（取消 org.apache.cordova.file 依赖），安装
+	cordova plugin add /dev/shm/ramdisk/cordova-HTTP-0.1.4/

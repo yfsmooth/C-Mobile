@@ -1,0 +1,102 @@
+搜索、安装条形码/二维码插件：
+	安装：
+		../node_modules/.bin/cordova plugin search barcode
+		../node_modules/.bin/cordova plugin add com.phonegap.plugins.barcodescanner --- 老版的 2.0.1
+		../node_modules/.bin/cordova plugin add phonegap-plugin-barcodescanner		--- 新版的 3.1.2
+		 	@https://github.com/phonegap/phonegap-plugin-barcodescanner
+	Android:
+		安装完后，plugins、platform/* 下面都会添加新的文件（一堆无关的可以删掉，如多语言等），并对部分文件有修改
+			删除 res/values-XXX 等语言文件，将 values-zh-rCN 中的复制到 values/strings.xml 中。
+			AndroidManifest.xml 需修改
+			res/xml/config.xml 需修改
+			可以删除 res 下的新增的图标：launcher_icon.png、shopper_icon.png 等
+				会导致编译失败，还需要修改 capture.xml 中的 @drawable/shopper_icon 为 @drawable/icon
+			如果只是扫码的话，还可以删除：
+				res/layout* 下，除了 capture.xml 外的其他界面；以及 res/menu 下的东西
+				AndroidManifest.xml 中，删除 EncodeActivity 和 HelpActivity 两个界面
+			其他文件：
+				res/raw/beep.ogg 是扫描成功的提示音，不要删除
+				res/values/ 下多了 arrays、colors、dimens、ids 等多个 xml，不知到干嘛的
+				res/xml 下多了 preferences.xml，不知道干嘛的
+		问题1：
+			老版 2.0.1 的默认扫描界面是横屏的，可以改成竖屏 --- 失败，不支持（源码里都有landscape-only说明）
+				AndroidManifest.xml 中，将 CaptureActivity 界面的 android:screenOrientation 由 landscape 改成 portrait
+				另外可以参考下面的文章尝试解决：
+					http://blog.csdn.net/mansai/article/details/19115095
+			新版 3.1.2 OK，只是会变瘦些
+
+	iOS：
+		安装后不需要额外的文件处理。
+		问题1：
+			我的 iPod 4 （iOS 6.1.5）下面，扫描总是无法对焦和扫描，可能是摄像头不支持自动对焦、iOS版本太低的原因，见：
+				http://stackoverflow.com/questions/8863050/using-phonegap-barcode-scanner-on-iphone
+			另外也尝试过下面的解决方案，无果：
+				https://github.com/wildabeast/BarcodeScanner/issues/103
+				https://github.com/wildabeast/BarcodeScanner/pull/129
+			甚至直接从 2.0.1 升级到最新的 3.1.2 也不行，包括升级后打上上面链接里的补丁也不行
+		问题2：
+			扫码时，点击 flip camera button 后，直接返回为 cancelled 状态，描述和补丁见：
+				https://github.com/wildabeast/BarcodeScanner/issues/282
+				https://github.com/phonegap/phonegap-plugin-barcodescanner/issues/30
+	调用 & 打包：
+		assets/www 会打包到 app 中，可以直接访问，但是里面的 cordova.js 代码是和系统有关的（iOS、Android都不一样）；
+		因此，如果是远程加载的 app，则需要判断平台，然后加载不同的 js 文件：
+			但是产品中做了拦截，会始终从本地加载这个 js 文件（CustomURLProtocol.m、MainActivity.java），
+			只有 cordova_plugins.js 会从远程加载，所以不需要额外判断了：）
+	使用参考：
+		http://plugins.cordova.io/#/package/com.phonegap.plugins.barcodescanner
+
+插件升级（没有明显改进，放弃）：
+	cordova plugin rm phonegap-plugin-barcodescanner	// 卸载
+	cordova plugin add phonegap-plugin-barcodescanner	// 安装
+	Android错误：
+		1.在cordova_511/BroMobileShell/platforms/android/res/values/strings.xml中会有两份这样的代码段，一份中文一份英文，将英文的这段注释掉或者删掉
+		<string name="app_picker_name"></string>
+			...
+			...
+		<string name="wifi_type_label"></string>
+		另外注意:
+			res目录下这个插件生成了很多的values-xx目录，这些目录下面都是国际化语言文件，可以根据只保留中文的，其他删掉。
+			res/drawable-xxhdpi这个目录下为应用图标，可删掉。
+			res/layout-land目录是布局文件的横屏版，但是我们的应用没有横版，这个也可以删掉
+			res/layout目录下的bookmark_picker_list_item.xml，encode.xml，help.xml，history_list_item.xml，search_book_contents.xml，
+				search_book_contents_header.xml，search_book_contents_list_item.xml都没用，可以删掉
+		2.在cordova_511/BroMobileShell/platforms/android/AndroidManifest.xml中会生成两份这个代码,删掉新加上的就行
+	IOS错误解决（跟系统有关，不一定出现）：
+		1、报错一：
+		error: cordova_511/BroMobileShell/platforms/ios/Foobar/Resources/ResourcesCDVBarcodeScanner.bundle: No such file or directory
+		解决方法:进入cordova_511/BroMobileShell/platforms/ios/Foobar/Resources目录下,将CDVBarcodeScanner.bundle文件名改为ResourcesCDVBarcodeScanner.bundle
+		2、报错二：
+		cordova_511/BroMobileShell/platforms/ios/Foobar/Resources/ResourcesscannerOverlay.xib: Interface Builder could not open the document ResourcesscannerOverlay.xib" because it does not exist.
+		解决方法:点击Xcode左上角的文件夹图标，进入然后在下面的Resources文件夹中将一个显示为红色的,文件名为scannerOverlay.xib文件右键—delete
+		3、报错三：之后大概会报16个错
+		解决方法:在刚刚的左侧视图中找到Foobar project,点击下面的Foobar.xcodeproj点击，然后找到中间视图中的Build Phases点击，然后展开Link Binary With Libraries，点击左下角的”+”号，在上面的搜索栏中依次输入:
+		AVFoundation.framework,AudioToolbox.framework,CoreVideo.framework,CoreMedia.framework, AddressBook.framework, AddressBookUI.framework, QuartzCore.framework, CoreImage.framework,libiconv.tbd,
+
+===============================================================================
+
+Manatee Works Barcode Scanner
+	../node_modules/.bin/cordova plugin add com.manateeworks.barcodescanner
+	需要购买license，可以设置屏幕方向
+
+===============================================================================
+
+org.cloudsky.cordovaplugins.zbar
+	和 ZXing 比，最大的问题是支持的类型比较少
+	但是屏幕是竖的、而且全屏，体验比较好
+	条形码明显比 ZXing 快得多，但是二维码相对比较慢
+
+===============================================================================
+
+测试：
+cordova.plugins.barcodeScanner.scan(
+	function (result) {
+		alert("We got a barcode\n" +
+			"Result: " + result.text + "\n" +
+			"Format: " + result.format + "\n" +
+			"Cancelled: " + result.cancelled);
+	},
+	function (error) {
+		alert("Scanning failed: " + error);
+	}
+);

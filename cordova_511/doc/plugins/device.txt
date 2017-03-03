@@ -1,0 +1,13 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.device
+
+../node_modules/.bin/cordova plugin add org.apache.cordova.device
+
+可以通过 device 对象来查看设备信息：
+    device.cordova
+    device.model
+    device.platform
+    device.uuid
+    device.version
+
+测试：
+	console.log( device )

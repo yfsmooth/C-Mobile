@@ -1,0 +1,144 @@
+新建一个应用：
+从 SVN Fork 一个分支，修改工程名，然后按照下面的一些说明来改：如替换文本、版本号、图标等
+如果不需要额外的插件，则直接从 platform/android 分支，否则从顶层（BroMobileShell）分支
+1、修改 src 下的 com.foo.bar 包名为实际的应用包名（一个包名只能有一个app）
+2、搜索 com.foo.bar，替换成新的，应该只有 AndroidManifest.xml、res/xml/config.xml 两个文件
+3、修改应用名和显示名 Foobar，应该只有 res/xml/config.xml、res/values/strings.xml 两个文件
+4、修改 AndroidManifest.xml 中的版本号（versionName）
+	Android Studio 1.5 后，应该改 build.gradle 里的 versionName，如果没有的话，在工程上F4、设置Version Name
+5、应用的更新地址、首页地址，在 res/values/strings.xml 里配置
+7、修改 res 下的 icon、splash 图片
+8、（可选）如果有QQ接口，需要在腾讯开放平台申请一个新的 APP ID，详见插件文档 cordova_qq
+9、（可选）如果有微信接口，也需要申请新的 APP ID，详见插件文档 cordova_wechat
+
+合并新建应用与产品代码：
+@see ios.txt
+
+打包：
+	ADT：工程点右键/Android Tools/Export ....
+	Android Studio：菜单 Build/Generate Signed APK
+
+WebView 的 userAgent 里加了一段 “BroMobileShell”，不要修改，便于应用判断是否可支持cordova，支持则导入相应的js库。
+	BTW：ios 也加了。
+
+res/drawable-land(port)-xxx 等文件夹都可以删掉
+	我们自己实现了一个 splashscreen.xml 启动界面，需要放一个 splashscreen.png 到各 drawable 即可
+
+导入到 ADT：
+	导入两个工程老是编译不过，修改Resource Filter里的exclude，把CordovaLib去掉
+	修改 src、gen、CordovaLib/src 为源码文件夹，而将工程从源码文件夹中删除
+	将 Android Target 修改成 4.0 -- 不行，会导致编译不过
+	? 看到的是最外层的 www 文件夹：不知道打包会不会把两个 www 合并后打在一起呢
+		-- 不会，所以如果是本地应用，则应该用某种方式来合并（如svn:external）
+	? 看到的是最外层的 config.xml，改一下 Linked Resources，改成 res/xml 下的
+		-- 不改也没问题
+
+优化问题：
+	Android WebView常见问题及解决方案汇总
+		http://blog.csdn.net/t12x3456/article/details/13769731
+	腾讯X5浏览服务
+		http://x5.tencent.com/index
+		其相对于系统webview，具有下述明显优势：
+		1) 速度快：相比系统webView的网页加载速度有近30%的提升。
+		2) 省流量：云端优化技术使流量节省20%
+		3) 更安全：24小时安全问题解决机制
+		4) 更稳定：经过亿级用户的使用考验，CRASH率0.15%
+		5) 集成强大的视频播放器，支持各种视频格式直接打开
+		6) 适屏排版、字体设置等浏览增强功能的提供
+		7) Html5更完整支持。
+		8) 无系统内核的碎片化问题，更少的兼容性问题
+	dCloud
+		http://www.dcloud.io/runtime.html
+		5+Runtime-增强版的手机浏览器引擎，让HTML5达到原生水平
+	Analyzing UI Performance with Systrace
+		http://developer.android.com/intl/zh-cn/tools/debugging/systrace.html
+	Android-AdvancedWebView
+		https://github.com/delight-im/Android-AdvancedWebView
+		好像支持 input file 多选。
+
+========================================================================================================================
+个推配置
+========================================================================================================================
+
+个推帐号：
+	http://dev.igetui.com/login.htm
+	用户：bropen/Passw0rd
+	邮箱：webmaster@bropen.com.cn
+	同时在线用户 1w 以内免费。
+
+个推缓存：
+	SD卡/libs
+
+-------------------------------------------------
+文件说明
+-------------------------------------------------
+
+libs 下的 GexinSdk.jar、GexinSdk.jar、armeabi/libincrement.so 文件
+
+res/layout/notification.xml
+	通知栏的界面
+
+res/drawable-xxx 下的 push.png
+	好象是显示在通知栏的图标，可以和 icon.png 保持一致
+
+-------------------------------------------------
+AndroidManifest.xml，在 application 内添加
+-------------------------------------------------
+	<!-- 个推基本配置 -->
+	<meta-data android:name="appid" android:value="@string/igexin_appid" />
+	<meta-data android:name="appkey" android:value="@string/igexin_appkey" />
+	<meta-data android:name="appsecret" android:value="@string/igexin_appsecret" />
+	<activity android:name="com.igexin.sdk.SdkActivity"
+		android:excludeFromRecents="true" android:process=":pushservice"
+		android:taskAffinity="android.task.SdkActivityTask" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+		<intent-filter>
+			<!-- com.igexin.action.popupact + BroMobileShell类的包名 -->
+			<action android:name="com.igexin.action.popupact.bropen.mobile.shell" />
+			<category android:name="android.intent.category.DEFAULT" />
+		</intent-filter>
+	</activity>
+
+	<!-- 个推的后台服务 -->
+	<service android:name="com.igexin.sdk.coordinator.SdkMsgService"
+		android:exported="true" android:label="@string/NotifyCenterAIDL"
+		android:process=":pushservice">
+	</service>
+	<receiver android:name="com.igexin.sdk.coordinator.NotificationCenterAIDLReceiver">
+		<intent-filter>
+			<action android:name="com.igexin.sdk.action.refreshls" />
+		</intent-filter>
+	</receiver>
+	<service android:name="com.igexin.sdk.SdkMainService"
+		android:exported="false" android:label="@string/NotifyCenter"
+		android:process=":pushservice">
+	</service>
+	<receiver android:name="com.igexin.sdk.SdkReceiver">
+		<intent-filter>
+			<!-- 系统启动完成后会调用 -->
+			<action android:name="android.intent.action.BOOT_COMPLETED" />
+			<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+			<action android:name="android.intent.action.USER_PRESENT" />
+		</intent-filter>
+	</receiver>
+
+	<!-- 个推：如下配置用于透传,静态注册广播 -->
+	<!-- receiver android:name="BroadcastReceiver子类完整路径" -->
+	<receiver android:name="bropen.mobile.shell.MessageReceiver">
+		<intent-filter>
+			<!-- TODO 可不可以配置到其它地方，同 igexin_appid -->
+			<action android:name="com.igexin.sdk.action.6PCgqlrR458LA4YeKoCPpA" />
+		</intent-filter>
+	</receiver>
+
+-------------------------------------------------
+res/values/strings.xml 里的配置
+-------------------------------------------------
+	<!-- 是否启用个推 -->
+	<string name="igexin_enable">true</string>
+	<!-- 个推配置：可自行申请帐号 -->
+	<string name="igexin_appid">6PCgqlrR458LA4YeKoCPpA</string>
+	<string name="igexin_appkey">D8zC5ITYYnA7lALmj6Zjj3</string>
+	<string name="igexin_appsecret">Sp9Ut6ZRfxAvzOeG05w4l8</string>
+	<!-- 个推后台服务名：BroMobileShell 需改成应用名 -->
+	<string name="NotifyCenter">BroMobileShellNotifyCenter</string>
+	<string name="NotifyCenterAIDL">BroMobileShellNotifyCenterAIDL</string>

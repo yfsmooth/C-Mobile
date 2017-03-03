@@ -1,0 +1,29 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.splashscreen
+
+cordova plugin add cordova-plugin-splashscreen
+
+Android：
+	测试OK的话，可以删掉老的代码和资源吧
+		原来 Android 有一个功能（自己写的，见老的 SplashActivity 代码），在启动界面上显示版本号，也一块去掉了，不如直接改图，以便兼容 iOS 等其他终端。
+		设置一个时间 SplashScreenDelay，在首页事件 deviceready 中主动调用，将其隐藏。
+	问题：退出、再打开 app 时，不自动显示启动页，而是白屏，然后进入首页
+		修改 SplashScreen.showSplashScreen，并且在 MainActivity.onCreate 中发送重新显示启动界面的消息
+	问题：如果加载超时，Android 始终显示启动界面，然后报错后自动退出，都没机会修改启动 URL -- CordovaWebViewImpl﹕ TIMEOUT ERROR
+		临时：可以彻底退出，然后再进，就可以先进入到修改启动 URL 的界面了
+		TODO 应该改 CordovaActivity.onReceivedError 就行：exit 的条件
+
+iOS：
+	默认从 Resources/splash 中加载，根据链接中的例子，应该有下面的10副图：
+		http://cordova.apache.org/docs/en/5.0.0/config_ref_images.md.html#Icons%20and%20Splash%20Screens 
+		Default~iphone.png				width="320"		height="480"
+		Default@2x~iphone.png			width="640"		height="960"
+		Default-Portrait~ipad.png		width="768"		height="1024"
+		Default-Portrait@2x~ipad.png	width="1536"	height="2048"
+		Default-Landscape~ipad.png		width="1024"	height="768"
+		Default-Landscape@2x~ipad.png	width="2048"	height="1536"
+		Default-568h@2x~iphone.png		width="640"		height="1136"
+		Default-667h.png				width="750"		height="1334"
+		Default-736h.png				width="1242"	height="2208"
+		Default-Landscape-736h.png		width="2208"	height="1242"
+	iOS 本身就有的功能，只是加了 js api 和一些 fade 参数。
+	

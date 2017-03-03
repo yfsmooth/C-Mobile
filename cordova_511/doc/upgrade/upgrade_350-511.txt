@@ -1,0 +1,61 @@
+在当前文件夹安装 Cordova：
+	npm info cordova
+	npm install cordova@5.1.1
+
+创建工程，不在 Mac 下也可以了：
+	./node_modules/.bin/cordova create BroMobileShell
+	cd BroMobileShell
+	../node_modules/.bin/cordova platform add android
+	../node_modules/.bin/cordova platform add ios
+
+自动添加了插件 cordova-plugin-whitelist
+	用于控制允许访问哪些URL，配置方式见插件下的 README.md
+	
+Share 到 SVN，过滤：
+	platforms/andoird：gen、bin、build、.gradle
+	platforms/andoird/CordovaLib：build
+	platforms/ios：*.mode1v3、*.perspectivev3、*.pbxuser、.DS_Store、build
+
+platforms/android:
+	project.properties 修改 target 为 19 ???
+	在 android stutio 中 build 的时候必须用 gradle 2.2.1，版本 2.5 编译失败
+	删除 res 下的 drawable-land-XXXX、drawable-port-XXXX 等文件夹，里面都是大小不一的启动界面（screen.png）
+	替换 res 下的 drawable-XXX 下的 icon.png，添加 splashscreen.png，作为应用图标和启动界面
+	添加 res/layout 文件夹
+	合并 res/values/strings.xml
+	合并 res/xml/config.xml
+	合并 AndroidManifest.xml
+	合并 src 文件夹，删除 io/cordova/hellocordova
+	去掉个推的代码：
+		不复制 libs 下的个推 jar 包
+		修改 MessageReceiver，注释掉相关代码
+		修改 MainActivity，注释掉相关代码
+		详细可以比较
+			https://service.bropen.com.cn/svn/bropen/BROPEN/BroMobile/cordova_350/BroMobileShell/platforms/android/src
+			https://service.bropen.com.cn/svn/bropen/BROPEN/BroMobile/cordova_511/BroMobileShell/platforms/android/src （SVN 13394）
+
+platforms/ios
+	将 3.50 下的 BroMobileShell、BroMobileShell.xcodeproj 代码分支
+	合并 BroMobileShell-Info.plist、config.xml
+	Resources 下，新版删除了大量语言文件，先把多余的删了，留下 en、zh-Hans
+	Resource/icons，多了一个 icon-60@3x.png，是 180x180 大小的，暂时不管
+	Resources/splash，多了 Default-667h.png、Default-736h.png、Default-Landscape-736h.png，暂时不管
+	合并 Classes/MainViewController.m、Classes/AppDelegate.m
+	将文件 HelloCordova.xcodeproj/project.pbxproj 移动到 HelloCordova 中，以便安装插件
+		同理，将 CordovaLib/CordovaLib.xcodeproj 移动到 CordovaLib 中
+
+测试：
+	是否显示启动界面
+	设置界面能否出来、设置的数据能否保存
+	能否调出设置界面
+	能否加载设置的首页
+	启动后 cordova 的 deviceready 是否正常
+	Android: 返回键是否正常
+	测试 navigator.userAgent 是否正确
+	测试是否能自动升级
+	测试消息推送
+	测试GPS
+
+升级后对操作系统版本有新的要求：
+1、Android：minSdkVersion="10" targetSdkVersion="22"
+2、iOS：最低版本 7.1，不再支持 6.1

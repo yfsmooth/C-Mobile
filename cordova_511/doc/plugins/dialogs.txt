@@ -1,0 +1,12 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.dialogs
+
+cordova plugin add cordova-plugin-dialogs
+
+This plugin provides access to some native dialog UI elements via a global navigator.notification object.
+
+
+Methods
+    navigator.notification.alert
+    navigator.notification.confirm
+    navigator.notification.prompt
+    navigator.notification.beep

@@ -1,0 +1,82 @@
+新建一个应用：
+从 SVN Fork 一个分支，修改工程名，然后按照下面的一些说明来改
+1、修改标识符（BundleId） com.foo.bar，可以和安卓版的包名一致
+	Foobar-Info.plist、config.xml
+2、修改文件夹 Foobar、Foobar.xcodeproj 名称以及关联文本（Foobar）为新的 app 名称
+3、修改 Foobar-Prefix.pch，配置系统参数，如 kUpdateUrl、kStartUrl
+4、修改 Foobar-Info.plist、Foobar-Prefix.pch 的文件名前缀为新的 app 名，如 DeviceStore-Info.plist
+5、修改工程设置显示名（CFBundleDisplayName @ Foobar-Info.plist，可以直接改成中文）、
+   版本号（CFBundleVersion、CFBundleShortVersionString @ Foobar-Info.plist）
+6、修改 Resources 下的 icons、splash 图片
+7、（可选）根据新的标识符和 app 名，申请新的 AppId，而 provision 可以直接通过 xcode 申请
+	xcode 7 以后 xcode 会自动申请
+8、（可选）如果不需要定位功能，则可以在工程的 Capabilities 下，关闭 Maps
+9、（可选）删除 HelloCordova 工程
+10、（可选）如果有QQ接口，需要在腾讯开放平台申请一个新的 APP ID，详见插件文档 cordova_qq
+11、（可选）如果有微信接口，也需要申请新的 APP ID，详见插件文档 cordova_wechat
+
+合并新建应用与产品代码：
+1、Android
+	1.1 src/com/foobar 下的文件在新建应用时会移动到其他包中，需单独合并该文件夹
+	1.2 按照新建应用的过程，搜一下相关的关键字
+2、iOS
+	2.1 在新建应用时步骤2、4有文件夹和文件重命名，需要单独合并这两个文件夹
+	2.2 按照新建应用的过程，搜一下相关的关键字
+
+安装证书：
+1、登录到 developer.apple.com，进入 Member Center / Cerficatates... / Certificates，下载 Certificates 里的所有证书，并双击安装
+2、下载 Provisioning Profiles 里的 Profiles，一个是用于开发测试的，一个是用于发布的，双击安装到 xcode 中。
+3、双击安装 bropen.p12 证书（密码为空），用于打包
+
+开发测试：
+1、工程属性 General / Bundle Identifier 设置和上述网站的 AppId 里的一样
+2、工程属性 Build Setting / Code Signing 中选择开发的 Profile 和证书
+3、模拟器测试：顶部选择模拟器，如 iPhone 4，&＋R 运行
+4、真机测试：插入设备后，到上述网站的 Devices 里添加设备，到 Profiles 里编辑 Profile，然后重新下载、导入，然后就可以选择对应的设备、运行了
+
+打包发布：
+1、选择设备为 iOS Device，不能选择模拟器
+2、点击菜单 Product / Archive 操作执行打包。
+   打包过程中，需要选择生产的 Profile 及证书；
+   完了后在 Archives 界面中 Export：
+       我们的是不能发布到 app store 的证书，选择“Save for Enterprise Deployment”
+   注：xcode 7.1 打包异常，找不到头文件 @ SVN17152
+   	   https://forum.ionicframework.com/t/cordova-cdvviewcontroller-h-file-not-found-in-xcode-7-1-beta/32232/4
+3、可以通过 iTune 将 ipa 文件安装到设备上，或者通过下面的步骤4、5安装
+4、发布时，生成两个文件，一个 .ipa，一个 .plist 文件
+	升级到 Xcode 6 后，无法生成 plist 文件，可以手动改一个，模板见：
+		http://stackoverflow.com/questions/25910387/xcode-6-save-for-enterprise-deployment-does-not-create-plist-for-ipa-anymore
+		http://segmentfault.com/q/1010000000623121	plist苹果安装包实现
+		http://www.cnblogs.com/beginor/archive/2013/01/25/2877200.html
+	此外，iOS 7.1 以上，必须通过一个有效的 https 服务来访问，也就是说 kUpdateUrl 必须是 https 的，
+		而且还必须是有效的证书，此外还不支持 Let's Encrypt 的免费证书：（
+		但是可以将 ipa 文件上传到微软 OneDrive 的公开文件夹中，下载一遍以获得其连接地址，然后修改 plist 文件里的连接；
+		然后讲 plist 也上传到 OneDrive，让后再修改安装网页里的 itms-services 链接中的 url 参数即可；
+		此外，OneDrive 生成的下载链接后缀 “?download....” 可以删除。
+5、将 ipa、plist 部署在 apache 里。需要修改 apache 的配置，添加：
+	AddType text/xml                 .plist
+	AddType application/octet-stream .ipa
+
+产品显示名称：
+CFBundleDisplayName @ Foobar-Info.plist
+也可以实现国际化
+
+版本号：
+CFBundleVersion @ Foobar-Info.plist
+
+IP地址参数配置：
+Foobar-Prefix.pch
+
+隐藏状态栏：
+	在plist里设置 UIStatusBarHidden 和 UIViewControllerBasedStatusBarAppearance，也就是：
+		首先设置key：Status bar is initially hidden    为YES
+		然后设置key：View controller-based status bar appearance  为NO
+	即可实现全局隐藏状态栏了。
+	已知问题：iOS 8.1~8.2 中，如果选择相册，返回后，状态栏又会出现，属于系统缺陷
+
+iOS 模拟器热键：
+Command+Shift+H         模拟器的Home键。
+Cmd+1/2/3               可以切换模拟器的显示比例。
+Option+Shift            可以在模拟器中调出双指拖动效果。
+Option                  可以在模拟器中调出双指放大缩小效果。
+Cmd+向左箭头/向右箭头   切换横竖屏。

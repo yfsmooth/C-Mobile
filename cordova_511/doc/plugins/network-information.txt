@@ -1,0 +1,23 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.network-information
+
+cordova plugin add cordova-plugin-network-information
+
+This plugin provides an implementation of an old version of the Network Information API.
+It provides information about the device's cellular and wifi connection, and whether the device has an internet connection.
+
+事件：offline、online
+
+测试代码：
+function checkConnection() {
+    var networkState = navigator.connection.type;
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+    alert('Connection type: ' + states[networkState]);
+}

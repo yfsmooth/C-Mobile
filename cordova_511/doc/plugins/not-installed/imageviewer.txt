@@ -1,0 +1,14 @@
+https://github.com/dsolimando/ImageViewer
+http://plugins.cordova.io/#/package/be.solidx.imageviewer
+
+cordova plugin add be.solidx.imageviewer
+
+Cordova Image Viewer plugin with pinch to zoom support
+有放大功能的图片查看器，能直接打开远程图片。
+
+问题：
+Android 版只有纯 js，没代码，测试没反应。
+从源码上看，只支持 iOS。
+
+测试：
+ImageViewer.show("http://www.baidu.com/img/bdlogo.png")

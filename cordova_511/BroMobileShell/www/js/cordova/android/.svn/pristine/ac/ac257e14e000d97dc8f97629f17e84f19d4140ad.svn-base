@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one
+	or more contributor license agreements.  See the NOTICE file
+	distributed with this work for additional information
+	regarding copyright ownership.  The ASF licenses this file
+	to you under the Apache License, Version 2.0 (the
+	"License"); you may not use this file except in compliance
+	with the License.  You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing,
+	software distributed under the License is distributed on an
+	"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+	 KIND, either express or implied.  See the License for the
+	specific language governing permissions and limitations
+	under the License.
+-->
+<html>
+	<head>
+		<!--
+		Customize this policy to fit your own app's needs. For more guidance, see:
+			https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+		Some notes:
+			* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+			* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+			* Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+				* Enable inline JS: add 'unsafe-inline' to default-src
+		-->
+		<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+		<meta http-equiv="Content-Security-Policy" content="default-src * data: 'unsafe-inline' 'unsafe-eval'">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<title>Hello World</title>
+	</head>
+	<body>
+		<div class="app" id="app">
+			<h1>Apache Cordova</h1>
+			<div id="deviceready" class="blink">
+				<p class="event listening">Connecting to Device</p>
+				<p class="event received">Device is Ready</p>
+			</div>
+			<button onclick="testGeolocation()">获取地理位置信息</button>
+			<button onclick="testDevice()">获取设备信息</button><br>
+			<button onclick="testBarcodeScanner()">扫一扫</button>
+			<button onclick="testOpen()">打开文件</button><br>
+			<button onclick="testCamera(1)">拍摄照片</button>
+			<!-- <button onclick="testCamera(1, true)">用前置摄像头拍照</button> -->
+			<button onclick="testCamera(2)">选择照片</button><br>
+			<button onclick="testImagepicker()">选择多张照片</button><br>
+			<button onclick="testConnection()">检测网络</button>
+			<button onclick="testDialog()">提示(alert等)</button><br>
+			<button onclick="testKeyboard()">软键盘(Android)</button><input type="text" style="width: 50px" /><br>
+			<button onclick="testHttp()">HTTP请求</button>
+			<button onclick="testNotification()">发布消息提醒</button><br>
+			<button onclick="testSplashscreen()">显示启动界面3s</button><br>
+			<!-- 问题1、不支持 android
+				 问题2、即便是 iOS，貌似也不能选其他类型的文件 -->
+			多图上传@iOS：<input type="file" name="imgs[]" multiple="" accept="image/*" /><br>
+			<!-- <button onclick="testFileChooser()">选择文件</button><br> -->
+			<button onclick="testIsQQInstall()">检查QQ是否安装</button>
+			<button onclick="testQQLogin()">第三方登陆QQ</button><br>
+			<button onclick="testQQLogout()">第三方登出QQ</button><br>
+			<button onclick="testShareToQQ()">分享到QQ</button>
+			<button onclick="testShareToQQzone()">分享到QQ空间</button><br>
+			<button onclick="testAddToQQCollection()">添加到QQ收藏</button><br>
+			  
+			<button onclick="testIsWeixinInstall()">测试微信是否安装</button>
+			<!--<button onclick="testWeixinAuth()">调用微信之前的认证</button><br>  -->
+			<button onclick="testWeixinShareText()">分享文本到微信</button>
+			<!--<button onclick="testWeixinShareMedia()">分享音视频图片到微信</button><br> -->
+			<button onclick="testWeixinShareLink()">分享链接到微信朋友圈</button>
+			<button onclick="testWeixinShareLinkToFriend()">分享链接到微信好友</button>
+			<!--<button onclick="testIsWeixinPay()">向微信发送支付请求</button><br>  -->
+			<button onclick="testClearCache()">清理缓存</button>
+			<div id="result" style="text-transform: none"></div>
+		</div>
+		<script src="js/bropen/shell.js" id="bro-mobile-shell" cordova="js/cordova/"></script>
+		<!-- <script type="text/javascript" src="cordova.js"></script> -->
+		<script type="text/javascript" src="js/index.js"></script>
+		<script>
+		/*function testFileChooser() {
+			var options = {"accept":"image/!*", "capture":false};
+			window.filechooser.open(options, function(data) {
+				console.log(data);
+			}, function(error) {
+				alert(error);
+			});
+		}*/
+
+		// 自动隐藏启动界面
+		document.addEventListener('deviceready', function() {
+			setTimeout(function() {
+				navigator.splashscreen.hide();
+			}, 500);
+		})
+
+		function testClearCache() {
+			var success = function(status) {
+				document.getElementById("result").innerHTML = ('testClearCache()--success: ' + status);
+			}
+			var error = function(status) {
+				document.getElementById("result").innerHTML = ('testClearCache()--error: ' + status);
+			}
+			window.cache.clear( success, error );	// 清理：浏览器缓存、Android 的文件缓存
+			window.cache.cleartemp();				// 清理：iOS 的文件缓存
+		}
+		
+		//微信是否安装:
+		function testIsWeixinInstall() {
+			Wechat.isInstalled(function (installed) {
+			    alert("Wechat installed: " + installed );
+			}, function (reason) {
+			    alert("Failed: " + reason);
+			});
+		}
+		
+		//调用微信之前的认证:
+		function testWeixinAuth() {
+			var scope = "snsapi_userinfo";
+			alert("testWeixinAuth()-->111");
+			Wechat.auth(scope, function (response) {
+				alert("testWeixinAuth()-->222");
+			    // you may use response.code to get the access token.
+			    alert(JSON.stringify(response));
+			}, function (reason) {
+				alert("testWeixinAuth()-->333");
+			    alert("Failed: " + reason);
+			});
+		}
+		
+		//微信分享文本:
+		function testWeixinShareText() {
+			alert("testWeixinShareText()-->111");
+			Wechat.share({
+				text: "This is just a plain string",
+				scene: Wechat.Scene.TIMELINE   // share to Timeline
+			}, function () {
+				alert("Success");
+			}, function (reason) {
+				alert("Failed: " + reason);
+			});
+
+		}
+		
+		//微信分享视频，音频，图片:
+		function testWeixinShareMedia() {
+			alert("testWeixinShareMedia()-->111");			
+			Wechat.share({
+			    message: {
+			        title: "Hi, there",
+			        description: "This is description.",
+			        thumb: "www/img/thumbnail.png",
+			        mediaTagName: "TEST-TAG-001",
+			        messageExt: "这是第三方带的测试字段",
+			        messageAction: "<action>dotalist</action>",
+			        media: "YOUR_MEDIA_OBJECT_HERE"
+			    },
+			    scene: Wechat.Scene.TIMELINE   // share to Timeline
+			}, function () {
+				alert("testWeixinShareMedia()-->Success");			
+			}, function (reason) {
+				alert("testWeixinShareMedia()-->fail:"+reason);			
+			});
+		}
+		
+		//微信分享链接到朋友圈:
+		function testWeixinShareLink() {
+			Wechat.share({
+			    message: {
+			        title: "Hi, there",
+			        //description: "This is description.",
+			        //thumb: "https://www.baidu.com/img/bdlogo.png",
+			        //mediaTagName: "TEST-TAG-001",
+			        //messageExt: "这是第三方带的测试字段",
+			        //messageAction: "<action>dotalist</action>",
+			        media: {
+			            type: Wechat.Type.LINK,
+			            webpageUrl: "http://www.baidu.com"
+			        }
+			    },
+			    scene: Wechat.Scene.TIMELINE   // share to Timeline
+			}, function () {
+			    alert("testWeixinShareLink()-->Success");
+			}, function (reason) {
+			    alert("testWeixinShareLink()-->fail:"+reason);
+			});
+		}	
+		
+		//微信分享链接到好友:
+		function testWeixinShareLinkToFriend() {
+			Wechat.share({
+			    message: {
+			        title: "Hi, there",
+			        description: "This is description.",
+			        thumb: "https://www.baidu.com/img/bdlogo.png",
+			        //mediaTagName: "TEST-TAG-001",
+			        //messageExt: "这是第三方带的测试字段",
+			        //messageAction: "<action>dotalist</action>",
+			        media: {
+			            type: Wechat.Type.LINK,
+			            webpageUrl: "http://www.baidu.com"
+			        }
+			    },
+			    scene: Wechat.Scene.SESSION   // share to Timeline
+			}, function () {
+			    alert("testWeixinShareLink()-->Success");
+			}, function (reason) {
+			    alert("testWeixinShareLink()-->fail:"+reason);
+			});
+		}	
+		
+		//微信发送支付请求:
+		function testIsWeixinPay() {
+			var params = {
+				    mch_id: '10000100', // merchant id
+				    prepay_id: 'wx201411101639507cbf6ffd8b0779950874', // prepay id
+				    nonce: '1add1a30ac87aa2db72f57a2375d8fec', // nonce
+				    timestamp: '1439531364', // timestamp
+				    sign: '0CB01533B8C1EF103065174F50BCA001', // signed string
+				};
+
+				Wechat.sendPaymentRequest(params, function () {
+				    alert("Success");
+				}, function (reason) {
+				    alert("Failed: " + reason);
+				});
+		}		
+			
+		
+		//分享到QQ空间
+		function testShareToQQzone() {
+			 var args = {};
+			 args.url = "http://www.baidu.com";
+			 args.title = "This is cordova QZone share ";
+			 args.description = "This is cordova QZone share ";
+			 var imgs =['https://www.baidu.com/img/bdlogo.png',
+				 'https://www.baidu.com/img/bdlogo.png',
+				 'https://www.baidu.com/img/bdlogo.png'];
+			  args.imageUrl = imgs;
+			  YCQQ.shareToQzone(function () {
+				  document.getElementById("result").innerHTML = ("testShareToQQzone()-->share success");
+			  }, function (failReason) {
+				  document.getElementById("result").innerHTML = ("testShareToQQzone()-->"+failReason);
+			  }, args);
+		}		
+		
+		//分享到QQ好友
+		function testShareToQQ() {
+			var args = {};
+			args.url = "http://www.baidu.com";
+			args.title = "This is cordova QQ share ";
+			args.description = "This is cordova QQ share ";
+			args.imageUrl = "https://www.baidu.com/img/bdlogo.png";//注意这里只能传一个url
+			args.appName = "设备优化";
+			YCQQ.shareToQQ(function(){
+				document.getElementById("result").innerHTML = ("testShareToQQ:success");
+				console.log("share success");
+			},function(failReason){
+				document.getElementById("result").innerHTML = ("testShareToQQ:fail"+failReason);
+				console.log(failReason);
+			},args);			
+			
+		}
+		
+		//QQ SSO 登录
+		function testQQLogin() {
+			var checkClientIsInstalled = 1;//default is 0,only for iOS
+			YCQQ.ssoLogin(function(args){
+					document.getElementById("result").innerHTML = ("访问令牌:"+args.access_token);
+					document.getElementById("result").innerHTML = ("用户id:"+args.userid);
+				},function(failReason){
+					console.log(failReason);
+					document.getElementById("result").innerHTML = (failReason);
+				}, checkClientIsInstalled);
+		}
+		
+		//QQ 登出
+		function testQQLogout() {
+			YCQQ.logout(function(){
+				document.getElementById("result").innerHTML = ("testQQLogout:success");
+				console.log('logout success');
+			},function(failReason){
+				document.getElementById("result").innerHTML = ("testQQLogout:"+failReason);
+				console.log(failReason);
+			});
+		}
+		
+		//测试QQ是否安装
+		function testIsQQInstall() {
+			YCQQ.checkClientInstalled(function(){
+			    QQINSTALLED = true;
+				document.getElementById("result").innerHTML = ("QQ是否安装:"+QQINSTALLED);
+			},function(){
+			    // if installed QQ Client version is not supported sso,also will get this error
+			    QQINSTALLED = false;
+				document.getElementById("result").innerHTML = ("QQ是否安装:"+QQINSTALLED);
+			});
+		}
+		
+		//QQ 收藏
+		function testAddToQQCollection() {
+			 var args = {};
+			 args.url = "http://www.baidu.com";
+			 args.title = "这个是cordova QQ 收藏测试";
+			 args.description = "这个是cordova QQ 收藏测试";
+			 args.imageUrl = "https://www.baidu.com/img/bdlogo.png";
+			 args.appName = "cordova—QQ";
+			 YCQQ.addToQQFavorites(function () {
+				 document.getElementById("result").innerHTML = ("testAddToQQCollection()-->share success");
+			 }, function (failReason) {
+				 document.getElementById("result").innerHTML = ("testAddToQQCollection():"+failReason);
+			 }, args);
+		}
+		
+		function testSplashscreen() {
+			navigator.splashscreen.show();
+			setTimeout(function() {
+				navigator.splashscreen.hide();
+			}, 3000);
+		}
+		function testGeolocation() {
+			navigator.geolocation.getCurrentPosition( function(position){
+				console.log(position)
+				document.getElementById("result").innerHTML = "纬度：" + position.coords.latitude
+					+ "<br/>经度：" + position.coords.longitude
+					+ "<br/>海拔：" + position.coords.altitude;
+			});
+		}
+		function testBarcodeScanner(){
+			cordova.plugins.barcodeScanner.scan(
+					function (result) {
+						document.getElementById("result").innerHTML = ("We got a barcode<br>" +
+							"Result: " + result.text + "<br>" +
+							"Format: " + result.format + "<br>" +
+							"Cancelled: " + result.cancelled);
+					},
+					function (error) {
+						alert("Scanning failed: " + error);
+					}
+				);
+		}
+		function testDevice() {
+			document.getElementById("result").innerHTML = "cordova: " + device.cordova + "<br>" +
+				"model: " + device.model + "<br>" +
+				"platform: " + device.platform + "<br>" +
+				"version: " + device.version + "<br>" +
+				"uuid: " + device.uuid;
+		}
+		function testOpen() {
+			// 会下载到 Android/data/com.foo.bar/cache 下
+			cordova.plugins.disusered.open('http://www.baidu.com/img/bdlogo.png')
+		}
+		function testCamera(type, front) {
+			navigator.camera.getPicture(function (imageData) {
+					setTimeout(function() {
+						//alert( imageURI );
+						document.getElementById("result").innerHTML = "<img width=100 height=100 src='data:image/jpeg;base64," + imageData + "' />"
+					}, 0);
+				}, function onFail(message) {
+					alert('Failed because: ' + message);
+				}, { quality: 50,
+					destinationType: Camera.DestinationType.DATA_URL,
+					mediaType: Camera.MediaType.PICTURE,
+					sourceType : type == 1 ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
+					cameraDirection: front ? Camera.Direction.FRONT : Camera.Direction.BACK}
+			)
+		}
+		function testImagepicker() {
+			window.imagePicker.getPictures(
+				function(results) {
+					for (var i = 0; i < results.length; i++) {
+						console.log('Image URI: ' + results[i]);
+					}
+					document.getElementById("result").innerHTML = results.join("<br/>");
+				}, function (error) {
+					document.getElementById("result").innerHTML = ('Error: ' + error);
+				}, {
+					maximumImagesCount: 10,
+					width: 100 // Set with for image - will keep the aspect ratio
+				}
+			);			
+		}
+		function testConnection() {
+		    var networkState = navigator.connection.type;
+		    var states = {};
+		    states[Connection.UNKNOWN]  = 'Unknown connection';
+		    states[Connection.ETHERNET] = 'Ethernet connection';
+		    states[Connection.WIFI]     = 'WiFi connection';
+		    states[Connection.CELL_2G]  = 'Cell 2G connection';
+		    states[Connection.CELL_3G]  = 'Cell 3G connection';
+		    states[Connection.CELL_4G]  = 'Cell 4G connection';
+		    states[Connection.CELL]     = 'Cell generic connection';
+		    states[Connection.NONE]     = 'No network connection';
+		    document.getElementById("result").innerHTML = 'Connection type: ' + states[networkState];
+		}
+		function testDialog() {
+			// alert
+			navigator.notification.alert(
+				'this is a alert!',
+				function(){
+					// confirm
+					navigator.notification.confirm(
+						'this is a confirm!',
+						function( buttonIndex ) {
+							alert('You selected button ' + buttonIndex);
+							// prompt
+							navigator.notification.prompt(
+								'this is a prompt!',
+								function( results ) {
+									alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+								},
+								'title',
+								['Ok','Exit'],
+								'defaultText'
+							);
+						},
+						'title',
+						 ['Confirm','Exit']
+					);
+				},
+				'title',
+				'button'
+			);
+			navigator.notification.beep();
+			navigator.vibrate(3000);
+			document.getElementById("result").innerHTML = "如果打开了声音，会响一下；如果打开了震动，会震一下。";
+		}
+		function testKeyboard() {
+			if ( cordova.plugins.Keyboard.isVisible ) {
+				cordova.plugins.Keyboard.close();
+			} else {
+				cordova.plugins.Keyboard.show();	// Android Only
+			}
+		}
+		document.addEventListener('deviceready', function() {
+			addEventListener('native.keyboardshow', function(e) {
+				document.getElementsByClassName('app')[0].className = 'x';
+				document.getElementById("result").innerHTML = ('Keyboard height is: ' + e.keyboardHeight);
+			});
+			addEventListener('native.keyboardhide', function() {
+				document.getElementsByClassName('x')[0].className = 'app';
+				document.getElementById("result").innerHTML = ('Keyboard hide event')
+			});
+		}, false);
+		function testHttp() {
+			cordovaHTTP.get("http://baidu.com/", {}, {}, 
+				function(response) {
+					document.getElementById("result").innerHTML = response.status;
+					console.log(response.data);
+				}, function(response) {
+					console.error(response);
+				});//*/
+			/* downloadFile 貌似有问题
+			cordovaHTTP.downloadFile( "http://www.baidu.com/", {}, {}
+				, "file:///somefile.htm"
+				, function(entry) {
+					console.log( entry )
+					document.getElementById("result").innerHTML = entry.name + "<br/>" + entry.fullPath;
+				}, function(response) {
+					if ( typeof(response) == "string" ) {
+						document.getElementById("result").innerHTML = response;
+					} else {
+						document.getElementById("result").innerHTML = response.status + "<br/>" + response.error;
+					}
+				});//*/
+			// get、post 等略，可以用来覆盖 jquery 的 ajax 方法，详见 github
+		}
+		
+		function testNotification() {
+			cordova.plugins.notification.local.schedule({
+				//id: 1,
+			    title: "New Message",
+			    message: "Hi, are you ready? We are waiting. 哈哈哈...",
+			    icon: "res://icon.png"
+			    //, at: new Date(new Date() + 10000)
+			});
+		}
+		document.addEventListener('deviceready', function() {
+			var first = true;
+			cordova.plugins.notification.local.on("click", function(notification, state) {
+				document.getElementById("result").innerHTML = ("notification clicked: " + notification.id);
+				if ( first === true ) {
+					// 点击提示启动app时，直接清空所有，否则每次重启Android系统后，还可能会提示？
+					cordova.plugins.notification.local.clearAll();
+					first = undefined;
+					// TODO 退出的时候，需要清空当前的提醒吗（注：不是取消）？
+				} else {
+					// 提示后马上清掉
+					cordova.plugins.notification.local.clear(notification.id);
+				}
+			});
+			cordova.plugins.notification.local.on("schedule", function(notification) {
+				document.getElementById("result").innerHTML = ("notification scheduled: " + notification.id);
+			});
+			cordova.plugins.notification.local.on("trigger", function(notification) {
+				document.getElementById("result").innerHTML = ("notification triggered: " + notification.id);
+			});
+		})
+		</script>
+	</body>
+</html>

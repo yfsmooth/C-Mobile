@@ -1,0 +1,26 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.camera
+
+cordova plugin add org.apache.cordova.camera
+
+This plugin defines a global navigator.camera object, which provides an API for taking pictures and for choosing images from the system's image library.
+从图库中选择图片、或拍照，并返回url或base64的数据
+
+照片存储在 Android/data/com.foo.bar/cache 下。
+
+类似的加强版，只支持Android：
+http://plugins.cordova.io/#/package/org.geneanet.customcamera
+
+可多选图片的 imagepicker：
+http://plugins.cordova.io/#/package/com.synconset.imagepicker
+	TODO 合并 imagePicker 和 camera 插件
+	TODO imagePicker 返回 base64 的图片选项
+
+测试：
+navigator.camera.getPicture(function (imageURI) {
+		alert( imageURI )
+	}, function onFail(message) {
+		alert('Failed because: ' + message);
+	}, { quality: 50,
+		destinationType: Camera.DestinationType.FILE_URI,
+		sourceType : Camera.PictureSourceType.CAMERA }	// Camera.PictureSourceType.PHOTOLIBRARY
+)

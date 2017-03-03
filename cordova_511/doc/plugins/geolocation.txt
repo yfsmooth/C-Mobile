@@ -1,0 +1,27 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.geolocation
+https://github.com/apache/cordova-plugin-geolocation
+
+cordova plugin add org.apache.cordova.geolocation
+
+This plugin provides information about the device's location, such as latitude and longitude.
+Common sources of location information include Global Positioning System (GPS) and location 
+inferred from network signals such as IP address, RFID, WiFi and Bluetooth MAC addresses, 
+and GSM/CDMA cell IDs. There is no guarantee that the API returns the device's actual location.
+
+获得当前经纬度。
+
+Android下只需要添加权限即可，不需要任何代码支持，原因是：
+https://issues.apache.org/jira/browse/CB-5977
+Android plugin support has been removed. Yi Ming Kuan said: "The reason we went with CB-5977 is that
+the webview on newer Android versions will get GPS locks more quickly than the native API, hence its
+removal. Adding the plugin on Android just adds the necessary permissions to use HTML5 Geolocation in your app."
+
+HTML5的示例代码可参见：
+http://stackoverflow.com/questions/19491875/phonegap-cordova-geolocation-not-working-on-android
+http://stackoverflow.com/questions/21819774/cordova-geolocation-not-working-on-android
+
+测试：
+navigator.geolocation.getCurrentPosition( function(position){
+	console.log(position)
+	alert(position.coords.latitude)
+});

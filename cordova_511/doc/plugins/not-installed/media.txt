@@ -1,0 +1,7 @@
+http://plugins.cordova.io/#/package/org.apache.cordova.media
+
+This plugin provides the ability to record and play back audio files on a device.
+
+NOTE: The current implementation does not adhere to a W3C specification for media capture,
+and is provided for convenience only. A future implementation will adhere to the latest W3C
+specification and may deprecate the current APIs.
