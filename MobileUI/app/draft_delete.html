@@ -1,0 +1,47 @@
+<!-- 草稿页面 -->
+<div class="page-group">
+	<div class="page _list draft_delete">
+		<form action="server2/work/delete" data-o-form="true">
+			<header class="bar bar-nav">
+				<a class="button button-link button-nav pull-left back" href="#">
+					<span class="icon icon-left"></span>返回
+				</a>
+
+				<h1 class="title">草稿删除</h1>
+				<a class="pull-right">
+					<span id="checkAll">全选</span>
+				</a>
+			</header>
+			<div class="content" id="checked"
+				 data-o-listloader="true"
+				 data-o-listloader-url="server2/work/listDraft"
+				 data-o-listloader-template-id="template-draft_delete-list">
+				<div class="o-listloader-data">
+				</div>
+			</div>
+			<script type="text/html" id="template-draft_delete-list">
+				{{each list as item}}
+				<div class="row">
+					<div class="col-80">
+						<div class="daiban-title">
+							{{substr(item.title,13,'...')}}
+						</div>
+						{{if item.sendName != null && item.sendName.length> 0}}
+						<span>{{item.sendName}}</span>
+						{{/if}}
+						<span>{{item.receiveTime}}</span>
+					</div>
+					<div class="col-20">
+						<div class="ch1 pull-right">
+							<div class="gou"></div>
+							<input id="{{item.taskId}}" type="checkbox" name="taskIds" value="{{item.taskId}}"
+								   class="pull-right checkbox">
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			</script>
+			<input class="delete-button" id="delete" value="删  除" type="submit">
+		</form>
+	</div>
+</div>

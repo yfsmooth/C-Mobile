@@ -1,0 +1,95 @@
+<!-- 流程跟踪 -->
+<div class="page draft _list processlog"
+	 data-o-template-fixed="true"
+	 data-o-template-script-id="template-processes-show"
+	 data-o-template-async="true"
+	 data-o-template-data-url="server2/work/processLog">
+	<script type="text/html" id="template-processes-show">
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="#">
+				<span class="icon icon-left"></span>返回
+			</a>
+
+			<h1 class="title">
+				{{substr(definitionName,8,'...')}}
+			</h1>
+			<a href="#" class="pull-right open-popover" data-popover="#form-processlog-popover">
+				<img src="../assets/img/header/more.png" id="moreimg"/>
+			</a>
+		</header>
+		<div class="content">
+			<div class="protitle">流程跟踪</div>
+			<div>
+				<!--分组(一个分组含有一个分组名称@groupName,一个流程实例@process)-->
+				{{each html as group i}}
+				<div class="timecontent">
+					<span><!-- 分组名称 --></span>
+
+					<div class="timeheader line"></div>
+					<!-- 流程实例包含多个流程环节@process -->
+					{{each group.process as process}}
+					{{if process.task != null && process.task.length> 0}}
+					{{if process.task[0].completeTime != null && process.task[0].completeTime.length> 0 &&
+					process.task[0].completeTime != "null"}}
+					<span class="imgbadge proal"></span>
+					{{/if}}
+					{{if process.task[0].completeTime == null || process.task[0].completeTime == "null" ||
+					process.task[0].completeTime.length == 0}}
+					<span class="imgbadge proto"></span>
+					{{/if}}
+					{{/if}}
+					<!-- 一个流程环节包含多个任务@task,任务中包含(@completeTime发送时间,@actor办理人,@nodeName环节名称,@content意见) -->
+					{{each process.task as task}}
+					<div class="line">
+						<div class="textcontent">
+							<div class="contime">
+								{{if task.completeTime && task.completeTime != "null" && task.completeTime.length>0}}
+								    {{task.completeTime.substring(0 , 16)}}
+								{{/if}}
+							</div>
+							<div class="crow">
+								<div class="col-10">
+									<span class="proaltext">{{task.nodeName}}</span>
+									<span>&nbsp;&nbsp;{{task.actor}}</span>
+								</div>
+							</div>
+							<div class="crow">
+								{{each task.content as c}}
+								{{if c != null}}
+								<div class="col-2">意见:</div>
+								<div class="col-8">
+									{{c}}
+								</div>
+								{{/if}}
+								<div style="clear: both"></div>
+								{{/each}}
+							</div>
+						</div>
+						<div class="conblank"></div>
+					</div>
+					{{/each}}
+					{{/each}}
+				</div>
+				{{/each}}
+			</div>
+		</div>
+		</div>
+		<!-- 右上角下拉菜单 -->
+		<div class="popover" id="form-processlog-popover">
+			<div class="popover-inner">
+				<div class="list-block">
+					<ul>
+						<li><a class="list-button item-link"
+							   data-o-url-replace="readlog.html?taskId={{taskId}}&origin={{origin}}">阅读跟踪</a></li>
+						{{if origin == "todo" || origin == 'done'}}
+						<li><a class="list-button item-link"
+							   data-o-url-replace="../bropen/templates/selector.html?selectorType=informed&orgId=selectPersonJsonTreeStore_{{taskId}}-root&taskId={{taskId}}"
+							   data-o-url-reload="true">知会</a>
+						</li>
+						{{/if}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+</div>

@@ -1,0 +1,46 @@
+<!-- 侧栏 -->
+<div class="panel-overlay"></div>
+<!-- Left Panel with Reveal effect -->
+<div class="panel panel-left panel-reveal" id='panel-left-demo'>
+    <div class="content-block">
+        <div>
+            <div class="content-block">
+                <div id="myContent" data-o-url-change="myself.html" data-o-template-dynamic="true">
+                    {{if $.o.user.avatarUrl}}
+                    <img data-src="{{$.o.user.avatarUrl}}"/>
+                    {{else}}
+                    <div class='round-head' data-o-nickname="true">{{subName($.o.user.nickname)}}</div>
+                    {{/if}}
+                </div>
+            </div>
+            <br>
+            <div>
+                <div class="row" data-o-url-change="mywork.html">
+                    <div class="col-20">
+                        <img src="../assets/img/panel/ce-wdgz.png"/>
+                    </div>
+                    <div class="col-80">我的工作</div>
+                </div>
+                <div class="row" data-o-url-change="draft_center.html">
+                    <div class="col-20">
+                        <img src="../assets/img/panel/ce-qczx.png"/>
+                    </div>
+                    <div class="col-80">起草中心</div>
+                </div>
+                <div class="row" data-o-url-change="notice.html">
+                    <div class="col-20">
+                        <img src="../assets/img/panel/ce-tzgg.png"/>
+                    </div>
+                    <div class="col-80">通知公告</div>
+                </div>
+                <div class="row" data-o-url-change="news.html">
+                    <div class="col-20">
+                        <img src="../assets/img/panel/ce-xw.png"/>
+                    </div>
+                    <div class="col-80">新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闻</div>
+                </div>
+            </div>
+            <div class="list-block"></div>
+        </div>
+    </div>
+</div>

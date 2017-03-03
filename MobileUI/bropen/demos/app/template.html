@@ -1,0 +1,51 @@
+<div class="page template" data-o-template-script-id="template">
+    <script type="text/html" id="template">
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-right">
+                <span class="icon icon-menu open-popover" data-popover="#form-popover"></span>
+            </a>
+            <a class="button button-link button-nav pull-left back" href="#">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title">{{subStr('模板测试aaaa', 4, '...')}}{{type}} {{$.o.config.telphone}}</h1>
+        </header>
+        <div class="content content-padded">
+            <div class="searchbar">
+                <div class="search-input">
+                    <label class="icon icon-search" for="search"></label>
+                    <input type="search" id='search' placeholder='输入关键字...'/>
+                </div>
+            </div>
+
+            <div class="searchbar row">
+                <div class="search-input col-80">
+                    <label class="icon icon-search" for="search"></label>
+                    <input type="search" id='search' placeholder='输入关键字...'/>
+                </div>
+                <a class="button button-fill button-primary col-20">搜索</a>
+            </div>
+
+            <div class="searchbar row">
+                <div class="search-input col-85">
+                    <input type="search" id='search' placeholder='输入关键字...'/>
+                </div>
+                <a class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a>
+            </div>
+        </div>
+
+        <div class="popover" id="form-popover">
+            <div class="popover-angle"></div>
+            <div class="popover-inner">
+                <div class="list-block">
+                    <ul>
+                        <li><a href="#" class="list-button item-link" data-o-logout="true">注销</a></li>
+                        <li><a href="#" class="list-button item-link">Link 2</a></li>
+                        <li><a href="#" class="list-button item-link">Link 3</a></li>
+                        <li><a href="#" class="list-button item-link">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>

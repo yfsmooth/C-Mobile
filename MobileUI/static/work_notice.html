@@ -1,0 +1,113 @@
+<!-- 工作提醒 -->
+	<div class="page-group" >
+		<div class="page work_notice _list">
+			<header class="bar bar-nav" >
+				<a class="button button-link button-nav pull-left back" href="#" >
+					<span class="icon icon-left" ></span>返回
+				</a>
+				<h1 class="title">工作提醒</h1>
+			</header>
+			<div class="bar bar-header-secondary">
+				<div class="searchbar">
+					<a class="searchbar-cancel" onclick="gztxSearch(1);"><span>搜索</span></a>
+					<div class="search-input">
+						<label class="icon icon-search" for="search"></label>
+						<input type="search" id='search' placeholder='输入关键字...'/>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="buttons-row">
+					<a href="#tab1" class="tab-link active button">待办&nbsp;<span class="mybadge">62</span></a>
+					<a href="#tab2" class="tab-link button">待阅&nbsp;<span class="mybadge">17</span></a>
+				</div>
+				<div class="tabs">
+					<div id="tab1" class="tab active">
+						<div class="content-block">
+							<div class="row">
+								<div class="col-80">
+									<div class="daiban-title" >标题国庆</div>
+									<span>人员</span><span>2016/4/18 17:00</span>
+								</div>
+								<div class="col-20">
+									<span class="pull-right cred">紧急</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-80">
+									<div class="daiban-title">标国庆题</div>
+									<span>人员</span><span>2016/4/18 17:00</span>
+								</div>
+								<div class="col-20">
+									<span class="pull-right cblue">普通</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-80">
+									<div class="daiban-title">国庆标题</div>
+									<span>人员</span><span>2016/4/18 17:00</span>
+								</div>
+								<div class="col-20">
+									<span class="pull-right cgray">一般</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab2" class="tab">
+						<div class="content-block">
+							<div class="row">
+								<div class="col-80">
+									<div class="daiban-title" >标题国庆</div>
+									<span>人员</span><span>&nbsp;&nbsp;2016/4/18 17:00</span>
+								</div>
+								<div class="col-20">
+									<span class="pull-right cred">紧急</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-80">
+									<div class="daiban-title">标国庆题</div>
+									<span>人员</span><span>&nbsp;&nbsp;2016/4/18 17:00</span>
+								</div>
+								<div class="col-20">
+									<span class="pull-right cblue">普通</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-80">
+									<div class="daiban-title">国庆标题</div>
+									<span>人员</span><span>&nbsp;&nbsp;2016/4/18 17:00</span>
+								</div>
+								<div class="col-20">
+									<span class="pull-right cgray">一般</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+				function gztxSearch(type){
+					//判断当前是否选中的是代办
+					if($("#tab1").hasClass("active")){
+						var searchVal = $("#search").val();
+						$(".daiban-title").html(highlight(searchVal,$(".daiban-title").html()));
+					}
+					else if($("#tab2").css("active")){
+						//判断当前是否选中的事待阅
+						type = 2;
+					}
+				}
+				/**关键字高亮
+				 * key:关键字
+				 * domText:需要替换的dom控件中的文字
+				 * */
+				function highlight(key,domText) {
+					return domText.replace(key,"<font style='color:#01a7e3'>"+ key +"</font>");
+				}
+			</script>
+		</div>
+	</div>
+
+
+

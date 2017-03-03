@@ -1,0 +1,126 @@
+<div class="page form" data-o-bar="../templates/nav.html" data-o-bar-id="form" data-o-slide="true">
+    <header class="bar bar-nav">
+        <a><span class="icon icon-menu pull-left open-panel" data-panel='#panel-left-demo'></span></a>
+        <a class="button button-link button-nav pull-right">
+            <span class="icon icon-menu open-popover" data-popover="#form-popover"></span>
+        </a>
+        <h1 class='title'>表单</h1>
+    </header>
+    <div class="content">
+        <form action="server1/bropen/demos/templates/show.json" data-o-form="true">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    <input type="text" id="username" name="username" placeholder="Your name"data-rule="用户名:required">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-email"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">邮箱</div>
+                                <div class="item-input">
+                                    <input type="email" id="email" name="email" placeholder="E-mail" data-rule="邮箱:required;email">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                    <input type="password" id="password" name="password" placeholder="Password" class="" data-rule="密码:required;" data-rule-number="[/^\d{6}$/, '请输入6位数字']">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">性别</div>
+                                <div class="item-input">
+                                    <select id="sex" name="sex">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Date -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">生日</div>
+                                <div class="item-input">
+                                    <!--<input type="date" id="date" name="date" placeholder="Birth day" value="2014-04-30">-->
+                                    <input type="text" class='datetime-picker'
+                                        data-o-timepicker="true"
+                                        data-o-timepicker-value="1985-12-04-09-34"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Switch (Checkbox) -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">开关</div>
+                                <div class="item-input">
+                                    <label class="label-switch">
+                                        <input type="checkbox">
+                                        <div class="checkbox"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="align-top">
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">文本域</div>
+                                <div class="item-input">
+                                    <textarea></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <div class="col-50"><a href="#" data-o-url-back="true" class="button button-big button-fill button-danger">取消</a></div>
+                    <div class="col-50"><a href="#" data-o-submit="true" class="button button-big button-fill button-success">提交</a></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="popover" id="form-popover">
+        <div class="popover-angle"></div>
+        <div class="popover-inner">
+            <div class="list-block">
+                <ul>
+                    <li><a href="#" class="list-button item-link" data-o-logout="true">注销</a></li>
+                    <li><a href="#" class="list-button item-link" id="test">测试popover关联</a></li>
+                    <li><a href="#" class="list-button item-link">Link 3</a></li>
+                    <li><a href="#" class="list-button item-link">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

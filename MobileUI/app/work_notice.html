@@ -1,0 +1,100 @@
+<!-- 工作提醒 -->
+<div class="page work_notice _list">
+	<header class="bar bar-nav">
+		<a class="button button-link button-nav pull-left" data-o-url-change="index.html"
+		   data-o-url-reload="true" href="#">
+			<span class="icon icon-left"></span>返回
+		</a>
+
+		<h1 class="title">工作提醒</h1>
+	</header>
+	<div class="bar bar-header-secondary">
+		<div class="searchbar">
+			<a class="searchbar-cancel" data-id="work_notice"><span>搜索</span></a>
+
+			<div class="search-input">
+				<label class="icon icon-search" for="search"></label>
+				<input type="search" id='search' placeholder='输入关键字...' value="{{condition}}"
+					   data-o-template-dynamic="true"/>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="buttons-tab"
+			 data-o-template-fixed="true"
+			 data-o-template-script-id="tab-show"
+			 data-o-template-async="false"
+			 data-o-template-data-url="server2/work/countWork">
+		</div>
+		<div class="tabs pull-to-refresh-container">
+			<div id="tab1" class="tab active"
+				 data-o-listloader="true"
+				 data-o-listloader-url="server2/work/listTodo"
+				 data-o-listloader-max="7"
+				 data-o-listloader-template-id="template-list-wait-do"
+				 data-count-target="#todoCount">
+				<div class="card-container o-listloader-data"></div>
+			</div>
+			<div id="tab2" class="tab"
+				 data-o-listloader="true"
+				 data-o-listloader-url="server2/work/listToread"
+				 data-o-listloader-max="7"
+				 data-o-listloader-template-id="template-list-wait-read"
+				 data-count-target="#toreadCount">
+				<div class="card-container o-listloader-data"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/html" id="template-list-wait-read">
+		{{each list as item}}
+		<div class="row" data-o-url-change="infoToread.html?taskId={{item.taskId}}">
+			<div class="col-50">
+				<div class="daiban-title nowrap">{{item.title}}</div>
+				<span>{{item.sendName}}&nbsp;&nbsp;{{item.receiveTime}}</span>
+			</div>
+			<div class="col-30">
+				&nbsp;
+			</div>
+			<div class="col-20">
+				{{if item.priority=="紧急"}}
+				<span class="pull-right cred">紧急</span>
+				{{/if}}
+				{{if item.priority=="普通"}}
+				<span class="pull-right cblue">普通</span>
+				{{/if}}
+				{{if item.priority=="一般"}}
+				<span class="pull-right cgray">一般</span>
+				{{/if}}
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<script type="text/html" id="template-list-wait-do">
+		{{each list as item}}
+		<div class="row" data-o-url-change="infoTodo.html?taskId={{item.taskId}}">
+			<div class="col-50">
+				<div class="daiban-title nowrap">{{item.title}}</div>
+				<span>{{item.sendName}}&nbsp;&nbsp;{{item.receiveTime}}</span>
+			</div>
+			<div class="col-30">
+				&nbsp;
+			</div>
+			<div class="col-20">
+				{{if item.priority=="紧急"}}
+				<span class="pull-right cred">紧急</span>
+				{{/if}}
+				{{if item.priority=="普通"}}
+				<span class="pull-right cblue">普通</span>
+				{{/if}}
+				{{if item.priority=="一般"}}
+				<span class="pull-right cgray">一般</span>
+				{{/if}}
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<script type="text/html" id="tab-show">
+		<a href="#tab1" class="tab-link active button">待办&nbsp;<span class="mybadge" id="todoCount">{{todoCount}}</span></a>
+		<a href="#tab2" class="tab-link button">待阅&nbsp;<span class="mybadge" id="toreadCount">{{toreadCount}}</span></a>
+	</script>
+</div>

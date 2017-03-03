@@ -1,0 +1,2561 @@
+/*覆盖light7中对col样式*/
+.row .col-30 {
+	width: 26%;
+	margin-left: 4%;
+}
+
+.row.no-gutter .col-30 {
+	width: 30%;
+	margin: 0;
+}
+
+/** 底部按钮 */
+.button.button-fill {
+	background-color: #00a5df;
+	position: fixed;
+	bottom: 0rem;
+	width: 100%;
+	height: 2.0rem;
+	font-size: .8rem;
+	padding-top: .4rem;
+	border-radius: 0;
+}
+
+/**
+ * 公共样式
+ */
+
+/* 隐藏 */
+.hide {
+	display: none;
+}
+
+/**底部导航栏*/
+.bar-tab .tab-item .badge.no-content {
+	min-width: .5rem;
+	height: .5rem;
+	top: .2rem;
+	margin-left: .2rem;
+}
+
+/* 数量标签 */
+.mybadge {
+	color: white !important;
+	background-color: #dd4c39;
+	border-radius: 2px;
+	display: inline-block;
+	line-height: .7rem;
+	padding: 1px .2rem 0; /* 临时解决bug：角标靠上 */
+}
+
+.open-panel {
+	font-size: 1.2rem !important;
+}
+
+/* 标题 */
+.page header {
+	background-color: #dd4c39;
+	border-bottom: 0px solid #e7e7e7 !important;
+	color: white;
+}
+
+/* 搜索框外侧颜色 */
+.bar-header-secondary {
+	top: 2.1rem;
+	border-bottom: 0px solid #e7e7e7 !important;
+	background-color: #ededed;
+}
+
+/* 标题文字 */
+.page .bar .button-nav.pull-left {
+	margin-left: 0rem;
+}
+
+.page header h1 {
+	color: white !important;
+	font-size: .95rem;
+	font-weight: bold;
+}
+
+.page header .title {
+	max-width: 50%;
+	margin-left: 25%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+/* 详情关闭按钮 */
+.page header span {
+	color: white !important;
+	font-size: .9rem;
+}
+
+.page header a {
+	z-index: 10;
+	color: white !important;
+	font-size: .9rem !important;;
+	position: relative;
+}
+
+.page header a.pull-right {
+	margin-right: 0;
+}
+
+/*向左箭头加粗*/
+.page header .icon-left {
+	font-weight: 900;
+}
+
+/*头部右侧更多按钮*/
+.page header .open-popover {
+	padding-left: .5rem;
+	padding-right: .1rem;
+}
+
+/*头部右侧文字*/
+.page header .pull-right span {
+	line-height: 2.2rem;
+}
+
+/*头部关闭按钮*/
+.page header #closeimg {
+	margin-top: .65rem;
+	margin-right: .1rem;
+	width: .68rem;
+	height: .68rem;
+	line-height: 1.2rem;
+}
+
+/* 头部添加按钮 */
+.page header #addimg {
+	margin-top: .6rem;
+	width: .9rem;
+	height: .9rem;
+	line-height: 1.2rem;
+}
+
+/* 头部更多按钮 */
+.page header #moreimg {
+	margin-top: .65rem;
+	width: .2rem;
+	height: .9rem;
+	line-height: 1.2rem;
+}
+
+/* 头部右侧下拉菜单 */
+.popover-angle:after {
+	width: 0;
+	height: 0;
+}
+
+.popover.modal-in {
+	top: 45px !important;
+}
+
+.popover-inner {
+	background-color: #dd4c39;
+}
+
+.popover-inner .list-block .item-link.list-button {
+	color: white;
+}
+
+.popover .list-block:first-child li:first-child a {
+	border-radius: 0 0 0 0;
+}
+
+.popover .list-block:last-child li:last-child a {
+	border-radius: 0 0 0 0;
+}
+
+.popover .list-block:first-child:last-child li:first-child:last-child a {
+	border-radius: 0 0 0 0;
+}
+
+/*字体颜色*/
+.cred {
+	color: red;
+}
+
+.cblue {
+	color: #01a7e3;
+}
+
+.cgray {
+	color: #909b9d;
+}
+
+/* 我的工作页面背景颜色 */
+.bdaiyue {
+	background-color: #1eafe4;
+}
+
+.bdaiban {
+	background-color: #32b16c;
+}
+
+/*流程时间轴点*/
+.proal {
+	border: 1px solid #e05f4a;
+	background-color: #f9b552;
+}
+
+.proto {
+	border: 1px solid #191b1a;
+	background-color: #91999c;
+}
+
+.proaltext {
+	color: #f9b552;
+}
+
+.prowait {
+	border: 1px solid #1a191a;
+	background-color: #91999c;
+}
+
+/*复选框*/
+.draft_delete .col-20 input {
+	width: 1.2rem;
+	height: 1.1rem;
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.ch {
+	width: 1.2rem;
+	height: 1.1rem;
+	border: 1px solid #d9d9d9;
+	position: relative;
+	margin-right: .6rem;
+}
+
+/* 普通列表(我的起草 草稿 待办 已办 待阅 已阅) */
+._list .row {
+	height: 3.3rem;
+	padding: 0.5rem 0.5rem 0.4rem;
+	border-bottom: #dadada solid 1px;
+}
+
+/* 工作提醒列表边距 */
+.work_notice .row {
+	height: 3.3rem;
+	padding: 0.5rem 0.5rem 0.4rem 0;
+	border-bottom: #dadada solid 1px;
+}
+
+._list .col-80 {
+	font-size: 0.75rem;
+	margin-left: 2.1%;
+}
+
+._list .col-80 span {
+	color: #909b9d;
+	font-size: 0.6rem;
+	margin-right: .5rem;
+}
+
+._list .row .col80 div {
+	line-height: 1rem;
+}
+
+._list .col-20 span {
+	line-height: 2.3rem;
+	font-size: 0.59rem;
+}
+
+/*详情(待办,待阅,已办,已阅,我的起草)*/
+._info table {
+	border: 1px solid #dadada;
+	width: 92%;
+	margin-left: 4%;
+	margin-top: .9rem;
+}
+
+._info table .ttitle {
+	width: 35%;
+	padding-right: .3rem;
+	text-align: right;
+	border: 1px solid #dadada;
+	font-size: .78rem !important;
+}
+
+._info table .tcontent {
+	padding-left: 3%;
+	width: 60%;
+	color: #909a9b;
+	border: 1px solid #dadada;
+	font-size: .78rem !important;
+}
+
+/* 已办详情结束时间颜色 */
+._info table .tcontent b font {
+	color: #01a7e3;
+}
+
+._info table td {
+	height: 1.5rem;
+}
+
+/* 嵌套表格 */
+._info .detail {
+	width: 100%;
+	height: 25%;
+	font-size: .68rem !important;
+}
+
+._info .title2 {
+	border-bottom: 1px solid #dadada;
+	border-right: 1px solid #dadada;
+	width: 40%;
+	float: left;
+	padding-right: .7rem;
+	text-align: right;
+}
+
+._info .content2 {
+	border-bottom: 1px solid #dadada;
+	width: 60%;
+	float: left;
+	padding-left: 5%;
+}
+
+._info .specontent {
+	padding-left: 0 !important;
+	border-bottom: white solid 0px !important;
+}
+
+._info #blankc {
+	width: 100%;
+	margin-top: 5rem;
+}
+
+/* 底部导航栏按住特效颜色 */
+.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+	color: #dd4c39;
+}
+
+/* 底部边框 */
+.border-btm {
+	border-bottom: 1px solid #d9d9d9 !important;
+}
+
+/*底部导航栏的背景颜色*/
+.bar-tab {
+	background-color: white;
+}
+
+/*
+ *    消息页面
+ */
+/* 消息侧栏 */
+.panel {
+	background-image: url("../img/panel/celan-bgi.png");
+	background-size: cover;
+	width: 14.2rem;
+}
+
+/* 侧边栏打开后首页显示宽度 */
+body.with-panel-left-reveal .page {
+	transform: translate3d(14.2rem, 0, 0);
+	-webkit-transform: translate3d(14.2rem, 0, 0);
+}
+
+.panel #myContent {
+	text-align: center;
+}
+
+.panel img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+/* 侧边栏头像不显示为绿色，改为蓝色 */
+.panel #myContent .round-head {
+	padding-left: .1rem;
+	margin-right: 4.2rem;
+	background-color: #88abda;
+	border-radius: 50%;
+	width: 4rem;
+	height: 4rem;
+	margin: 0 auto;
+	font-size: 1.3rem;
+	border: 3px white solid;
+	color: white;
+	padding-top: 1rem;
+}
+
+.panel .content-block {
+	margin: 2.75rem 0 1rem 0;
+}
+
+/*测栏头像div*/
+.panel .tximg {
+	margin-top: 2.3rem;
+	margin-bottom: 1.6rem;
+	width: 100%;
+	height: 7rem;
+	text-align: center;
+	color: white;
+}
+
+/*测栏头像图片*/
+.panel .tximg img {
+	width: 4rem;
+	height: 4rem;
+	margin-left: auto;
+}
+
+/*测栏头像文字说明*/
+.panel .tximg span {
+	margin-left: auto;
+}
+
+/* 测栏文字 */
+.panel .row .col-80 {
+	color: #ffaba9;
+	padding-top: 0.5rem;
+	padding-left: 0.35rem;
+	margin-left: 0rem;
+}
+
+/* 测栏图片 */
+.panel .row .col-20 img {
+	margin-top: .45rem;
+	margin-left: .3rem;
+	width: 1.2rem;
+	height: 1.2rem;
+}
+
+.message .content-padded {
+	margin-top: .3rem;
+	margin-right: 0;
+}
+
+/* 主页面文字 */
+.message .content .col-80 div span {
+	color: #909b9d;
+	font-size: .58rem;
+	font-weight: normal;
+}
+
+/* 标题链接 */
+.message .content .col-80 .ttitle a {
+	color: #3d4145;
+}
+
+.message .content .event .text {
+	font-size: .65rem;
+	padding-left: .1rem;
+	padding-right: .1rem;
+}
+
+.message .content .col-80 .ttitle {
+	font-size: .82rem;
+	margin-top: .2rem;
+}
+
+/* 消息页面右上角时间大小 */
+.message .content .col-80 .ttitle .pull-right {
+	line-height: 1.2rem;
+	font-size: .58rem;
+}
+
+/* 主页面图片 */
+.message .content .col-20 img {
+	width: 1.95rem;
+	height: 1.95rem;
+	margin: .55rem auto 0rem;
+	vertical-align: middle;
+}
+
+.message .content .row .col-20 {
+	width: 12%;
+	height: 3.38rem;
+}
+
+/* 消息页面列表底部边框顶到屏幕右侧 */
+.message .content .row .col-80 {
+	width: 83%;
+	margin-left: 1%;
+	margin-top: .32rem;
+	height: 2.8rem;
+	border-bottom: 1px solid #d9d9d9;
+	padding-right: .5rem;
+}
+
+.message .content .event {
+	font-size: .4rem !important;
+}
+
+.message .bar-tab .tab-item.active {
+	color: #dd4c39;
+}
+
+/**
+ * 首页搜索
+ */
+.index-search .content .content-block-title {
+	color: #909b9d;
+}
+.index-search .content .content-block .btn-contact {
+	width: 65px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.index-search .content .content-block .btn-work {
+	width: 80px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	margin-top: 5px;
+}
+.index-search .content .content-block {
+	margin: .4rem 0;
+}
+.index-search .content .list-block {
+	margin: 0;
+}
+.index-search .content .list-block ul li .item-content .item-media,
+.index-search .content .list-block ul li .item-content .item-inner {
+	padding: .15rem 0 .14rem;
+}
+.index-search .content .list-block.list-contact ul li .item-content .item-media img {
+	width: 35px;
+}
+.index-search .content .list-block.list-contact ul li .item-content .item-inner .item-title {
+	color: #0894ec;
+	font-size: .7rem;
+}
+.index-search .content .list-block.list-contact ul li .item-content .item-inner .item-subtitle,
+.index-search .content .list-block.list-work ul li .item-content .item-inner .item-subtitle {
+	color: #909b9d;
+	font-size: .5rem;
+}
+.index-search .content .list-block.list-work ul li .item-content .item-inner .item-title {
+	font-size: .7rem;
+}
+.index-search .content .list-block.list-work ul li .item-content .item-inner .item-subtitle span:first-child {
+	margin-right: 20px;
+}
+
+/**
+*  工作提醒页面
+*/
+/* 标签页 */
+.work_notice .tab {
+	/*margin-top: -2rem;*/
+}
+
+/* 首页、通讯录 搜索框与下方内容去除边距 */
+.index .bar-header-secondary ~ .content,
+.contact .bar-header-secondary ~ .content,
+.work_notice .bar-header-secondary ~ .content {
+	top: 4.3rem;
+}
+
+/* 首页 */
+.index .content .content-padded .row .event .pull-left {
+	margin-left: 0;
+}
+
+/* 消息提醒页待办/待阅下方添加横线 */
+.work_notice .buttons-tab .button.active {
+	background-color: white;
+	color: black;
+	border-top: 0px solid #d0d0d0;
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.work_notice .buttons-tab .button {
+	color: black;
+	border-color: #e3e3e3;
+	border-width: 0px;
+	font-size: .7rem;
+	height: 2rem;
+	line-height: 1.9rem;
+	background-color: #e3e3e3;
+	margin-top: -1px;
+}
+
+.work_notice .buttons-tab {
+	height: 2rem;
+	border-bottom: 0px solid #d0d0d0;
+}
+
+/* 右侧标题文字大小 */
+.work_notice .daiban-title {
+	font-size: .75rem;
+	margin-top: .1rem;
+}
+
+/* 工作提醒列表标题和人名改紧凑 */
+.work_notice .daiban-title ~ span {
+	font-size: .6rem;
+	color: #909b9d;
+	display: block;
+	float: left;
+	white-space: nowrap;
+}
+
+/* 待办列表标题和人名改紧凑 */
+.wait_solu .daiban-title {
+	font-size: .75rem;
+	margin-top: .1rem;
+}
+
+/* 待办列表标题和人名改紧凑 */
+.wait_solu .daiban-title ~ span {
+	font-size: .6rem;
+	color: #909b9d;
+	display: block;
+	float: left;
+}
+
+/* 草稿列表标题和人名改紧凑 */
+.draft .daiban-title {
+	font-size: .75rem;
+	margin-top: .1rem;
+}
+
+/* 草稿列表标题和人名改紧凑 */
+.draft .daiban-title ~ span {
+	font-size: .6rem;
+	color: #909b9d;
+	display: block;
+	float: left;
+}
+
+/* 已办列表标题和人名改紧凑 */
+.already_solu .daiban-title {
+	font-size: .75rem;
+	margin-top: .1rem;
+}
+
+/* 已办列表标题和人名改紧凑 */
+.already_solu .daiban-title ~ span {
+	font-size: .6rem;
+	color: #909b9d;
+	display: block;
+	float: left;
+}
+
+/* 已阅列表标题和人名改紧凑 */
+.already_read .daiban-title {
+	font-size: .75rem;
+	margin-top: .1rem;
+}
+
+/* 已阅列表标题和人名改紧凑 */
+.already_read .daiban-title ~ span {
+	font-size: .6rem;
+	color: #909b9d;
+	display: block;
+	float: left;
+}
+
+/* 待阅列表标题和人名改紧凑 */
+.wait_read .daiban-title {
+	font-size: .75rem;
+	margin-top: .1rem;
+}
+
+/* 待阅列表标题和人名改紧凑 */
+.wait_read .daiban-title ~ span {
+	font-size: .6rem;
+	color: #909b9d;
+	display: block;
+	float: left;
+}
+
+.work_notice .col-80 span {
+	color: #909b9d;
+	font-size: 0.62rem;
+	margin-right: .7rem;
+}
+
+/* 正行样式 */
+.work_notice .row {
+	height: 3.3rem;
+	padding: 0.4rem;
+	width: 100%;
+	margin-left: 0;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+/* 左侧紧急程度 */
+.work_notice .col-20 span {
+	line-height: 2rem;
+	font-size: 0.61rem;
+}
+
+/*
+ *  通知公告样式
+ */
+/**通知公告内容行*/
+.notice .row {
+	width: 100%;
+	margin-left: 0;
+	height: 3.3rem;
+	padding: 0.5rem 0.2rem 0.45rem 0.1rem;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+/* 右侧标题,时间 */
+.notice .col-80 {
+	margin-left: 3%;
+	font-size: 0.8rem;
+	margin-right: 1%;
+}
+
+.notice .col-80 span {
+	font-size: 0.6rem;
+}
+
+/* 左侧紧急程度 */
+.notice .col-20 span {
+	line-height: 2rem;
+	font-size: 0.61rem;
+}
+
+.notice .content-block {
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ *  新闻样式
+ */
+.news .content-block {
+	margin: 0rem;
+	padding: 0rem;
+}
+
+.news .page header {
+	padding-left: .6rem;
+}
+
+/**新闻内容行*/
+.news .row {
+	padding: 0;
+	height: 3.3rem;
+	padding: 0.5rem;
+	border-bottom: 1px solid #d9d9d9;
+	margin-right: .1rem;
+}
+
+/* 内容行中左侧的标题 */
+.news .col-50 span {
+	font-size: 0.6rem;
+}
+
+.news .col-50 {
+	width: 61%;
+}
+
+/* 标题文字大小 */
+.news .daiban-title {
+	font-size: .75rem;
+}
+
+/* 新闻标题右侧时间 */
+.news .col-20 {
+	width: 35%;
+	margin-left: 0;
+}
+
+.news .col-20 span {
+	line-height: 3.5rem;
+	font-size: 0.6rem;
+	margin-right: .15rem;
+}
+
+/*
+ * 我 样式
+ */
+.myself #myContent {
+	width: 100%;
+	height: 6rem;
+	padding-top: 1rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+/* 头像 */
+.myself #myContent img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+/* 我-头像改为蓝色 */
+.myself .round-head {
+	background-color: #88abda;
+	border-radius: 50%;
+	width: 4rem;
+	height: 4rem;
+	margin: 0 auto;
+	font-size: 1.3rem;
+	border: 3px white solid;
+	color: white;
+	padding-top: 1rem;
+}
+
+.myself .content-block {
+	margin: 1.75rem 0 1.6rem;
+}
+
+/* 列表 */
+.myself .row {
+	font-size: .84rem;
+	border-top: 1px solid #d9d9d9;
+	line-height: 2.2rem;
+	margin-left: 0px;
+	height: 2.2rem;
+}
+
+.myself .row .col-20 {
+	margin-left: 1.1%;
+}
+
+/* 我页面右侧小箭头 */
+.myself .row .col-20 span {
+	color: #cfcfcf;
+	font-size: .65rem;
+	font-weight: 900;
+}
+
+.myself .content {
+	background-color: white;
+}
+
+/* 底部操作表 */
+.actions-modal-button {
+	font-size: 0.85rem !important;
+}
+
+/*
+ *提醒设置页面
+ */
+.remind-set .content {
+	margin-top: .2rem;
+	background-color: #f4f4f4;
+}
+
+.remind-set .row {
+	font-size: .81rem;
+	margin-left: 0px;
+	line-height: 2.2rem;
+	height: 2.3rem;
+	border: 1px solid #e0e0e0;
+	margin-top: .7rem;
+	background-color: white;
+}
+
+.remind-set .row .col-80 {
+	margin-left: 3%;
+}
+
+.remind-set .label-switch input[type="checkbox"]:checked + .checkbox {
+	background: #39a7f4;
+}
+
+/* 提醒文字 */
+.remind-set .row1 > span {
+	display: block;
+	margin-top: .3rem;
+	margin-left: 3%;
+	margin-right: 3%;
+	color: #979797;
+	font-size: .55rem;
+}
+
+/*
+ * 起草中心
+ */
+/**总菜单*/
+.draft_center .all {
+	height: 2.24rem;
+	border-bottom: 1px solid #d9d9d9;
+	font-size: .75rem;
+	line-height: 2.24rem;
+	background-color: #dfdfdf;
+	margin-top: .5rem;
+}
+
+/* 一级菜单 */
+.draft_center .type {
+	height: 2.24rem;
+	border-bottom: 1px solid #d9d9d9;
+	font-size: .75rem;
+	line-height: 2.24rem;
+	background-color: #eaeaea;
+}
+
+/* 一级菜单文字 */
+.draft_center .type div span {
+	margin-right: .4rem;
+}
+
+.draft_center .type div {
+	margin-left: 1.5rem;
+	float: left;
+	overflow: hidden;
+}
+
+.draft_center .all div {
+	margin-left: .6rem;
+	float: left;
+	overflow: hidden;
+}
+
+/* 一级菜单图片 */
+.draft_center .type div img {
+	margin-right: .2rem;
+	width: .73rem;
+	height: .73rem;
+	margin-top: .2rem;
+}
+
+.draft_center .all div img {
+	height: .58rem;
+	width: .6rem;
+	margin-right: .2rem;
+	margin-top: .2rem;
+}
+
+/* 二级菜单 */
+.draft_center .erji {
+	height: 2.24rem;
+	line-height: 2.24rem;
+	border-bottom: 1px solid #d9d9d9;
+	font-size: .73rem;
+	padding-left: 2.6rem;
+	background-color: #f5f5f5;
+}
+
+.draft_center .erji span {
+	margin-right: .4rem;
+}
+
+/* 二级菜单图片 */
+.draft_center .erji img {
+	margin-right: .3rem;
+	width: .7rem;
+	height: .7rem;
+}
+
+/* 三级菜单 */
+.draft_center .third {
+	height: 2.24rem;
+	line-height: 2.24rem;
+	border-bottom: 1px solid #d9d9d9;
+	font-size: .73rem;
+	padding-left: 3.7rem;
+	max-width: 100%;
+}
+
+/*
+ *  我的工作
+ */
+.mywork .row {
+	margin-top: .7rem;
+	height: 1.7rem;
+	margin-left: 0px;
+	border-bottom: 1px solid #e0e0e0;
+	line-height: 1rem;
+}
+
+/* 左侧图片 */
+.mywork .row .col-80 img {
+	width: .95rem;
+	height: .95rem;
+}
+
+.mywork .row .col-80 {
+	margin-left: 3%;
+}
+
+.mywork .row .col-80 div {
+	float: left;
+	line-height: 1rem;
+}
+
+/* 右侧文字 */
+.mywork .row .col-20 {
+	width: 10%;
+	margin-left: 8%;
+	color: white;
+	font-size: 0.65rem;
+	text-align: right;
+}
+
+.mywork .row .col-20 span {
+	padding: 0rem .1rem;
+	border-radius: 2px;
+}
+
+/*
+ * 草稿 draft
+ */
+.draft .row {
+	height: 3.3rem;
+	padding: 0.5rem;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.draft .col-80 {
+	font-size: 0.8rem;
+}
+
+.draft .col-80 span {
+	color: #909b9d;
+	font-size: 0.6rem;
+}
+
+.draft .col-20 span {
+	line-height: 2rem;
+	font-size: 0.65rem;
+}
+
+/*
+ * 草稿删除页面
+ */
+.draft_delete .row .col-20 {
+	margin-top: .5rem;
+	text-align: right;
+}
+
+.draft_delete .row .col-20 .ch {
+	margin-left: .5rem;
+	margin-right: 0;
+}
+
+/* 全选按钮 */
+.draft_delete #checkAll {
+	font-size: .88rem !important;
+	font-weight: normal;
+}
+
+.draft_delete .bar.bar-nav ~ .content {
+	bottom: 4rem;
+}
+
+/* 删除按钮 */
+.draft_delete .delete-button {
+	text-align: center;
+	line-height: 1.7rem;
+	color: white;
+	background-color: #00a5df;
+	width: 100%;
+	height: 1.7rem;
+	position: fixed;
+	top: 90%;
+	z-index: 10;
+	border: none;
+}
+
+/*
+ *  草稿详情页面
+ */
+.draft_info .list-block {
+	margin: 0;
+}
+
+/* 必填向前型号 */
+.draft_info .req:before {
+	content: '*';
+	color: red;
+}
+
+/* 表单样式 */
+.draft_info .list-block .item-title.label {
+	text-align: right;
+	width: 30%;
+	margin: 0;
+}
+
+.draft_info .list-block .item-content {
+	padding-left: 0;
+}
+
+.draft_info .list-block {
+	font-size: 0.75rem;
+}
+
+/* 选择下拉表 */
+.draft_info .list-block select {
+	-webkit-appearance: menulist !important;
+}
+
+.draft_info .item-input {
+	border-bottom: 1px solid #cdcdcd;
+	color: #727272;
+	font-size: 0.75rem;
+	margin-left: 1rem;
+	min-height: 1.1rem;
+	line-height: 1rem;
+}
+
+.draft_info .list-block .item-inner {
+	border: 0px none #FFFFFF;
+}
+
+.draft_info .list-block select, .draft_info .list-block input[type="text"] {
+	border: 0px none #FFFFFF;
+	color: #727272;
+	font-size: 0.7rem;
+	height: 1.15rem;
+	width: 100%;
+}
+
+.draft_info .list-block ul li {
+	_height: 1.9;
+	min-height: 1.9rem;
+}
+
+.draft_info .list-block ul {
+	border: 0px none #FFFFFF;
+}
+
+.draft_info .radiob {
+	margin-right: .65rem;
+	float: left;
+}
+
+/*
+ *  工作页面
+ */
+.work .bar {
+	border-bottom: 0px;
+}
+
+/* 轮播 */
+.work #swiper {
+	width: 100%;
+	height: 29.4%;
+}
+
+/* 轮播点 */
+.work .swiper-container-horizontal > .swiper-pagination {
+	bottom: 28px;
+	width: 100%;
+	text-align: right;
+	margin-bottom: .1rem;
+	padding-right: 1%;
+}
+
+/* 图中选中点样式 */
+.work .swiper-pagination-bullet-active {
+	background: #dd4c39 !important;
+}
+
+/* 未选中样式 */
+.work .swiper-pagination-bullet {
+	background: white;
+	opacity: 1;
+}
+
+/* 轮播图片标题 */
+.work .swiper-title {
+	z-index: 100;
+	position: absolute;
+	bottom: 0px;
+	padding-top: 3px;
+	width: 100%;
+	text-align: left;
+	padding-left: 2%;
+	background: rgba(0, 0, 0, 0.3);
+	color: white;
+	font-size: .7rem;
+}
+
+/* 轮播图片 */
+.work #swiper img {
+	width: 100%;
+	height: 7.7rem;
+}
+
+/* 轮播图下方菜单 */
+.work .row {
+	margin-left: 0;
+	margin-top: -.5rem;
+}
+
+.work .row .dimg {
+	float: left;
+	width: 25%;
+	height: 4.65rem;
+	text-align: center;
+	padding-top: .7rem;
+	border-right: 1px solid #d9d9d9;
+	border-top: 1px solid #d9d9d9;
+}
+
+.work .row .borbottom {
+	border-bottom: 1px solid #d9d9d9;
+}
+
+/* 我的工作功能模块补全第二排没有的功能模块 */
+.work .row .clearrbor {
+	border-bottom: 1px solid #d9d9d9;
+}
+
+/* 菜单图片 */
+.work .row .dimg img {
+	width: 1.8rem;
+	height: 1.8rem;
+}
+
+/* 菜单图片标题 */
+.work .imgtitle {
+	font-size: .75rem;
+}
+
+/* 数量图标,现改为无数字，只有红点 */
+.work .imgbadge {
+	position: absolute;
+	z-index: 100;
+	height: .8rem;
+	min-width: .8rem;
+	padding: 0 .2rem;
+	margin-left: -.4rem;
+	font-size: .6rem;
+	line-height: .8rem;
+	background-color: red;
+	color: white;
+	vertical-align: top;
+	border-radius: .7rem;
+	min-width: .5rem;
+	height: .5rem;
+}
+
+/*
+ * 流程跟踪
+ */
+/* 流程跟踪标题 */
+.processlog .protitle {
+	margin-top: .7rem;
+	margin-left: 3%;
+	width: 90%;
+	color: #dd4c39;
+	font-size: 0.82rem;
+}
+
+/* 右侧内容块 */
+.processlog .timecontent {
+	margin-top: .3rem;
+	margin-left: 3%;
+	width: 90%;
+	height: auto;
+}
+
+/* 左侧时间块 */
+.processlog .timeline {
+	height: 100%;
+	width: 20%;
+	float: left;
+	text-align: center;
+}
+
+/* 时间块头部 */
+.processlog .timeheader {
+	height: .75rem !important;
+}
+
+/* 时间块尾部 */
+.processlog .timefooter {
+	height: .5rem;
+}
+
+/* 内容块文本区 */
+.processlog .textcontent {
+	border: 1px solid #dadada;
+	word-wrap: break-word;
+	float: right;
+	width: 90%;
+	border-radius: .2rem;
+	padding: .2rem 0rem;
+}
+
+/* 时间轴边框 */
+.processlog .line {
+	border-left: 1px solid #91999c;
+	width: 93%;
+	height: auto;
+	margin-left: 7%;
+}
+
+.processlog .line .conblank {
+	clear: both;
+	height: .5rem;
+	width: 100%;
+}
+
+/* 内容块时间文本样式 */
+.processlog .textcontent .contime {
+	text-align: right;
+	width: 100%;
+	font-size: .5rem;
+	color: #91999c;
+	padding-right: .3rem;
+}
+
+/* 内容标题行 */
+.processlog .textcontent .crow {
+	height: auto;
+	margin-bottom: .3rem;
+	margin-left: .3rem;
+	margin-top: .3rem;
+	border-bottom-width: 0px;
+	word-wrap: break-word;
+	font-size: 0.65rem;
+}
+
+/* 内容标题模块 */
+.processlog .crow .col-2 {
+	float: left;
+	word-wrap: break-word;
+}
+
+/* 内容标题模块 */
+.processlog .crow .col-8 {
+	width: 75%;
+	margin-left: 5%;
+	float: left;
+	word-wrap: break-word;
+	color: #91999c;
+}
+
+.processlog .crow .col-10 {
+	width: 100%;
+}
+
+/* 流程跟踪大点 */
+.processlog .imgbadge {
+	position: absolute;
+	z-index: 100;
+	height: .7rem;
+	min-width: .7rem;
+	padding: 0 .2rem;
+	margin-left: .736rem;
+	font-size: .6rem;
+	line-height: .8rem;
+	color: white;
+	vertical-align: top;
+	border-radius: .5rem;
+	display: inline-block;
+}
+
+/*
+ * 外出授权
+ */
+.outpower .col-80 div span {
+	color: #3d4145;
+	font-size: 0.8rem;
+}
+
+/*
+ * 新闻详情
+ */
+.news_info .newstitle {
+	width: 90%;
+	margin-top: .8rem;
+	font-size: .95rem;
+	margin-left: 5%;
+}
+
+.news_info .newstitme {
+	width: 90%;
+	margin-left: 5%;
+	margin-top: .3rem;
+	color: #90999e;
+	font-size: .7rem;
+}
+
+.news_info .newstitme span {
+	display: block;
+	margin-right: .5rem;
+	float: left;
+}
+
+.news_info .newstitme .origin {
+	color: #01a5e2;
+}
+
+/*
+ * 帮助页面 / 个人资料页面
+ */
+
+.help, .personal-info {
+	font-size: .2rem;
+	color: blue;
+}
+
+.help .content,
+.personal-info.content {
+	margin-top: .5rem;
+	background-color: #f4f4f4;
+}
+
+.help .row,
+.personal-info .row {
+	margin-left: 0;
+	padding: .55rem 0rem;
+	border-top: 1px solid #d9d9d9;
+	background-color: white;
+}
+
+/* 个人资料、帮助左右边距 */
+.help .row .col-20,
+.personal-info .row .col-20 {
+	width: 20%;
+	color: #141414;
+	font-size: .83rem;
+}
+
+/* 个人资料左右边距 */
+.help .row .col-80,
+.personal-info .row .col-80 {
+	width: 72%;
+	margin-left: 0;
+	text-align: right;
+	color: #929292;
+	font-size: .83rem;
+}
+
+/*------------------------------------------------------------------*/
+
+/**登录页面*/
+/**设置边框none*/
+.login .list-block li:last-child .item-inner, .list-block li:last-child li:last-child .item-inner {
+	border: none;
+}
+
+.login .list-block ul:before, .list-block .item-inner:after, .list-block ul:after {
+	display: none;
+}
+
+/**覆盖原有样式*/
+.login i.icon.icon-form-name, i.icon.icon-form-email, i.icon.icon-form-password {
+	width: 0;
+}
+
+/**设置ul边框none*/
+.login .list-block .item-inner {
+	border-bottom: none;
+}
+
+/**设置下拉选*/
+.login .list-block select {
+	margin-top: 0rem;
+	padding-left: 0rem;
+	background-color: rgba(225, 225, 225, 0);
+	/*color: #aaaaaf;*/
+	height: 1.1rem;
+}
+
+/**设置ul图片*/
+.login .list-block #img {
+	float: right;
+	margin-bottom: .3rem;
+	margin-right: .6rem;
+	width: .5rem;
+}
+
+.login .list-block #img1 {
+	margin-top: .4rem;
+}
+
+/**设置li头样式*/
+.login .list-block .item-content .item-inner .item-title {
+	width: 10%;
+	margin: 0 0 0 4%;
+	width: 34px;
+	height: 34px;
+}
+
+/**设置li及ul样式*/
+.login .list-block .item-content .item-inner .item-input {
+	position: relative;
+	width: 80%;
+	padding-bottom: .3rem;
+}
+
+.login .list-block .item-content .item-inner {
+	margin: 0;
+	padding: 0;
+}
+
+.login .list-block .item-content {
+	padding: 0 0;
+	margin: 6% auto;
+}
+
+.login .list-block {
+	width: 64%;
+	margin: 0 auto;
+}
+
+.login .list-block ul {
+	background: none;
+}
+
+/* 登录页输入框位置调整 */
+.login .list-block .item-content .item-inner .item-input #password {
+	padding-left: 0;
+}
+
+/* 登录页输入框默认提示 */
+.login .list-block .item-content .item-inner .item-input input::-webkit-input-placeholder {
+	color: black;
+	opacity: 0.35;
+}
+
+/* 登录页输入框默认提示 */
+.login .list-block .item-content .item-inner .item-input #username {
+	padding-left: 0;
+	margin-top: .14rem;
+}
+
+/**提交按钮*/
+.login .content {
+	background-color: transparent;
+}
+
+/* 登录按钮 */
+.login .content-block #submit {
+	text-align: center;
+	background-color: #dd4c39;
+	margin: 0 auto;
+	border-radius: 10px;
+	line-height: 1.95rem;
+	color: white;
+	font-size: .85rem;
+}
+
+.login .content-block .submit input {
+	border: none;
+	line-height: 2.6;
+	width: 100%;
+}
+
+/**设置单个li img*/
+.login .item-inner .item-title img {
+	width: .95rem;
+	margin-top: .2rem;
+}
+
+/**设置背景图*/
+.login.img {
+	background-image: url(../img/login/login.png);
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+}
+
+/**设置li半透明*/
+.login .list-block li {
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 10px;
+	height: 2rem;
+}
+
+/**设置内容区*/
+.login .content-block {
+	width: 64%;
+	margin: 1.5rem auto;
+	margin-bottom: .5rem;
+	padding: 0;
+}
+
+/**设置p元素*/
+.login .content p {
+	text-align: center;
+	margin-top: 33.5%;
+	margin-bottom: 6%;
+	font-size: 1.15rem;
+	color: white;
+}
+
+/**设置login页面手势解锁图片*/
+.login .content .gesture-img {
+	position: absolute;
+	bottom: 1rem;
+	left: 8.2rem;
+}
+
+.login .content img {
+	width: 2rem;
+}
+
+.content {
+	background-color: white;
+}
+
+/*通讯录*/
+/**设置背景色*/
+.contact .content, .contact-ent .content {
+	padding-bottom: 10%;
+}
+
+/**设置ul*/
+.contact .content .list-block.del {
+	border-top: 1px #d9d9d9 solid;
+	margin-top: .5rem;
+}
+
+/**设置内容区图*/
+.contact .content img {
+	width: .9rem;
+	padding-top: .3rem;
+}
+
+/* 已选人按钮与左侧选人的距离 */
+.message_process img.selected {
+	margin-right: 1.1rem;
+}
+
+/* 流程选人，已选人按钮大小 */
+.message_process .content img {
+	width: 1.42rem;
+	padding-bottom: .3rem;
+}
+
+/**设置第二级别背景图*/
+.contact img.child {
+	width: .8rem;
+}
+
+.contact .pull-left img {
+	width: 0.56rem;
+	padding-top: 0.1rem;
+	margin-left: .1rem;
+}
+
+/**设置内容区ul*/
+.contact .content .list-block {
+	margin-bottom: 1rem;
+	font-size: .95rem;
+}
+
+/**设置工具栏*/
+.contact #nav .bar.bar-tab {
+	background-color: white;
+	border-top: 1px #e5e5e5 solid;
+}
+
+.contact .bar-tab .tab-item:active {
+	color: #dd4c39;
+}
+
+/**设置ul内元素*/
+.contact .content .list-block .block-title {
+	color: #29b3fe;
+	margin-left: 3%;
+	padding-top: 2.7%;
+	font-size: .65rem;
+}
+
+.contact .content .list-block {
+	margin: 0;
+}
+
+.contact .content .list-block .item-title {
+	font-size: .8rem;
+}
+
+.contact .content .list-block .item-after {
+	margin-left: 0;
+	font-size: .5rem;
+	color: #7c7c7c;
+}
+
+.contact .list-block .item-link .item-inner {
+	margin-left: 0;
+	border-bottom: none;
+}
+
+.contact .content .list-block .item-content .item-media {
+	width: 7%;
+}
+
+.contact .content .list-block .item-content .item-inner {
+	border-bottom: none;
+}
+
+/*企业通讯录*/
+/**共用点击样式*/
+.contact .bar-tab .tab-item:active {
+	color: #dd4c39;
+}
+
+.contact_com .page {
+	background-color: #f4f4f4;
+}
+
+/**总体图片样式*/
+.contact_com img {
+	width: 0.7rem;
+}
+
+/**li消息提醒数目*/
+.contact_com .pull-right.mes {
+	padding: 0 .2rem;
+	background-color: #f19149;
+	text-align: center;
+	color: white;
+	border-radius: 3px;
+	line-height: .8rem;
+	font-size: .65rem;
+}
+
+/* 企业通讯录搜索出来的内容处颜色 */
+.contact_com .list-block .user {
+	background-color: white;
+}
+
+/**li消息提醒数目*/
+.contact_com .list-block .item-content {
+	height: 1rem;
+	border-bottom: 1px #d9d9d9 solid;
+}
+
+.contact .content {
+	background-color: #f4f4f4;
+}
+
+.contact_com .content .list-block.pic ul {
+	background-color: #f9f9f9;
+}
+
+.contact_com .content .list-block {
+	margin: 0;
+	/*border-bottom: 1px #e0e0e0 solid;*/
+}
+
+/**ul边距*/
+.contact_com .content .list-block.del {
+	margin-top: 1.9rem;
+}
+
+/**搜索栏居顶部距离*/
+/*.contact_com .bar-header-secondary ~ .content {
+    top: 2.4rem;
+}*/
+
+/**li头像*/
+.contact_com .content .list-block .item-content.pic img {
+	width: 60%;
+}
+
+/**li标题*/
+.contact_com .content .list-block.del .block-title {
+	margin: 0 0 0 4%;
+	padding: 0;
+	color: black;
+	font-size: 0.5rem;
+}
+
+/**li内容区*/
+.contact_com .list-block .item-title {
+	font-size: .75rem;
+}
+
+.contact_com .list-block .item-media + .item-inner {
+	margin-left: 0.2rem;
+	border-bottom: none;
+}
+
+.contact_com .content .list-block.del .item-after {
+	margin-left: 0;
+	font-size: 0.75rem;
+	color: #7c7c7c;
+	line-height: 1.5rem;
+}
+
+/**li媒体区*/
+.contact_com .content .list-block .item-content .item-media {
+	width: 7%;
+	padding-bottom: 0;
+}
+
+.contact_com .content .list-block .item-content .item-media.round {
+	width: 10%;
+	padding-bottom: .4rem;
+}
+
+.contact_com .content .list-block .item-content .item-media.round img {
+	width: 95%
+}
+
+/**企业通讯录*/
+/**li标题*/
+.contact_com.contact-ent .content .list-block .headerNav {
+	color: #2cb1ff;
+	margin-left: 3.4%;
+	padding-top: 3%;
+	font-size: 0.65rem;
+}
+.contact_com.contact-ent .content .list-block .headerNav a{
+	color: #dd4c39;
+}
+
+.contact-ent .bar-header-secondary ~ .content {
+	top: 2.4rem;
+}
+
+.headerNav {
+	display: -webkit-inline-box;
+	overflow-x: auto;
+}
+
+/*人事行政部*/
+/**内容区*/
+.contact_hr .content .list-block .item-content {
+	height: 2.25rem;
+}
+
+/*通知公告**/
+/* 通知公告列表时间位置 */
+.notice .row .col-20 {
+	font-size: 0.6rem;
+	width: 20%;
+	margin-left: 0;
+	padding-left: .15rem;
+	line-height: 3.6rem;
+}
+
+/** 通知公告、新闻 详情 */
+/**ul元素*/
+.news-info ul,
+.notice-info ul {
+	padding: 0;
+	list-style: none;
+}
+
+/**li元素*/
+.news-info li,
+.notice-info li {
+	font-size: .75rem;
+	margin: .78rem 0rem;
+}
+
+/**内容区p元素*/
+.news-info .content p,
+.notice-info .content p {
+	margin-left: .4rem;
+	font-size: 1rem;
+	margin: .8rem .5rem;
+	margin-bottom: .2rem;
+}
+
+/**内容区p元素内容*/
+.news-info .content p.hafter,
+.notice-info .content p.hafter {
+	margin-left: .5rem;
+	font-size: .67rem;
+	margin-top: .2rem;
+	color: #90989b;
+}
+
+.news-info .content .pull-right,
+.notice-info .content .pull-right {
+	padding: 0.3rem .85rem;
+	padding-top: 0rem;
+	background-color: white;
+	text-align: center;
+	color: #91999c;
+	font-size: .67rem;
+}
+
+.news-info .content .pull-right img,
+.notice-info .content .pull-right img {
+	width: .6rem;
+	margin-left: 1rem;
+	margin-right: .3rem;
+}
+
+/** 流程 */
+.message_processes .content .list-block .opinion .opin {
+	border-bottom: 0px solid #e7e7e7 !important;
+}
+
+/** 已选人栏 */
+.message_process .content .list-block .item-content.li .checkedEmp {
+	display: -webkit-inline-box;
+	width: 7rem;
+	overflow-x: auto;
+	position: relative;
+}
+
+.message_process .list-block textarea {
+	width: 83%;
+	margin-left: 13%;
+	font-size: .75rem;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-top: .4rem;
+	margin-bottom: .35rem;
+	border: 1px solid #d9d9d9;
+}
+
+/** 选人 */
+.message_process .selector {
+	width: 8.5rem;
+	overflow-x: auto;
+	position: relative;
+}
+
+/* 意见框里右下角的数字 */
+.message_process .wordwrap {
+	position: absolute;
+	top: 4.25rem;
+	float: right;
+	right: 1rem;
+	font-size: .6rem;
+	color: #6a6a6a;
+}
+
+.message_process .item-inner .checkedEmp .round-head {
+	padding-left: .2rem;
+	display: -webkit-inline-box;
+	margin-top: .25rem;
+	margin-right: .14rem;
+	width: 1.7rem;
+	height: 1.7rem;
+	line-height: 1.7rem;
+	border-radius: 50%;
+	font-size: .6rem;
+	color: white;
+	padding-top: 0;
+}
+
+/**内容区颜色*/
+.message_process .content {
+	background-color: white;
+}
+
+/**设置ul元素*/
+.message_process .content .list-block {
+	margin: 1rem 0 0 1rem;
+}
+
+/**设置ul p元素*/
+.message_process .content .list-block p {
+	font-size: .8rem;
+	margin: 0;
+}
+
+/* 设置多条意见时的间距 */
+.message_process .content .list-block .item-content.opinion {
+	margin-bottom: .4rem;
+}
+
+/**设置ul li元素*/
+.message_process .content .list-block .item-content {
+	padding-left: 0;
+	height: 1.9rem;
+	min-height: .2rem;
+}
+
+/**设置ul li内容*/
+.message_process .content .list-block .item-content .item-inner {
+	padding-top: 0rem;
+	padding-bottom: 0rem;
+}
+
+/**设置ul li下一级图片*/
+.message_process .content .list-block .item-content .opin {
+	border-bottom: 1px #dcdcdc solid;
+}
+
+.message_process .list-block .item-inner {
+	padding-right: 0;
+	margin-right: .75rem;
+	min-height: 0;
+	border-bottom: 0px solid #e7e7e7;
+}
+
+.message_process .list-block li:last-child .item-inner {
+	border-bottom: 0px solid #e7e7e7;
+}
+
+/**设置ul li图片*/
+.message_process .content .list-block .item-content.liop {
+	padding-left: 0;
+	line-height: 1rem;
+	margin: .7rem 0 .4rem 0;
+}
+
+/* 流程页面步骤名称和右侧距离 */
+.message_process .content .list-block .item-content.li .name {
+	width: 36%;
+	font-size: .77rem;
+	text-align: right;
+	padding-top: 0rem;
+	padding-right: .5rem;
+}
+
+/**设置ul li 标题*/
+.message_process .content .list-block .item-content.li .item-title {
+	font-size: .75rem;
+	color: #aeaeae;
+	padding-top: 0rem;
+	padding-left: .25rem;
+	width: 9.5rem;
+}
+
+/**设置ul li 标题图片*/
+.message_process .content .list-block .item-content.li .item-title img {
+	margin: 0 0.2rem;
+	width: 1.5rem;
+}
+
+/**设置ul li 点击图片div*/
+.message_process .content .list-block .item-content.li .rightImg {
+	float: right;
+	padding-top: .2rem;
+}
+
+.message_process .content .list-block .item-content.li .rightImg img {
+	width: .65rem;
+}
+
+/**覆盖原有样式*/
+.message_process .list-block ul:before {
+	content: none;
+}
+
+/**设置意见文本域*/
+.message_process .choise {
+	display: none;
+}
+
+/**设置意见文本域li*/
+.message_process .choise li {
+	padding: 0;
+	width: 90%;
+	color: #00a4e1;
+	text-align: center;
+	border-top: 1px #dcdcdc solid;
+	height: 2rem;
+	font-size: .85rem;
+	line-height: 2rem;
+	margin: 0 .5rem;
+	border-radius: 8px;
+	background-color: #dcdcdc;
+}
+
+/**设置意见行*/
+.message_process #choiseOpnA, #choiseOpnB {
+	width: 87%;
+	border: 1px #d9d9d9 solid;
+	margin-left: 1.6rem;
+	height: 5.4rem;;
+	margin-top: .1rem;
+}
+
+/**高亮图片默认隐藏*/
+.message_process .rightImg .imgon {
+	display: none;
+}
+
+/* 流程提交页面 意见选择 控制右侧按钮颜色 */
+.message_process .content li .imgdef {
+	display: block;
+}
+
+.message_process .content li .imgon {
+	display: none;
+}
+
+.message_process .content li.active .imgon {
+	display: block;
+}
+
+.message_process .content li.active .imgdef {
+	display: none;
+}
+
+/**设置li图片*/
+.message_process .contact .pull-left img {
+	width: 0.56rem;
+	padding-top: 0.1rem;
+	margin-left: .4rem;
+}
+
+/**弹出框第一行*/
+.actions-modal-button:first-child, .actions-modal-label:first-child {
+	border-radius: .3rem .3rem 0 0;
+}
+
+/**弹出框最后一行*/
+.actions-modal-button:last-child, .actions-modal-label:last-child {
+	border-radius: 0 0 .3rem .3rem;
+}
+
+/**覆盖原有样式*/
+.actions-modal-button {
+	cursor: pointer;
+	line-height: 2.15rem;
+	font-size: .85rem;
+	color: #0894ec;
+	background-color: white;
+}
+
+/*关于*/
+/**设置图片样式*/
+.about .pull-right {
+	padding-top: 0;
+	font-size: .85rem;
+	padding-right: .2rem;
+	margin-top: .1rem;
+}
+
+/**设置背景色*/
+.about .content {
+	background-color: white;
+	height: 100%
+}
+
+/**设置ul*/
+.about .content .list-block {
+	margin: 6.8rem auto;
+	font-size: .95rem;
+	width: 4rem;
+	padding-left: .1rem;
+}
+
+/**设置ul图片*/
+.about .content .list-block img {
+	width: 3.5rem;
+	margin-left: .1rem;
+}
+
+/**设置ul中p元素*/
+.about .content .list-block p {
+	margin-top: 0;
+	margin-bottom: .3rem;
+
+}
+
+/**设置图片版本元素*/
+.about .content .list-block p#ban {
+	font-size: .55rem;
+	color: #727272;
+	margin-left: .2rem;
+}
+
+/** 设置图片声明元素 */
+.about .voice {
+	position: fixed;
+	bottom: .8rem;
+	font-size: .55rem;
+	color: #727272;
+	margin: 0 1.8rem;
+	text-align: center;
+	left: 0;
+	right: 0;
+}
+
+/*创建团队*/
+/**设置ul元素*/
+.message_process.create .content .list-block {
+	margin: 1rem 0 0 0.5rem;
+}
+
+.message_process.create .content .list-block .item-content.li .pull-right {
+	width: 25%;
+}
+
+.message_process.create .content .list-block .item-content.li .item-title input {
+	color: #cdcdcd;
+	font-size: .75rem
+}
+
+/**
+ * 流程已选人
+ */
+/** 设置搜索框局顶部位置 */
+.office-checked-emp .bar-header-secondary ~ .content,
+.selected .bar-header-secondary ~ .content {
+	bottom: 2rem;
+}
+
+/* 已选人列表与顶部间的距离 */
+.office-checked-emp #checked,
+.selected #checked {
+	top: -2rem;
+}
+
+/**设置li元素*/
+.office-checked-emp .list-block li,
+.selected .list-block li {
+	box-sizing: border-box;
+	position: relative;
+	height: 2.4rem;
+}
+
+/**设置图删除按钮*/
+.office-checked-emp .button.button-fill,
+.selected .button.button-fill {
+	background-color: #00a5df;
+	height: 2rem;
+	font-size: .85rem;
+	padding-top: .5rem;
+	position: fixed;
+	bottom: 0rem;
+	width: 100%;
+	border-radius: 0;
+}
+
+/**设置li input元素*/
+.office-checked-emp .list-block li input,
+.selected .list-block li input {
+	width: 1.5rem;
+	height: 1.1rem;
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/**团队*/
+.contact_team p {
+	margin: 1em 0;
+	font-size: .65rem;
+	margin-left: .6rem;
+	margin-top: 2.3rem;
+	color: #0aafff;
+}
+
+/**
+ * 知会、流程选人
+ */
+.page.selector {
+	background-color: white;
+}
+
+.selector .bar .button-link {
+	margin-left: -.15rem;
+}
+
+.selector ::-webkit-scrollbar {
+	width: 0px;
+	display: none;
+}
+
+.selector .header .pull-right {
+	padding-top: 0rem;
+	padding-right: 0rem;
+}
+
+/* 选人 */
+.selector .htitle {
+	display: -webkit-inline-box;
+	overflow-x: auto;
+}
+
+/** 顶部搜索栏 */
+.selector .searchbar.searchbar-active .searchbar-cancel + .search-input {
+	margin-right: 1.5rem;
+}
+
+/**设置li头像元素*/
+/*.selector .item-content.pic {
+    background-color: #eaeaea;
+}*/
+
+/* 顶部导航 */
+.selector .htitle {
+	padding-top: 1.45rem;
+	font-size: .7rem;
+	padding-left: .75rem;
+	color: #717171;
+	margin-top: 1.3rem;
+	width: 100%;
+}
+
+/** 顶部导航 */
+.selector .htitle .navigation a {
+	color: #717171;
+}
+
+.selector .htitle .navigation a.active {
+	color: #de4b37;
+}
+
+.selector .htitle .block-title {
+	display: -webkit-inline-box;
+	width: 17.9rem;
+	overflow: auto;
+}
+
+/* 二级标题栏 */
+.selector .bar-header-secondary {
+	top: 4.1rem;
+	background-color: white;
+	height: 2.4rem;
+	border-top: 1px #d9d9d9 solid;
+	padding-top: 3px;
+}
+
+/* 已选人 */
+.selector .headerChecked {
+	width: 50%;
+	float: left;
+	overflow: auto;
+}
+
+.selector .checkedEmp {
+	display: -webkit-inline-box;
+	margin-left: -.05rem;
+	margin-bottom: .35rem;
+}
+
+/* 已选人按钮 */
+.selector .selected {
+	width: 1.8rem;
+	float: left;
+	padding: 0.36rem 0.12rem;
+}
+
+/* 查看已选人按钮 */
+.selector .selected img {
+	width: 1.5rem;
+}
+
+/* 搜索栏 */
+.selector .bar .searchbar {
+	background: rgba(0, 0, 0, 0);
+	border: 1px #d9d9d9 solid;
+	border-radius: 5rem;
+	height: 1.4rem;
+	padding: 0rem 0rem;
+	margin: .4rem -.5rem;
+	width: 36%;
+	float: right;
+	margin-right: .05rem;
+}
+
+/* 搜索框 */
+.selector .bar .searchbar .search-input input {
+	border: 0;
+	background: rgba(0, 0, 0, 0);
+	line-height: 1rem;
+	padding-right: 0;
+}
+
+/* 搜索框右侧查询按钮 */
+.selector .bar .searchbar .searchbar-cancel {
+	width: 1.5rem;
+}
+
+/* 内容 */
+.selector .bar-header-secondary ~ .content {
+	top: 6.5rem;
+	bottom: 2rem !important;
+	border-top: 1px solid #d9d9d9;
+}
+
+.selector .content .list-block.del {
+	margin-top: 0;
+}
+
+.selector .content .list-block.del .item-after {
+	line-height: 1rem !important;
+}
+
+/** 设置内容区li */
+.selector .list-block li {
+	box-sizing: border-box;
+	position: relative;
+	height: 2.8rem;
+}
+
+.selector .list-block li input {
+	width: 1.5rem;
+	height: 1.1rem;
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.contact_com .round .round-head {
+	margin-top: 0rem;
+	margin-left: 0rem;
+	width: 1.7rem;
+	height: 1.6rem;
+	padding: .36rem 0 0 .2rem;
+}
+
+/* 流程+知会选人，已选人员框 */
+.contact_com .round-head {
+	margin: 0.36rem .12rem;
+	border-radius: 50%;
+	padding: .25rem .14rem;
+	font-size: .65rem;
+	color: white;
+	background-color: #dd4c39;
+}
+
+.contact .round-head {
+	margin: 0.36rem;
+	border-radius: 50%;
+	font-size: .65rem;
+	color: white;
+	background-color: #dd4c39;
+	margin-top: 0rem;
+	margin-left: 0rem;
+	width: 1.7rem;
+	height: 1.6rem;
+	padding: .36rem 0 0 .2rem;
+}
+
+/**
+ * 阅读跟踪
+ */
+/* 设置背景色 */
+.readlog {
+	background: white;
+	padding-bottom: 10%;
+}
+
+.readlog .content {
+	top: .2rem;
+}
+
+/* 内容区域 */
+.readlog .content .list-block {
+	padding: 0 4%;
+}
+
+/* 设置内容标题 */
+.readlog .content .list-block .block-title {
+	color: #de4d38;
+	padding-top: 2%;
+	font-size: 0.80rem;
+	line-height: 2rem;
+}
+
+/* 设置表格 */
+.readlog .content table {
+	width: 100%;
+	border: 1px solid #dcdcdc;
+	text-align: center;
+}
+
+.readlog .content table tr {
+	white-space: nowrap;
+}
+
+/* 设置表格标题 */
+.readlog .content table th {
+	height: 1.6rem;
+	width: 6rem;
+	font-size: .78rem;
+	font-weight: normal;
+}
+
+/**设置表格td*/
+.readlog .content table td {
+	height: 1.6rem;
+	color: #717171;
+	font-size: .7rem;
+}
+
+/**共用元素 覆盖原有样式*/
+i.icon.icon-f7 {
+	background-image: none;
+}
+
+/* 知会选人页面，内容上方加条边框 */
+.office-notify #checked {
+	border-top: 1px solid #d9d9d9;
+}
+
+.list-block ul {
+	border-top: none;
+	border-bottom: none;
+}
+
+/* 企业通讯录集团下方的横线 */
+.contact-ent #checked {
+	border-top: 1px solid #d9d9d9;
+}
+
+.list-block li:last-child .item-inner, .list-block li:last-child li:last-child .item-inner {
+	/*border-bottom: 1px solid #e7e7e7;*/
+}
+
+/* 草稿删除列表标题与时间缩进距离 */
+.draft_delete .col-80 {
+	margin-top: .1rem;
+}
+
+/* 草稿删除列表标题与时间缩进距离 */
+.draft_delete .col-80 span {
+	display: block;
+	float: left;
+}
+
+/* 草稿删除列表左右边距 */
+.draft_delete .row {
+	padding: 0.5rem .1rem 0.4rem 1rem;
+}
+
+/**checkbox边框样式*/
+.draft_delete .ch1 {
+	margin-right: .3rem;
+	width: 1.2rem;
+}
+
+.ch1 {
+	width: 1.4rem;
+	height: 1.1rem;
+	border: 1px solid #d9d9d9;
+	position: relative;
+	margin-right: .7rem;
+	border-radius: 2px;
+}
+
+.draft_info .page .bar .button-nav.pull-left {
+	margin-left: 0.1rem;
+}
+
+.list-block textarea {
+	border: 1px #cdcdcd solid;
+}
+
+/**checkbox对勾*/
+.gou1 {
+	width: .4rem;
+	height: .9rem;
+	border-bottom: 2px solid #000;
+	border-right: 2px solid #000;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	margin-left: .3rem;
+}
+
+.gesture .content .gesture-title {
+	text-align: center;
+	color: #de4d3c;
+	margin-top: 4.5rem;
+	font-size: .78rem;
+}
+
+.gesture .content #gesturepwd {
+	margin-top: 1.5rem;
+}

@@ -1,0 +1,139 @@
+<!-- 审批单详情 -->
+<div class="page-group" >
+    <div class="page draft_info">
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left">
+                <img src="../assets/img/header/close.png" id="closeimg"/><span>关闭</span>
+            </a>
+            <h1 class="title" >请假审批单</h1>
+            <a class="pull-right">
+                <img src="../assets/img/header/more.png" id="moreimg"/>
+            </a>
+        </header>
+        <div class="content">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">审批编号:</div>
+                                <div class="item-input">
+                                    HR121121
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">安全等级:</div>
+                                <div class="item-input">
+                                    <div class="radiob"><input type="radio" name="safelv" value="">内部</div>
+                                    <div class="radiob"><input type="radio" name="safelv" value="">秘密</div>
+                                    <div class="radiob"><input type="radio" name="safelv" value="">机密</div>
+                                    <div class="radiob"><input type="radio" name="safelv" value="">绝密</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">紧急联系方式:</div>
+                                <div class="item-input">
+                                    <input type="text"  class="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">所在体系:</div>
+                                <div class="item-input">
+                                    <select>
+                                        <option>业务支援部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Date -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">请假原因:</div>
+                                <div class="item-input">
+                                    <select>
+                                        <option>事假</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">起始时间:</div>
+                                <div class="item-input">
+                                    <input type="text" class='datetime-picker' data-o-timepicker="true"
+                                           data-o-timepicker-value="1985-12-04-09-34"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">结束时间:</div>
+                                <div class="item-input">
+                                    <input type="text" class='datetime-picker' data-o-timepicker="true"
+                                           data-o-timepicker-value="1985-12-04-09-34"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">是否拥有电脑:</div>
+                                <div class="item-input">
+                                    <div class="radiob"><input type="radio" name="hasComputer" value=""/>是</div>
+                                    <div class="radiob"><input type="radio" name="hasComputer" value=""/>否</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label req">办结知会:</div>
+                                <div class="item-input">
+                                    <div class="radiob"><input type="checkbox" value=""/>李四</div>
+                                    <div class="radiob"><input type="checkbox" value=""/>王五</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">附件:</div>
+                                <div class="item-input">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="submit-button" id="submit" >提交</div>
+        </div>
+    </div>
+    <script>
+        $(".datetime-picker").datetimePicker({
+            value: ['1985', '12', '04', '9', '34']
+        });
+    </script>
+</div>

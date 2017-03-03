@@ -1,0 +1,31 @@
+<div class="page cropper">
+    <style>
+        .cropper {
+            margin: auto;
+        }
+    </style>
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="#">
+            <span class="icon icon-left"></span>返回
+        </a>
+        <a class="button button-link button-nav pull-right" id="btn-top-right">
+            确定
+        </a>
+        <h1 class='title'>头像裁剪</h1>
+    </header>
+    <div class="content cropper">
+        <div class="img-container">
+            <img src="" alt="Picture" style="max-width: 100%; max-height: 100%;">
+        </div>
+    </div>
+
+    <div data-o-template-fixed="true" data-o-template-script-id="app-page-cropper">
+        <script type="text/html" id="app-page-cropper">
+            <form action="{{action}}" enctype="multipart/form-data" class="o-hide" data-o-template-fixed="true">
+                <img id="{{tag}}" name="{{tag}}" alt="" data-o-form-img='true'>
+                <input type="hidden" name="avatarData" id="avatarData"><!--后台裁剪时使用-->
+                {{if total}}<input type="hidden" id="{{tag}}__total" name="{{tag}}__total" value="{{total}}">{{/if}}
+            </form>
+        </script>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div id="page-swiper" class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="/demos">
+            <span class="icon icon-left"></span>
+            Back
+        </a>
+        <h1 class="title">Swiper</h1>
+    </header>
+    <div class="content"
+         data-o-template-fixed="true"
+         data-o-template-script-id="swiper-template"
+         data-o-template-async="true"
+         data-o-template-data-url="server1/member/swiper">
+        <script type="text/html" id="swiper-template">
+            <div data-o-swiper="true" data-space-between='10' data-autoplay="2000">
+                <div class="swiper-wrapper">
+                    {{each list as item}}
+                        <div class="swiper-slide">
+                            <img src="{{item.url}}" alt="" style='width: 100%'>
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </script>
+    </div>
+</div>

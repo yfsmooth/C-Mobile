@@ -1,0 +1,37 @@
+<!-- 新闻详情 -->
+<div class="page contact_com contact_hr news-info">
+    <div data-o-template-fixed="true"
+         data-o-template-script-id="template-news-show"
+         data-o-template-async="true"
+         data-o-template-data-url="server2/news/content">
+        <script type="text/html" id="template-news-show">
+            <header class="bar bar-nav">
+                <a class="button button-link button-nav pull-left back" href="#">
+                    <img src="../assets/img/header/close.png" id="closeimg"/><span>关闭</span>
+                </a>
+                <h1 class="title">新闻详情</h1>
+                <a href="index.html" class="pull-right"><span>首页</span></a>
+            </header>
+            <div class="content">
+                <div class="htitle">
+                    <p class="htitle">{{title}}</p>
+                    <p class="hafter">{{time}}  &nbsp  {{source}} <a> &nbsp {{companyName()}}</a></p>
+                </div>
+                <div class="content-padded">
+                    <ul>
+                        {{if src!=null }}
+                        <li>
+                            <img src="../assets/img/office/review.png">
+                        </li>
+                        {{/if}}
+                        <li>{{#html}}</li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <img src="../assets/img/office/praise.png">赞
+                    <img src="../assets/img/office/review.png">评论
+                </div>
+            </div>
+        </script>
+    </div>
+</div>

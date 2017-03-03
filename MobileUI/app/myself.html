@@ -1,0 +1,86 @@
+<!-- 我首页 -->
+<div class="page myself" data-o-bar="../templates/nav.html" data-o-bar-id="myself" data-cache="true">
+    <header class="bar bar-nav">
+        <h1 class="title">我</h1>
+    </header>
+    <div class="content"
+         data-o-template-fixed="true"
+         data-o-template-script-id="template-myslef"
+         data-o-template-async="true"
+         data-o-template-data-url="server2/address/user?currentUser=this">
+        <script type="text/html" id="template-myslef">
+            <div class="content-block">
+                <div id="myContent">
+                    {{if $.o.user.avatarUrl}}
+                    <img src="{{$.o.user.avatarUrl}}"/>
+                    {{else}}
+                    <div class='round-head'>{{subName($.o.user.nickname)}}</div>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="row" data-o-url-change="personal_info.html?currentUser=this&orgId={{orgId}}">
+                <div class="col-80">
+                    <span>个人资料</span>
+                </div>
+                <div class="col-20">
+                <span class="pull-right">
+                    <span class="icon icon-right"></span>
+                </span>
+                </div>
+            </div>
+            <div class="row" data-o-url-change="remind_set.html">
+                <div class="col-80">
+                    <span>提醒设置</span>
+                </div>
+                <div class="col-20">
+                <span class="pull-right">
+                    <span class="icon icon-right"></span>
+                </span>
+                </div>
+            </div>
+            <div class="row" id="gesture">
+                <div class="col-80">
+                    <span>手势密码</span>
+                </div>
+                <div class="col-20">
+                <span class="pull-right">
+                    <span class="icon icon-right"></span>
+                </span>
+                </div>
+            </div>
+            <div class="row" data-o-url-change="help.html">
+                <div class="col-80">
+                    <span>帮助</span>
+                </div>
+                <div class="col-20">
+                <span class="pull-right">
+                    <span class="icon icon-right"></span>
+                </span>
+                </div>
+            </div>
+            <div class="row" data-o-url-change="about.html">
+                <div class="col-80">
+                    <span>关于</span>
+                </div>
+                <div class="col-20">
+                <span class="pull-right">
+                    <span class="icon icon-right"></span>
+                </span>
+                </div>
+            </div>
+            <div class="row" id="quiet">
+                <div class="col-80">
+                    <span>退出</span>
+                </div>
+                <div class="col-20">
+                <span class="pull-right">
+                    <span class="icon icon-right"></span>
+                </span>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </script>
+    </div>
+</div>
+

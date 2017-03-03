@@ -1,0 +1,43 @@
+<!-- 通知公告 -->
+<div class="page notice">
+	<header class="bar bar-nav">
+		<a class="button button-link button-nav pull-left back" href="#">
+			<span class="icon icon-left"></span>返回
+		</a>
+
+		<h1 class="title">通知公告</h1>
+		<a class="pull-right">
+			<img src="../assets/img/header/add.png" id="addimg"/>
+		</a>
+	</header>
+	<div class="bar bar-header-secondary">
+		<div class="searchbar">
+			<a class="searchbar-cancel" data-id="notice"><span>搜索</span></a>
+
+			<div class="search-input">
+				<label class="icon icon-search" for="search"></label>
+				<input type="search" id='search' placeholder='输入关键字...' value="{{condition}}"
+					   data-o-template-dynamic="true"/>
+			</div>
+		</div>
+	</div>
+	<div class="content"
+		 data-o-listloader="true"
+		 data-o-listloader-url="server2/notice/list"
+		 data-o-listloader-template-id="template-notice-list">
+		<div class="content-block o-listloader-data">
+		</div>
+	</div>
+	<script type="text/html" id="template-notice-list">
+		{{each list as item}}
+		<div class="row" data-o-url-change="notice_info.html?noticeId={{item.noticeId}}">
+			<div class="col-80">
+				<div class="daiban-title nowrap">{{substr(item.title,18,'...')}}</div>
+				<span>{{item.source}}</span>
+			</div>
+			<div class="col-20">{{item.time}}</div>
+		</div>
+		{{/each}}
+	</script>
+</div>
+

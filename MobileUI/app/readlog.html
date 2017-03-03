@@ -1,0 +1,58 @@
+<!-- 阅读跟踪 -->
+<div class="page readlog"
+	 data-o-template-fixed="true"
+	 data-o-template-script-id="template-show"
+	 data-o-template-async="true"
+	 data-o-template-data-url="server2/work/readLog">
+	<script type="text/html" id="template-show">
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="#">
+				<span class="icon icon-left"></span>返回
+			</a>
+
+			<h1 class="title">{{substr(definitionName,8,'...')}}</h1>
+			<a href="#" class="pull-right open-popover" data-popover="#form-readlog-popover">
+				<img src="../assets/img/header/more.png" id="moreimg"/>
+			</a>
+		</header>
+		<div class="content">
+			<div class="list-block">
+				<div class="block-title">阅读跟踪</div>
+				{{if data && data.length}}
+				<table border="1">
+					<tr>
+						<th>发送人</th>
+						<th>知会人</th>
+						<th>阅读时间</th>
+					</tr>
+					{{each data as item}}
+					<tr>
+						<td>{{item.sender}}</td>
+						<td>{{item.notifyActor}}</td>
+						<td>{{item.completeTime}}</td>
+					</tr>
+					{{/each}}
+				</table>
+				{{else}}
+					无
+				{{/if}}
+			</div>
+		</div>
+		<!-- 右上角下拉菜单 -->
+		<div class="popover" id="form-readlog-popover">
+			<div class="popover-inner">
+				<div class="list-block">
+					<ul>
+						<li><a href="#" class="list-button item-link"
+							   data-o-url-replace="processlog.html?taskId={{taskId}}&origin={{origin}}">流程跟踪</a></li>
+						{{if origin=='todo' || origin=='done'}}
+						<li><a href="#" class="list-button item-link"
+							   data-o-url-replace='../bropen/templates/selector.html?selectorType=informed&orgId=selectPersonJsonTreeStore_{{taskId}}-root&taskId={{taskId}}'
+							   data-o-url-reload="true">知会</a></li>
+						{{/if}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+</div>

@@ -1,0 +1,22 @@
+<div class="page template_list" data-o-bar="../templates/nav2.html" data-o-bar-id="list">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="/demos">
+            <span class="icon icon-left"></span>
+            Back
+        </a>
+        <h1 class="title">Infinite Scroll</h1>
+    </header>
+    <div class="content" data-o-listloader="true"
+         data-o-listloader-url="server1/bropen/demos/templates/list10.json"
+         data-o-listloader-template-id="template-list-template">
+        <div class="list-block">
+            <ul class="list-container o-listloader-data">
+            </ul>
+        </div>
+    </div>
+    <script type="text/html" id="template-list-template">
+        {{each list as item i}}
+            <li class="item-content"><div class="item-inner"><div class="item-title">Item-{{i}}</div></div></li>
+        {{/each}}
+    </script>
+</div>

@@ -1,0 +1,53 @@
+<!-- 草稿详情 -->
+<div class="page draft_info _info">
+    <div data-o-template-fixed="true"
+         data-o-template-script-id="template-info-draft-show"
+         data-o-template-async="true"
+         data-o-template-data-url="server2/work/document">
+        <script type="text/html" id="template-info-draft-show">
+            <header class="bar bar-nav">
+                <a class="button button-link button-nav pull-left back">
+                    <img src="../assets/img/header/close.png" id="closeimg"/><span>关闭</span>
+                </a>
+                <h1 class="title">
+                    {{substr(definitionName,8,'...')}}
+                </h1>
+                <a class="pull-right open-popover" data-popover="#form-infoDraft-popover">
+                    <img src="../assets/img/header/more.png" id="moreimg"/>
+                </a>
+            </header>
+            <div class="content">
+                <div class="list-block">
+                    <ul>
+                        {{each data as item}}
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">{{#item.fieldName}}</div>
+                                    <div class="item-input">
+                                        {{#item.valueHtml}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <a id="submit" class="button button-fill" data-o-url-change="message_processes.html?taskId={{taskId}}&definitionName={{definitionName}}">提&nbsp;&nbsp;交</a>
+            <!-- 右上角下拉菜单 -->
+            <div class="popover" id="form-infoDraft-popover">
+                <div class="popover-inner">
+                    <div class="list-block">
+                        <ul>
+                            <li><a href="#" class="list-button item-link" data-o-url-change="">保存</a></li>
+                            <li><a class="list-button item-link" data-o-url-change="processlog.html?taskId={{taskId}}&origin=done">流程日志</a></li>
+                            <li><a href="#" class="list-button item-link" data-o-url-change="">上传附件</a></li>
+                            <li><a href="#" class="list-button item-link" data-o-template-data-url="">删除</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>

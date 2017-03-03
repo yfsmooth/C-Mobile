@@ -1,0 +1,46 @@
+<!-- 公共已选人页面 -->
+<div class="page contact_com selected">
+	<header class="bar bar-nav">
+		<a class="button button-link button-nav pull-left back" href="#">
+			<span class="icon icon-left"></span>返回
+		</a>
+
+		<h1 class="title">已选择人员</h1>
+		<a class="pull-right" id="btn-top-right"><span>全选</span></a>
+	</header>
+	<div class="bar bar-header-secondary">
+		<div class="searchbar">
+			<a class="searchbar-cancel">取消</a>
+
+			<div class="search-input">
+				<label class="icon icon-search" for="search"></label>
+				<input type="search" id='search' placeholder='输入关键字...'/>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="list-block del">
+			<ul id="checked" data-o-template-script-id="template-selected">
+				<script type="text/html" id="template-selected">
+					{{each selected as item}}
+					<li class="item-content user" data-id="{{item.id}}" data-name="{{item.name}}">
+						<div class="item-media round">
+							<i class="icon icon-f7">
+								<div class="round-head">{{subName(item.name)}}</div>
+							</i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title">{{item.name}}</div>
+						</div>
+						<div class="ch1">
+							<div class="gou"></div>
+							<input type="checkbox" class="pull-right checked">
+						</div>
+					</li>
+					{{/each}}
+				</script>
+			</ul>
+		</div>
+	</div>
+	<a id="delete" class="button button-fill">删&nbsp;&nbsp;除</a>
+</div>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+    <script>
+        var assets = {
+            // 强制覆盖资源url后缀（版本），开发环境可设为时间戳（但刷新就没法调试js了），其他环境应设为空，并设置资源
+            ver: null,
+//            ver: new Date().getTime(),
+
+            baseBro: "../",	// 产品资源路径，会拼在以 bropen/ 开头的资源URL前
+            baseApp: "../",			// App资源路径
+
+            css: [
+                /*["bropen/js/SUI-Mobile-0.6.2/css/sm.css"]
+                , ["bropen/js/SUI-Mobile-0.6.2/css/sm-extend.css"]*/
+
+                ["bropen/js/light7-0.4.3/css/light7.css"]
+                , ["bropen/js/light7-0.4.3/css/light7-swiper.css"]
+                , ["bropen/css/o.css"]
+                , ["assets/css/application.css"]
+            ],
+            js_head: [
+            ],
+            js_tail_core: [
+                /*["bropen/js/cordova/shell.js", undefined, {id: "bro-mobile-shell", cordova: "bropen/js/cordova/"}]
+                , ["bropen/js/zepto-1.1.6/zepto.js"]
+                , ["bropen/js/zepto-1.1.6/event.js"]
+                , ["bropen/js/zepto-1.1.6/ajax.js"]
+                , ["bropen/js/zepto-1.1.6/form.js"]
+                , ["bropen/js/zepto-1.1.6/data.js"]
+                , ["bropen/js/zepto-1.1.6/selector.js"]
+                , ["bropen/js/zepto-1.1.6/callbacks.js"]
+                , ["bropen/js/zepto-1.1.6/deferred.js"]
+                , ["bropen/js/zepto-1.1.6/ie.js"]*/
+
+                  ["bropen/js/jquery/jquery-2.1.4.js"]
+                , ["bropen/js/artTemplate-3.0.1/template-debug.js"]
+                /*, ["bropen/js/SUI-Mobile-0.6.2/js/sm.js"]
+                , ["bropen/js/SUI-Mobile-0.6.2/js/sm-extend.js"]
+                , ["bropen/js/SUI-Mobile-0.6.2/js/sm-city-picker.js"]*/
+                , ["bropen/js/light7-0.4.3/js/light7.js"]
+                , ["bropen/js/light7-0.4.3/js/light7-swiper.js"]
+                , ["bropen/js/o.js"]
+                , ["bropen/js/util.js"]
+                , ["bropen/js/i18n/zh_CN.js"]
+            ],
+            js_tail_other: [
+                /*["bropen/js/jquery.cropper-0.11.1/cropper.js"]
+                , ["bropen/js/jquery.lazyload-1.9.5/jquery.lazyload.js"]
+                , ["bropen/js/dropload-0.3.0/dropload.js"]
+                , ["bropen/js/niceValidator-0.8.0/jquery.validator.js"]
+                , ["bropen/js/niceValidator-0.8.0/local/zh-CN.js"]
+                , ["bropen/js/qrcodejs-3.0.5/index.js"]*/
+                  ["bropen/js/niceValidator-0.8.1/jquery.validator.js"]
+                , ["bropen/js/niceValidator-0.8.1/local/zh-CN.js"]
+            ],
+            js_tail_app: [
+                ["assets/js/application.js"]
+            ],
+
+            // TODO 未测试IE
+            // TODO 可以将资源缓存到本地，取出来 eval -- 类似 Sencha Touch
+            write: function( type, jsCallback ) {
+                var files = this[type],
+                        css = (type == "css");
+                if ( !files ) return;
+                for ( var i=0; i<files.length; i++ ) {
+                    if ( files[i][0].indexOf("bropen/") == 0 ) {
+                        files[i][0] = this.baseBro + files[i][0];
+                    } else {
+                        files[i][0] = this.baseApp + files[i][0];
+                    }
+                    if ( css ) {
+                        var n = document.createElement("link");
+                        n.href = files[i][0] + "?" + (files[i][1] || this.ver);
+                        n.rel = "stylesheet";
+                        document.head.appendChild(n);
+                    } else {
+                        var n = document.createElement("script");
+                        n.src = files[i][0] + "?" + (files[i][1] || this.ver);
+                        n.setAttribute("i", i);
+                        n.type = "text/javascript";
+                        if ( files[i][2] ) {
+                            for ( var k in files[i][2] ) {
+                                if ( files[i][2][k].indexOf("bropen/") == 0 ) {
+                                    n.setAttribute(k, this.baseBro + files[i][2][k]);
+                                } else {
+                                    n.setAttribute(k, files[i][2][k]);
+                                }
+                            }
+                        }
+                        n.addEventListener('load', nextScript, false);	// 模拟浏览器行为，串行加载，避免异常
+                        n.addEventListener('error', nextScript, false);
+                        if ( i == 0 ) document.head.appendChild(n);
+                        else files[i] = n;
+                    }
+                }
+                function nextScript(event) {
+                    var i = Number(event.target.getAttribute("i")),
+                            n = files[i+1];
+                    if ( n ) {
+                        document.head.appendChild( files[i+1] );
+                    } else if ( typeof(jsCallback) == "function" ) {
+                        jsCallback();
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>assets.write("css")</script>
+    <script>assets.write("js_head")</script>
+
+</head>
+<body>
+
+<div class="page-group">
+    <div class="page" id="index">
+        <span data-o-template-include="index_.html" data-o-template-async="true"></span>
+        <span data-o-template-include="../bropen/templates/listloader.html" data-o-template-async="true"></span>
+    </div>
+</div>
+<script>
+    assets.write("js_tail_core", function() {
+        // 并行加载其他 js 资源
+        assets.write("js_tail_other");
+        assets.write("js_tail_app");
+    });
+</script>
+</body>
+</html>

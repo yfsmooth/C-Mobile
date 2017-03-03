@@ -1,0 +1,64 @@
+<!-- 工作首页 -->
+<div class="page work" data-o-bar="../templates/nav.html" data-o-bar-id="work" data-cache="true">
+	<header class="bar bar-nav">
+		<h1 class="title">工 作</h1>
+	</header>
+	<div class="content">
+		<div data-o-template-fixed="true"
+			 data-o-template-script-id="template-menu"
+			 data-o-template-async="true"
+			 data-o-template-data-url="server2/appCenter/appCenterInfo">
+			<script type="text/html" id="template-menu">
+				<div>
+					<div id="swiper" data-o-swiper="true" data-autoplay="2000">
+						<div class="swiper-wrapper">
+							{{each list as item}}
+								<div class="swiper-slide" data-o-url-change="news_info.html?newsId={{item.newsId}}">
+									<img src="{{item.imgSrc}}" alt="" style='width: 100%'>
+									<div class="swiper-title">
+										{{substr(item.title,15,'...')}}
+									</div>
+								</div>
+							{{/each}}
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+					<div class="row">
+						<div class="dimg" id="mywork" data-o-url-change="mywork.html">
+							<img src="../assets/img/work/work.png"/>
+							<span class="imgbadge no-content badge-mywork {{if totalWorks == 0}}hide{{/if}}"></span>
+							<div class="imgtitle">我的工作</div>
+						</div>
+						<div class="dimg" id="draft_center" data-o-url-change="draft_center.html">
+							<img src="../assets/img/work/draftup.png"/>
+
+							<div class="imgtitle">起草中心</div>
+						</div>
+						<div class="dimg" id="notice" data-o-url-change="notice.html">
+							<img src="../assets/img/work/notice.png"/>
+							<span class="imgbadge no-content badge-notice {{if totalNotices == 0}}hide{{/if}}"></span>
+							<div class="imgtitle">通知公告</div>
+						</div>
+						<div class="dimg" id="news" data-o-url-change="news.html">
+							<img src="../assets/img/work/news.png"/>
+							<span class="imgbadge no-content badge-news {{if totalNews == 0}}hide{{/if}}"></span>
+							<div class="imgtitle">新闻</div>
+						</div>
+						<div class="dimg borbottom confirm-ok" id="outpower">
+							<img src="../assets/img/work/outpower.png"/>
+
+							<div class="imgtitle">外出授权</div>
+						</div>
+						<div class="dimg borbottom" id="setting">
+							<img src="../assets/img/work/setting.png"/>
+
+							<div class="imgtitle">开发中</div>
+						</div>
+						<div class="dimg clearrbor"></div>
+						<div class="dimg clearrbor"></div>
+					</div>
+				</div>
+			</script>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<!-- 个人资料 -->
+<div class="page-group">
+	<div class="page personal-info">
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="#">
+				<span class="icon icon-left"></span>返回
+			</a>
+
+			<h1 class="title">个人资料</h1>
+		</header>
+		<div class="content"
+			 data-o-template-fixed="true"
+			 data-o-template-script-id="template-personal-info">
+			<script type="text/html" id="template-personal-info">
+				<div class="row">
+					<div class="col-20">企业</div>
+					<div class="col-80">{{companyName()}}</div>
+				</div>
+				<div class="row">
+					<div class="col-20">姓名</div>
+					<div class="col-80">{{currentUser ? $.o.user.data.data.name : name}}</div>
+				</div>
+				<div class="row">
+					<div class="col-20">电话</div>
+					<div class="col-80" data-o-tel="{{mobile}}">{{currentUser ? $.o.user.data.data.mobile : mobile}}</div>
+				</div>
+				<div class="row">
+					<div class="col-20">邮箱</div>
+					<div class="col-80">{{currentUser ? $.o.user.data.data.email : email}}</div>
+				</div>
+				<div class="row border-btm">
+					<div class="col-20">部门</div>
+					<div class="col-80" data-o-url-change="contact_ent.html?orgId={{currentUser ? $.o.user.data.data.orgId : orgId}}&current=this">{{currentUser ? $.o.user.data.data.orgName : orgName}}
+					</div>
+				</div>
+			</script>
+		</div>
+	</div>
+</div>

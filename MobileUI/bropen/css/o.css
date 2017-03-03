@@ -1,0 +1,11 @@
+/* 不换行 */
+.nowrap {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+/* 不换行(不会加星) */
+.nowrap2 {
+	white-space: nowrap;
+}

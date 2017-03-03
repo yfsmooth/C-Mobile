@@ -1,0 +1,87 @@
+<div class="page contact_com contact-ent">
+	<header class="bar bar-nav">
+		<a class="button button-link button-nav pull-left back" href="#">
+			<span class="icon icon-left"></span>返回
+		</a>
+
+		<h1 class="title">企业通讯录</h1>
+	</header>
+	<div class="bar bar-header-secondary">
+		<div class="searchbar">
+			<a class="searchbar-cancel">搜索</a>
+
+			<div class="search-input">
+				<label class="icon icon-search" for="search"></label>
+				<input type="search" id='search' placeholder='请输入姓名'/>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div data-o-template-fixed="true"
+			 data-o-template-script-id="template-contact-ent"
+			 data-o-template-async="true"
+			 data-o-template-data-url="server2/address">
+			<script type="text/html" id="template-contact-ent">
+				<div class="list-block del older">
+					<div class="block-title headerNav">
+						{{each navigation(data.orgName) as org i}}
+						<div class="navigation">
+							{{if i != 0}}&gt;{{/if}}
+							<a data-o-url-go="">&nbsp;{{org}}&nbsp;</a>
+						</div>
+						{{/each}}
+					</div>
+					<ul id="checked">
+						{{each data.data as item}}
+						{{if item.type=="user"}}
+						<li class="item-content user" data-o-url-change="personal_info.html?userId={{item.id}}">
+							<div class="item-media round"><i class="icon icon-f7">
+								<div class='round-head'>{{subName(item.name)}}</div>
+							</i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title">{{item.name}}</div>
+							</div>
+						</li>
+						{{/if}}
+						{{/each}}
+					</ul>
+				</div>
+				<div class="list-block pic older">
+					<ul>
+						{{each data.data as item}}
+						{{if item.type=="org"}}
+						<li class="item-content" data-o-url-change="contact_ent.html?orgId={{item.id}}{{if item.group}}&groupId={{item.groupId}}{{/if}}">
+							<div class="item-media"><i class="icon icon-f7"><img src="../assets/img/yiji.png"></i></div>
+							<div class="item-inner">
+								<div class="item-title">{{item.name}}</div>
+								<div class="pull-right mes">{{if item.group}}{{item.data.length}}{{else}}{{item.size}}{{/if}}</div>
+							</div>
+						</li>
+						{{/if}}
+						{{/each}}
+					</ul>
+				</div>
+			</script>
+		</div>
+		<div id="find"></div>
+	</div>
+	<script type="text/html" id="template-contact-ent_find">
+		<div class="list-block pic del">
+			<ul id="checked-emp">
+				{{data}}
+				{{each data as item}}
+				<li class="item-content user" data-o-url-change="personal_info.html?userId={{item.id}}">
+					<div class="item-media round"><i class="icon icon-f7">
+						<div class='round-head'>{{subName(item.name)}}</div>
+					</i>
+					</div>
+					<div class="item-inner">
+						<div class="item-title">{{item.name}}</div>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+	</script>
+</div>

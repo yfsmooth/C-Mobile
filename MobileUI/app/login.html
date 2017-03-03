@@ -1,0 +1,65 @@
+<div class="page img login">
+    <div class="content">
+        <form action="server2/mobileLogin/login" data-o-form="true">
+            <div calss="title"><p>C-Mobile管理平台系统</p></div>
+            <div class="list-block" id="list">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label"><img src="../assets/img/login/nick.png"/></div>
+                                <div class="item-input">
+                                    <input type="text" id="username" name="username" placeholder="请输入您的帐号" data-rule="用户名:required">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner" id="item2">
+                                <div class="item-title label"><img id="img1" src="../assets/img/login/email.png"/></div>
+                                <div class="item-input">
+                                    <div class="select"
+                                         data-o-template-fixed="true"
+                                         data-o-template-script-id="template-email"
+                                         data-o-template-async="true"
+                                         data-o-template-data-url="server2/mobileLogin/getSuffixs">
+                                    </div>
+                                </div>
+                                <img id="img" src="../assets/img/contact/select.png">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner" id="item3">
+                                <div class="item-title label"><img src="../assets/img/login/password.png"/></div>
+                                <div class="item-input">
+                                    <input type="password" id="password" name="password" placeholder="请输入您的密码" data-rule="密码:required;" data-rule-number="[/^\d{6}$/, '请输入6位数字']">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block">
+                <div class="submit"><input id="submit" type="submit" value="登 &nbsp录"/></div>
+            </div>
+            <div data-o-template-fixed="true" data-o-template-script-id="template-gesture"></div>
+        </form>
+    </div>
+    <script type="text/html" id="template-email">
+        <select id="email" name="email">
+            {{each suffixs as item}}
+            <option>{{item.text}}</option>
+            {{/each}}
+        </select>
+    </script>
+    <script type="text/html" id="template-gesture">
+        {{if gesturePwd()}}
+            <div class="gesture-img" data-o-url-change="gesture.html"><img src="../assets/img/login/gesture.png"></div>
+        {{/if}}
+    </script>
+</div>

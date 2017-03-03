@@ -1,0 +1,92 @@
+<!-- 起草中心 -->
+<div class="page-group">
+    <div class="page draft_center">
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left back" href="#">
+                <span class="icon icon-left"></span>返回
+            </a>
+            <h1 class="title">起草中心</h1>
+        </header>
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel" onclick=""><span>搜索</span></a>
+
+                <div class="search-input">
+                    <label class="icon icon-search" for="search"></label>
+                    <input type="search" id='search' placeholder='请输入标题名称'/>
+                </div>
+            </div>
+        </div>
+        <div class="content"
+             data-o-template-fixed="true"
+             data-o-template-script-id="template-draft_center"
+             data-o-template-async="false"
+             data-o-template-data-url="server2/work/getDraftTreeAsJSON">
+            <script type="text/html" id="template-draft_center">
+                <div class="search_html">
+                </div>
+                <div class="all">
+                    <div>
+                        <img src="../assets/img/leader.png"/>
+                        <span>{{data.name}}</span><span id="titleNum"></span>
+                    </div>
+                </div>
+                <div style="display: block" class="all-div">
+                    {{each data.data as item}}
+                    <div class="type">
+                        <div>
+                            <img src="../assets/img/yiji.png"/>
+                            <span>{{item.name}}</span><span id="number"></span>
+                        </div>
+                    </div>
+                    <div class="first-div" style="display: none">
+                        {{if item.processes}}
+                        {{each item.processes as itemp1}}
+                        <div class="nav3" data-o-url-change="sheet.html?url={{itemp1.url}}">
+                            <div class="third nowrap">
+                                <span>{{itemp1.name}}</span>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                        {{if item.data}}
+                        {{each item.data as item1}}
+                        <div>
+                            <div class="nav2">
+                                <div class="erji">
+                                    <img src="../assets/img/erji.png"/>
+                                    <span>{{item1.name}}</span><span id="nextNum"></span>
+                                </div>
+                            </div>
+                            <div class="next-div" style="display: none">
+                                {{if item1.data}}
+                                {{each item1.data as item2}}
+                                <div class="nav2">
+                                    <div class="erji">
+                                        <img src="../assets/img/erji.png"/>
+                                        <span>{{item2.name}}</span>
+                                    </div>
+                                </div>
+                                {{/each}}
+                                {{/if}}
+                                {{if item1.processes}}
+                                {{each item1.processes as itemp2}}
+                                <div class="nav3" data-o-url-change="sheet.html?url={{itemp2.url}}">
+                                    <div class="third nowrap">
+                                        <span>{{itemp2.name}}</span>
+                                    </div>
+                                </div>
+                                {{/each}}
+                                {{/if}}
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </script>
+        </div>
+    </div>
+</div>
+

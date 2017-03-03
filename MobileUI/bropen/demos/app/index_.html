@@ -1,0 +1,64 @@
+<header class="bar bar-nav">
+    <h1 class='title'>标签页</h1>
+</header>
+<div class="content">
+    <div data-o-template-fixed="true"
+         data-o-template-script-id2="swiper-template"
+         data-o-template-async="true"
+         data-o-template-data-url="server1/member/swiper">
+        <script type="text/html" id="swiper-template">
+            <div data-o-swiper="true" data-space-between='10' data-autoplay="2000">
+                <div class="swiper-wrapper">
+                    {{each list as item}}
+                    <div class="swiper-slide">
+                        <img src="{{item.url}}" alt="" style='width: 100%'>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </script>
+    </div>
+    <div class="buttons-tab">
+        <a href="#tab1" class="tab-link active button">全部</a>
+        <a href="#tab2" class="tab-link button">待付款</a>
+        <a href="#tab3" class="tab-link button">待发货</a>
+    </div>
+    <div class="content-block">
+        <div class="tabs">
+            <div id="tab1" class="tab active">
+                <div class="content-block">
+                    <a href="home.html">消息首页</a><br>
+                    <p><a href="test.html">This is tab 1 content</a></p>
+                    <p><a href="form.html">测试表单</a></p>
+                    <p><a href="test_security.html">测试登陆成功</a></p>
+                    <p><a href="template.html?type=1&a=2&b=3&c=4">模板测试1</a></p>
+                    <p><a href="template.html?type=2">模板测试2</a></p>
+                    <p><a href="template_show.html?type=3&id=1">模板测试3-ajax加载用户信息</a></p>
+                    <p><a href="template_list.html?type=4">模板测试4-ajax加载用户列表 ul</a></p>
+                    <p><a href="template_list_div.html?type=5">模板测试5-ajax加载用户列表 div</a></p>
+                    <p><a href="template_list_tabs.html?type=6">模板测试6-ajax加载用户列表 多页签tabs</a></p>
+                    <p><a href="page-ptr.html">下拉刷新</a></p>
+                    <p><a href="page-infinite-scroll.html">到底部自动加载更多</a></p>
+                    <p><a href="page-ptr-tabs.html">多页签列表</a></p>
+                    <p><a href="swiper.html">图片轮播</a></p>
+                    <p><a href="swipeout.html">swipeout 仿qq单条信息滑动</a></p>
+                    <p><a href="modal.html">模态框-多种</a></p>
+                    <p><a href="../../templates/cropper.html">头像裁剪</a></p>
+                    <p><a href="myself.html">个人中心</a></p>
+                </div>
+            </div>
+            <div id="tab2" class="tab">
+                <div class="content-block">
+                    <p class="open-panel" data-panel='#panel-left-demo'>This is tab 2 content</p>
+                    <a href="#" data-o-url-go="2">前进2步</a>
+                </div>
+            </div>
+            <div id="tab3" class="tab">
+                <div class="content-block">
+                    <p>This is tab 3 content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

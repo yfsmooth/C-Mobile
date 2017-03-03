@@ -1,0 +1,51 @@
+<div class="page template_list_tabs">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="/demos">
+            <span class="icon icon-left"></span>
+            Back
+        </a>
+        <h1 class="title">template_list_div.html</h1>
+    </header>
+    <div class="content">
+        <div class="buttons-tab">
+            <a href="#tab1" class="tab-link active button">All</a>
+            <a href="#tab2" class="tab-link button">Boys</a>
+            <a href="#tab3" class="tab-link button">Girls</a>
+        </div>
+
+        <div class="tabs pull-to-refresh-container">
+            <div id="tab1" class="tab active"
+                 data-o-listloader="true"
+                 data-o-listloader-url="server1/bropen/demos/templates/list10.json"
+                 data-o-listloader-template-id="template-list-tabs-template">
+                <div class="card-container o-listloader-data"></div>
+            </div>
+            <div id="tab2" class="tab"
+                 data-o-listloader="true"
+                 data-o-listloader-url="server1/bropen/demos/templates/list5.json"
+                 data-o-listloader-max="5"
+                 data-o-listloader-reload="true"
+                 data-o-listloader-template-id="template-list-tabs-template">
+                <div class="card-container o-listloader-data"></div>
+            </div>
+            <div id="tab3" class="tab"
+                 data-o-listloader="true"
+                 data-o-listloader-url="server1/bropen/demos/templates/list3.json"
+                 data-o-listloader-max="3"
+                 data-o-listloader-template-id="template-list-tabs-template">
+                <div class="card-container o-listloader-data"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="template-list-tabs-template">
+        {{each list as item}}
+        <div class="card">
+            <div class="card-header">{{item.name}}</div>
+            <div class="card-content">
+                <div class="card-content-inner">手机号：{{item.mobile}} 昵称：{{item.nickname}}</div>
+            </div>
+            <div class="card-footer">生日：{{item.birthdate}}</div>
+        </div>
+        {{/each}}
+    </script>
+</div>

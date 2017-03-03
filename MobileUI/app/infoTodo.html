@@ -1,0 +1,47 @@
+<!-- 待办详情 -->
+<div class="page draft_info _info"
+	 data-o-template-fixed="true"
+	 data-o-template-script-id="template-infoTodo-show"
+	 data-o-template-async="true"
+	 data-o-template-data-url="server2/work/document">
+	<script type="text/html" id="template-infoTodo-show">
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="#">
+				<img src="../assets/img/header/close.png" id="closeimg"/><span>关闭</span>
+			</a>
+
+			<h1 class="title">{{substr(definitionName,8,'...')}}</h1>
+			<a class="pull-right open-popover" data-popover="#form-infoTodo-popover">
+				<img src="../assets/img/header/more.png" id="moreimg"/>
+			</a>
+		</header>
+		<div class="content">
+			<table>
+				{{each data as item}}
+				<tr>
+					<td class="ttitle">{{#item.fieldName}}</td>
+					<td class="tcontent">{{#item.valueHtml}}</td>
+				</tr>
+				{{/each}}
+			</table>
+			<div id="blankc"></div>
+		</div>
+		<a id="submit" class="button button-fill" data-o-url-change="message_processes.html?taskId={{taskId}}&definitionName={{definitionName}}">提&nbsp;&nbsp;交</a>
+		<!-- 右上角下拉菜单 -->
+		<div class="popover" id="form-infoTodo-popover">
+			<div class="popover-inner">
+				<div class="list-block">
+					<ul>
+						<li><a class="list-button item-link"
+							   data-o-url-change="processlog.html?taskId={{taskId}}&origin=todo">流程跟踪</a></li>
+						<li><a class="list-button item-link"
+							   data-o-url-change="readlog.html?taskId={{taskId}}&origin=todo">阅读跟踪</a></li>
+						<li><a class="list-button item-link"
+							   data-o-url-change="../bropen/templates/selector.html?selectorType=informed&orgId=selectPersonJsonTreeStore_{{taskId}}-root&taskId={{taskId}}"
+							   data-o-url-reload="true">知会</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</script>
+</div>

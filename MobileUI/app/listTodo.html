@@ -1,0 +1,64 @@
+<!-- 待办列表 -->
+<div class="page wait_solu _list">
+	<div data-o-template-fixed="true"
+		 data-o-template-script-id="header-do-show"
+		 data-o-template-async="true"
+		 data-o-template-data-url="server2/work/countWork">
+	</div>
+	<div class="bar bar-header-secondary">
+		<div class="searchbar">
+			<a class="searchbar-cancel" data-id="listTodo"><span>搜索</span></a>
+
+			<div class="search-input">
+				<label class="icon icon-search" for="search"></label>
+				<input type="search" id='search' placeholder='标题、姓名' value="{{condition}}"
+					   data-o-template-dynamic="true"/>
+			</div>
+		</div>
+	</div>
+	<div class="content"
+		 data-o-listloader="true"
+		 data-o-listloader-url="server2/work/listTodo"
+		 data-o-listloader-template-id="template-todo-list"
+		 data-count-target="#count">
+		<div class="o-listloader-data"></div>
+	</div>
+	<script type="text/html" id="template-todo-list">
+		{{each list as item}}
+		<div class="row" data-o-url-change="infoTodo.html?taskId={{item.taskId}}">
+			<div class="col-50">
+				<div class="daiban-title nowrap">
+					{{substr(item.title,13,'...')}}
+				</div>
+				{{if item.sendName != null && item.sendName.length> 0}}
+				<span>{{item.sendName}}</span>
+				{{/if}}
+				<span>&nbsp;&nbsp;{{item.receiveTime}}</span>
+			</div>
+			<div class="col-30">
+				&nbsp;
+			</div>
+			<div class="col-20">
+				{{if item.priority == "紧急"}}
+				<span class="pull-right cred">紧急</span>
+				{{/if}}
+				{{if item.priority == "普通"}}
+				<span class="pull-right cblue">普通</span>
+				{{/if}}
+				{{if item.priority == "一般"}}
+				<span class="pull-right cgray">一般</span>
+				{{/if}}
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<script type="text/html" id="header-do-show">
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="#">
+				<span class="icon icon-left"></span>返回
+			</a>
+
+			<h1 class="title">待办(<span id="count">{{num(todoCount)}}</span>)</h1>
+		</header>
+	</script>
+</div>

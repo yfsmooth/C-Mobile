@@ -1,0 +1,42 @@
+<div class="page login">
+    <header class="bar bar-nav">
+        <h1 class='title'>登陆</h1>
+    </header>
+    <div class="content">
+        <form data-o-form="true">
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">用户名</div>
+                                <div class="item-input">
+                                    <input type="text" id="username" name="username" placeholder="Your name"data-rule="用户名:required">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-password"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                    <input type="password" id="password" name="password" placeholder="Password" class="" data-rule="密码:required;number" data-rule-number="[/^\d{6}$/, '请输入6位数字']">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <div class="col-50"><a href="#" data-o-url-back="true" class="button button-big button-fill button-danger">取消</a></div>
+                    <div class="col-50"><a href="#" data-o-submit="true" class="button button-big button-fill button-success">提交</a></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- 帮助页面 -->
+<div class="page help">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="#">
+            <span class="icon icon-left"></span>返回
+        </a>
+        <h1 class="title">帮 助</h1>
+    </header>
+    <div class="content"
+         data-o-template-fixed="true"
+         data-o-template-async="true"
+         data-o-template-script-id="template-help"></div>
+    <script type="text/html" id="template-help">
+        <div class="row">
+            <div class="col-20 nowrap2">联系电话</div>
+            <div class="col-80" data-o-tel="{{$.o.config.telphone}}">{{$.o.config.telphone}}</div>
+        </div>
+        <div class="row">
+            <div class="col-20 nowrap2">邮箱地址</div>
+            <div class="col-80">{{$.o.config.email}}</div>
+        </div>
+        <div class="row border-btm">
+            <div class="col-20 nowrap2">即时通讯</div>
+            <div class="col-80">{{$.o.config.pidgin}}</div>
+        </div>
+    </script>
+</div>

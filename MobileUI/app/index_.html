@@ -1,0 +1,79 @@
+<!-- 消息首页 -->
+<header class="bar bar-nav" id="mainContent">
+	<a><span class="icon icon-menu pull-left open-panel"></span></a>
+
+	<h1 class="title" style="color:white;">消 息</h1>
+</header>
+<div class="bar bar-header-secondary">
+	<div class="searchbar">
+		<div class="search-input">
+			<label class="icon icon-search" for="search"></label>
+			<input type="search" id='search' placeholder='输入关键字...'/>
+		</div>
+	</div>
+</div>
+<div class="content"
+	 data-o-template-fixed="true"
+	 data-o-template-script-id="messagehome"
+	 data-o-template-async="true"
+	 data-o-template-data-url="server2/homepage/homepageInfo"
+	 data-o-template-refresh-interval="300000">
+	<script type="text/html" id="messagehome">
+		<div class="content-padded grid-demo">
+			<div class="row" data-o-url-change="work_notice.html">
+				<div class="col-20">
+					<img src="../assets/img/home/gztx.png">
+				</div>
+				<div class="col-80">
+					<div class="ttitle"><a>工作提醒</a>
+                        <span class="pull-right">
+                            {{newWork.receiveTime.substring(11,16)}}
+                        </span>
+					</div>
+					<div class="event">
+						<span class="nowrap pull-left col-90">{{newWork.sendName}}:&nbsp;&nbsp;{{substr(newWork.title,18,'...')}}</span>
+						{{if totalWorks>0}}
+						<span class="pull-right mybadge text">{{totalWorks}}</span>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+			<div class="row" data-o-url-change="notice.html">
+				<div class="col-20">
+					<img src="../assets/img/home/tzgg.png">
+				</div>
+				<div class="col-80">
+					<div class="ttitle"><a>通知公告</a>
+                        <span class="pull-right">{{notice.time}}</span>
+					</div>
+					<div class="event">
+						{{if notice.source!=""}}
+							<span class="nowrap pull-left col-90">{{notice.source}}:&nbsp;&nbsp;{{substr(notice.title,18,'...')}}</span>
+						{{/if}}
+						{{if totalNotices>0}}
+							<span class="pull-right mybadge text">{{totalNotices}}</span>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+			<div class="row" data-o-url-change="news.html">
+				<div class="col-20">
+					<img src="../assets/img/home/xw.png"/>
+				</div>
+				<div class="col-80">
+					<div class="ttitle"><a>新闻</a>
+						<span class="pull-right">{{news.time}}</span>
+					</div>
+					<div class="event">
+						{{if news.title!=""}}
+							<span class="nowrap pull-left col-90">新闻:&nbsp;&nbsp;{{substr(news.title,18,'...')}}</span>
+						{{/if}}
+						{{if totalNews>0}}
+							<span class="pull-right mybadge text">{{totalNews}}</span>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+</div>

@@ -1,0 +1,86 @@
+<!-- 公共选人页面 -->
+<div class="page contact_com selector"
+	 data-o-template-script-id="template-selector"
+	 data-o-template-async="true">
+	<script type="text/html" id="template-selector">
+		<header class="bar bar-nav">
+			<a class="button button-link button-nav pull-left back" href="#">
+				<span class="icon icon-left"></span>返回
+			</a>
+
+			<h1 class="title">{{title}}</h1>
+			{{if !$.o.util.means(single)}}<a class="pull-right" id="btn-top-right"><span>全选</span></a>{{/if}}
+		</header>
+		<input type="hidden" id="orgName" name="orgName" value="{{orgName}}">
+		<div class="htitle headerNav">
+			{{each orgNames as org i}}
+			<div class="navigation">
+				{{if i != 0}}&gt;{{/if}}
+				{{if i != orgNames.length-1}}
+				<a class="active" data-direction="reverse"
+				   data-o-url-replace='{{stitchParam("selector.html", {orgId:parentOrgIds[i], groupId:null})}}'>&nbsp;{{org}}&nbsp;</a>
+				{{else}}
+				<a>&nbsp;{{org}}&nbsp;</a>
+				{{/if}}
+			</div>
+			{{/each}}
+		</div>
+		<div class="bar bar-header-secondary">
+			<div class="headerChecked">
+				<div class="checkedEmp" id="checked-head"></div>
+			</div>
+			<div class="hide selected" data-o-url-change='{{stitchParam("selected.html", {selectorType:"selector"})}}' data-o-url-reload="true">
+				<img src="../img/more04.png"/>
+			</div>
+			<div class="searchbar">
+				<a class="searchbar-cancel"><span class="icon icon-search"></span></a>
+
+				<div class="search-input">
+					<input type="search" id='search' placeholder='搜索' value="{{condition}}"
+						   data-o-template-dynamic="true"/>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="list-block del">
+				<ul class="org" id="checked">
+					{{each data as item}}
+					{{if item.type == "org"}}
+					<li class="item-content pic orgpic"
+						data-o-url-replace='{{stitchParam("selector.html", {orgId:item.id, groupId:item.groupId})}}'>
+						<div class="item-media"><i class="icon icon-f7"><img src="../img/yiji.png"></i></div>
+						<div class="item-inner">
+							<div class="item-title">{{item.name}}</div>
+						</div>
+					</li>
+					{{/if}}
+					{{if item.type == "user"}}
+					<li class="item-content user" data-id="{{item.id}}" data-name="{{item.name}}">
+						<div class="item-media round">
+							<i class="icon icon-f7">
+								<div class='round-head'>{{subName(item.name)}}</div>
+							</i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title">
+								<div class="item-after">{{item.name}}</div>
+								<div style="display: none" class="object">{{item.id}},{{item.name}}</div>
+							</div>
+						</div>
+						<div class="ch1">
+							<div class="gou"></div>
+							{{if $.o.util.means(single)}}
+							<input type="radio" class="pull-right checked">
+							{{else}}
+							<input type="checkbox" class="pull-right checked">
+							{{/if}}
+						</div>
+					</li>
+					{{/if}}
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+		<a id="submit" class="button button-fill">{{btnName}}</a>
+	</script>
+</div>

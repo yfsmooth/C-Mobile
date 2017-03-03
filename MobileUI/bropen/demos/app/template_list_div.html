@@ -1,0 +1,41 @@
+<div class="page template_list_div">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="/demos">
+            <span class="icon icon-left"></span>
+            Back
+        </a>
+        <h1 class="title">template_list_div.html</h1>
+    </header>
+    <div class="content" data-o-listloader="true"
+         data-o-listloader-url="server1/bropen/demos/templates/list10.json"
+         data-o-listloader-reload="true"
+         data-o-listloader-template-id="template-list-div-template">
+        <div class="card-container o-listloader-data">
+            <div class="card">
+                <div class="card-header">Title</div>
+                <div class="card-content">
+                    <div class="card-content-inner">Contents Contents Contents Contents Contents Contents Contents Contents Contents </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Title</div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        Drag down to load more card
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="template-list-div-template">
+        {{each list as item}}
+        <div class="card">
+            <div class="card-header">{{item.name}}</div>
+            <div class="card-content">
+                <div class="card-content-inner">手机号：{{item.mobile}} 昵称：{{item.nickname}}</div>
+            </div>
+            <div class="card-footer">生日：{{item.birthdate}}</div>
+        </div>
+        {{/each}}
+    </script>
+</div>

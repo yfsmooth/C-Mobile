@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "member": {
+    "class": "test.Member",
+    "id": 1,
+    "birthdate": "2016-03-04T07:02:26Z",
+    "mobile": "11134371081",
+    "name": "张三丰0",
+    "nickname": "ab23d",
+    "project": [],
+    "sex": "男",
+    "weixin": "fe30b"
+  }
+}
