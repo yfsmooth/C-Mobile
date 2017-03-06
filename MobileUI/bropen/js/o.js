@@ -1525,11 +1525,10 @@ dom cache 配置：
 					$.mobile.navigate.history.previousIndex = undefined;*/
 					// 删除所有 .ui-page
 					//$(".ui-page:gt(0)").remove();
-					// 重定向到登录 TODO:判断是否有手势密码，有则重定向到手势密码页
+					// 重定向到登录
 					if ($.o.util.cache.get("gesturepwd")){
 						me.gesture({method: "overwrite", transition: 'slide', success: function() {
 							// 重定向到首页
-							page.removeDate("_loggedout");
 							me.homepage({method: "overwrite", reload: true, _page: page});
 						}});
 					} else {
@@ -1640,7 +1639,12 @@ dom cache 配置：
 				$.router.stack.setItem("back", "[]"); // 清除历史记录
 				$.router.removePage('.page:not(.page-current)', null, true);
 			});
-			me.homepage();
+			// 如果设置了手势解锁，则跳转到手势解锁页面
+			if (!$.o.util.cache.get("gesturepwd")) {
+				me.homepage();
+			} else {
+				me.gesture();
+			}
 			/*var needLogin = !me.authorize(o._config.home_page_url);
 			var aidx = $.mobile.navigate.history.activeIndex;
 			if ( aidx > 0 ) {

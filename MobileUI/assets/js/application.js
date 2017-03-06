@@ -8,6 +8,7 @@ $.o.config = {
 	user_login_url: "server2/mobileLogin/login",
 
 	/** 服务器地址 */
+	/** 服务器地址 */
 	server_url: ["http://192.168.0.230:9080/moa/",
 		//"http://192.168.0.88:8081/boeMobileAdapter/",
 		//"http://192.168.0.88:8081/boeMobileAdapter/",
@@ -172,9 +173,9 @@ $.o.page.on("pageInit", ".login", function(e, page) {
  * 首页
  */
 $.o.page.on("pageInit", ".index", function (e, page) {
-	//page.on("focus", "#search", function() {
-	//	$.o.page.change("index_search.html")
-	//})
+	page.on("focus", "#search", function() {
+		$.o.page.change("index_search.html")
+	})
 })
 
 /**
@@ -902,7 +903,10 @@ $.o.page.on("pageInit", ".myself", function (e, page) {
 			}, {
 				text: '确认',
 				onClick: function () {
-					$.o.page.change("gesture.html?aaa='1'");
+					var encKey = $.o.util.cache.get("gesturepwd");
+					var setting = "new";
+					if (encKey) setting = "revise";
+					$.o.page.change("gesture.html?setting=" + setting + "");
 				}
 			}]
 		})
@@ -1002,9 +1006,23 @@ $.o.page.on("loaded", ".personal-info", function (e, page) {
  * 手势解锁
  */
 $.o.page.on("pageInit", ".gesture", function (e, page) {
-	// TODO: 根据setting参数判断是，新建手势，重设手势，还是登录三种情况，并且更改手势密码左上角的按钮提示及链接
-	var setting = $.o.util.url.getParameter("setting"); // created, edit, login
 	var pageWidth = $(window).get(0).innerWidth;
+	page.find("#gesturepwd").css("margin-left", pageWidth * 0.1);
+	// 根据setting参数判断，是新建，修改，密码还是登录
+	var setting = $.o.util.url.getParameter("setting"); // new, revise, login
+	if (setting == "revise") {
+		// 重新设置手势密码
+		page.find(".gesture-title").html("请输入旧手势密码");
+	} else if (setting == "new") {
+		// 设置新手势密码
+		page.find(".gesture-title").html("请输入新手势密码");
+	} else {
+		// 登录
+		page.find(".gesture-title").html("请输入手势密码");
+		page.find(".pull-left").removeClass("back");
+		page.find(".pull-left").attr("data-o-url-change","login.html");
+	}
+	// 初始化手势解锁控件
 	page.find("#gesturepwd").GesturePasswd({
 		backgroundColor:"#ffffff",  //背景色
 		color:"#dd4c39",   //主要的控件颜色m
@@ -1016,21 +1034,28 @@ $.o.page.on("pageInit", ".gesture", function (e, page) {
 		lineColor:"#dd4c39",   //用户划出线条的颜色
 		zindex :100  //整个组件的css z-index属性
 	});
+	// 输入图形结束事件
 	page.on("hasPasswd", "#gesturepwd", function (e,passwd) {
 		// 获取手势密码加密字符串
 		var encKey = $.o.util.cache.get("gesturepwd");
-		console.log(encKey);
 		if (encKey) {
 			// 取到加密字符串进行解密
 			try {
 				// 解密成功，获取到用户名
 				var username = GibberishAES.dec(encKey, passwd);
-				console.log(username);
 				if (username) {
-					// 解密成功提交后台进行登录
-					page.find("#gesturepwd").trigger("passwdRight");
-					var password = $.o.util.cache.get("password");
-					$.o.user.login({'username': username, 'password': password});
+					if(setting=="revise"){
+						// 重新设置手势密码
+						$.o.util.cache.remove("gesturepwd");
+						page.find("#gesturepwd").trigger("passwdRight");
+						$.o.page.change("gesture.html?setting=new");
+						return ;
+					} else {
+						// 解密成功提交后台进行登录
+						page.find("#gesturepwd").trigger("passwdRight");
+						var password = $.o.util.cache.get("password");
+						$.o.user.login({'username': username, 'password': password});
+					}
 				}
 			} catch (e) {
 				// 解密失败
@@ -1039,36 +1064,30 @@ $.o.page.on("pageInit", ".gesture", function (e, page) {
 				return;
 			}
 		} else {
+			// 设置新手势密码
 			// 对手势密码进行加密存在本地
-			var encKey = GibberishAES.enc($.o.user.username, passwd);
-			$.o.util.cache.set("gesturepwd",encKey);
-			$.alert("保存成功！");
-			setTimeout(function(){
-				//密码验证正确后的其他操作，打开新的页面等。。。
-				$.o.page.back();
-			},500);  //延迟半秒以照顾视觉效果
-		}
-		/*
-		$.ajax({
-			url: 'server2/work/countWork',
-			type: 'post',
-			sync: true,
-			data: {'username': "", 'gesturePwd': passwd},
-			dataType: 'json',
-			success: function(data){
-
+			var passwdTemp = $.o.util.cache.get("passwdTemp");
+			if (passwdTemp) {
+				// 判断再次输入的手势密码和前一次是否相同
+				if (passwd == passwdTemp) {
+					// 两次输入的图案相同
+					page.find("#gesturepwd").trigger("passwdRight");
+					var encKey = GibberishAES.enc($.o.user.username, passwd);
+					$.o.util.cache.set("gesturepwd",encKey);
+					$.alert("保存成功！");
+					setTimeout(function(){
+						$.o.page.change("myself.html");
+					},1000);  //延迟半秒以照顾视觉效果
+					$.o.util.cache.remove("passwdTemp");
+				} else {
+					page.find("#gesturepwd").trigger("passwdWrong");
+					$.alert("两次输入的图案不同！");
+				}
+			} else {
+				page.find("#gesturepwd").trigger("passwdRight");
+				page.find(".gesture-title").html("请再次输入新手势密码");
+				$.o.util.cache.set("passwdTemp",passwd);
 			}
-		});
-		if(result == true){
-			$("#gesturepwd").trigger("passwdRight");
-			setTimeout(function(){
-				//密码验证正确后的其他操作，打开新的页面等。。。
-				alert("密码正确！")
-			},500);  //延迟半秒以照顾视觉效果
-		}else{
-			$("#gesturepwd").trigger("passwdWrong");
-			//密码验证错误后的其他操作。。。
-		}*/
+		}
 	})
-	page.find("#gesturepwd").css("margin-left", pageWidth * 0.1);
 });
