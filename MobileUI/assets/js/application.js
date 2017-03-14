@@ -8,16 +8,14 @@ $.o.config = {
 	user_login_url: "server2/mobileLogin/login",
 
 	/** 服务器地址 */
-	/** 服务器地址 */
-	server_url: ["http://192.168.0.230:9080/moa/",
+	server_url: ["http://192.168.0.230:8081/bro/",
 		//"http://192.168.0.88:8081/boeMobileAdapter/",
 		//"http://192.168.0.88:8081/boeMobileAdapter/",
 		//"http://192.168.0.88:8080/boeHQ/"],
-		"http://192.168.0.230:8082/hnecMobileAdapter/",
-		"http://192.168.0.230:8082/hnecMobileAdapter/",
-		"http://192.168.0.230:8080/HNEC/"
+		"http://192.168.0.230:8888/Foobar/",
+		"http://192.168.0.230:8888/Foobar/"
 	],
-	server_url_pattern: [/^\/?server1\//, /^\/?server2\//, /^\/?hnecMobileAdapter\//, /^\/?boeHQ\//],
+	server_url_pattern: [/^\/?server1\//, /^\/?server2\//, /^\/?Foobar\//],
 	//server_url_pattern: [/^\/?server1\//, /^\/?server2\//, /^\/?boeMobileAdapter\//, /^\/?boeHQ\//],
 	server_url_replace: true,
 
@@ -164,9 +162,24 @@ function searchEmp(page, templateId, orgId) {
  * 登录页面
  */
 $.o.page.on("pageInit", ".login", function(e, page) {
+	// 控制垂直居中
+	var pageHeight = $(window).get(0).innerHeight;
+	var formHeight = page.find(".content form").height();
+	page.find(".logo-div").css("margin-top",(pageHeight-formHeight)/3);
+	// 点击眼睛图标显示密码
+	page.on("click", "#item3 img", function(){
+		if (page.find("#item3 input").attr("type") == "text") {
+			page.find("#item3 input").attr("type","password");
+		} else {
+			page.find("#item3 input").attr("type","text");
+		}
+	})
 	page.on("click", "#submit", function(){
 		// 缓存中存入密码
 		$.o.util.cache.set("password",$("#password").val());
+		// 去掉用户名中的空格
+		var username = page.find("#username").val().replace(/[ ]/g,"");
+		page.find("#username").val(username);
 	})
 })
 /**
@@ -1006,6 +1019,11 @@ $.o.page.on("loaded", ".personal-info", function (e, page) {
  * 手势解锁
  */
 $.o.page.on("pageInit", ".gesture", function (e, page) {
+	// 阻止iOS浏览器上下滑动网页
+	page.find(".content").on('touchmove', function (event) {
+		event.preventDefault();
+	})
+	$.o.util.cache.remove("passwdTemp");
 	var pageWidth = $(window).get(0).innerWidth;
 	page.find("#gesturepwd").css("margin-left", pageWidth * 0.1);
 	// 根据setting参数判断，是新建，修改，密码还是登录
@@ -1077,16 +1095,36 @@ $.o.page.on("pageInit", ".gesture", function (e, page) {
 					$.alert("保存成功！");
 					setTimeout(function(){
 						$.o.page.change("myself.html");
-					},1000);  //延迟半秒以照顾视觉效果
+					},1000);  //延迟一秒以照顾视觉效果
 					$.o.util.cache.remove("passwdTemp");
 				} else {
 					page.find("#gesturepwd").trigger("passwdWrong");
 					$.alert("两次输入的图案不同！");
 				}
 			} else {
-				page.find("#gesturepwd").trigger("passwdRight");
-				page.find(".gesture-title").html("请再次输入新手势密码");
-				$.o.util.cache.set("passwdTemp",passwd);
+				if(passwd.length<3){
+					page.find("#gesturepwd").trigger("passwdWrong");
+					setTimeout(function(){
+						$.alert("密码太短！");
+					},1000);  //延迟一秒以照顾视觉效果
+				} else {
+					$.modal({
+						title: "是否确认当前输入的密码?",
+						buttons: [{
+							text: '取消',
+							onClick: function () {
+								page.find("#gesturepwd").trigger("passwdWrong");
+							}
+						}, {
+							text: '确认',
+							onClick: function () {
+								page.find("#gesturepwd").trigger("passwdRight");
+								page.find(".gesture-title").html("请再次输入新手势密码");
+								$.o.util.cache.set("passwdTemp",passwd);
+							}
+						}]
+					})
+				}
 			}
 		}
 	})

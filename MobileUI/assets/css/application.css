@@ -1584,9 +1584,8 @@ body.with-panel-left-reveal .page {
 
 /**设置login页面手势解锁图片*/
 .login .content .gesture-img {
-	position: absolute;
-	bottom: 1rem;
-	left: 8.2rem;
+	width: 2rem;
+	margin: 2rem auto 0rem;
 }
 
 .login .content img {
